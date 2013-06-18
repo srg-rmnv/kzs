@@ -1,30 +1,28 @@
-<div class="hero-unit">
+
   <h2>Сотрудники</h2>
 
   <table class="table table-striped">
   <tr>
-	<th>№ п/п</th>
+	<th></th>
     <th>ФИО</th>
     <th>Организация</th>
 	<th>Статус</th>
-    <th></th>
-	<th></th>
-    <th></th>
+    <th>Детали</th>
+    <th>#</th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
-	<td><%= user.id %></td>
+	<td><%= image_tag user.photo.url(:thumb), :class => 'user_image' %></td>
     <td><%= user.name %></td>
 	<td><%= user.organization %></td>
-	<td><%= t(user.work_status) %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<td style="color:<%= if user.work_status == 'at_work' then '#00bc80;' else '#9a0000;' end %>"><%= t(user.work_status) %></td>
+    <td><%= link_to 'Подробнее', user %></td>
+    <td><%= link_to '#', edit_user_path(user) %></td>
   </tr>
 <% end %>
 </table>
 
 <%= link_to "Добавить сотрудника", new_user_path %>
 
-</div>
+

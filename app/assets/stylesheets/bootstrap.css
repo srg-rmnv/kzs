@@ -957,7 +957,7 @@ table {
   padding: 8px;
   line-height: 20px;
   text-align: left;
-  vertical-align: top;
+  vertical-align: center;
   border-top: 1px solid #dddddd;
 }
 .table th {
@@ -4455,7 +4455,7 @@ a.thumbnail:focus {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .hero-unit {
-  padding: 60px;
+  padding: 20px 60px 60px 60px;
   margin-bottom: 30px;
   font-size: 18px;
   font-weight: 200;
