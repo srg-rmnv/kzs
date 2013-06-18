@@ -1,0 +1,22 @@
+<div style="margin-top: 30px;" class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">САКЭ КЗС dev.</a>
+    <ul class="nav">
+      <%= content_tag(:li, (link_to "Сотрудники", users_path), :class => ('active' if controller?("users"))) %>
+      <li><a href="#">Организации</a></li>
+      <li><a href="#">Документооборот</a></li>
+	  <li><a href="#">Зоны ответственности</a></li>
+	  <li class="dropdown">
+	    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	      Выпадающий список
+	      <b class="caret"></b>
+	    </a>
+	    <ul class="dropdown-menu">
+	      	<li><a href="#">Организации</a></li>
+		    <li><a href="#">Документооборот</a></li>
+			<li><a href="#">Зоны ответственности</a></li>
+	    </ul>
+	  </li>
+    </ul>
+  </div>
+</div>
