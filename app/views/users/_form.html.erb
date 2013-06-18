@@ -49,7 +49,7 @@
   </div>
   <div class="field">
     <%= f.label :work_status %><br />
-    <%= f.text_field :work_status %>
+	<%= f.select :work_status, options_for_select(User::WORK_STATUSES, @user.work_status) %>
   </div>
 
 
