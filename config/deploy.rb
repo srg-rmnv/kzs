@@ -37,5 +37,11 @@ namespace :deploy do
   end
 end
 
+namespace(:customs) do
+  task :restart do
+    run "cd #{current_path}; thin restart"
+   end
+end
+
 before "deploy:assets:precompile", "copy_database_config"
 after "deploy", "deploy:cleanup"
