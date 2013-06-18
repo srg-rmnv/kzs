@@ -38,4 +38,3 @@ namespace :deploy do
 end
 
 before "deploy:assets:precompile", "copy_database_config"
-after "deploy", "deploy:cleanup"
