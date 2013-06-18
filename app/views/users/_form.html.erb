@@ -1,7 +1,7 @@
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
 
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
@@ -12,43 +12,43 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <label>ФИО</label>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br />
+    <%= f.label :phone %>
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :position %><br />
+    <%= f.label :position %>
     <%= f.text_field :position %>
   </div>
   <div class="field">
-    <%= f.label :organization %><br />
+    <%= f.label :organization %>
     <%= f.text_field :organization %>
   </div>
   <div class="field">
-    <%= f.label :division %><br />
+    <%= f.label :division %>
     <%= f.text_field :division %>
   </div>
   <div class="field">
-    <%= f.label :access_level %><br />
-    <%= f.number_field :access_level %>
+    <%= f.label :access_level %>
+	<%= f.select :access_level, options_for_select(User::ACCESS_LEVELS, @user.access_level) %>
   </div>
   <div class="field">
-    <%= f.label :photo %><br />
+    <%= f.label :photo %>
     <%= f.file_field :photo %>
   </div>
   <div class="field">
-    <%= f.label :dob %><br />
+    <%= f.label :dob %>
     <%= f.text_field :dob %>
   </div>
   <div class="field">
-    <%= f.label :permit %><br />
+    <%= f.label :permit %>
     <%= f.text_field :permit %>
   </div>
   <div class="field">
-    <%= f.label :work_status %><br />
+    <%= f.label :work_status %>
 	<%= f.select :work_status, options_for_select(User::WORK_STATUSES, @user.work_status) %>
   </div>
 

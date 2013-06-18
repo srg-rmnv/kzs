@@ -12,6 +12,8 @@ gem 'paperclip'
 gem "russian", "~> 0.6.0"
 gem 'devise'
 
+gem 'awesome_nested_set'
+
 
 
 group :assets do

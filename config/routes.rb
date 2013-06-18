@@ -1,4 +1,7 @@
 Kzs::Application.routes.draw do
+  resources :organizations
+
+
   resources :users
   root :to => 'users#index'
 
