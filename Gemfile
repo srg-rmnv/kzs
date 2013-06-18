@@ -7,6 +7,9 @@ gem 'rvm-capistrano'
 gem 'execjs'
 gem 'therubyracer', '~> 0.10.2'
 
+gem 'paperclip'
+
+
 gem 'pg'
 
 group :assets do
