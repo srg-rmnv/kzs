@@ -40,6 +40,14 @@
     <%= f.file_field :photo %>
   </div>
   <div class="field">
+    <%= f.label :info %>
+    <%= f.text_area :info, :rows => '3' %>
+  </div>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+  <div class="field">
     <%= f.label :dob %>
     <%= f.text_field :dob %>
   </div>
@@ -54,6 +62,6 @@
 
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Создать', :class => 'btn btn-primary' %>
   </div>
 <% end %>
