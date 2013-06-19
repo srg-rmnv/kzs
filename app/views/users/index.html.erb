@@ -15,7 +15,7 @@
   <tr>
 	<td><%= image_tag user.photo.url(:thumb), :class => 'user_image' %></td>
     <td><%= user.name %></td>
-	<td><%= user.organization %></td>
+	<td><%= organzation_title(user) %></td>
 	<td style="color:<%= if user.work_status == 'at_work' then '#00bc80;' else '#9a0000;' end %>"><%= t(user.work_status) %></td>
     <td><%= link_to 'Подробнее', user %></td>
     <td><%= link_to '#', edit_user_path(user) %></td>

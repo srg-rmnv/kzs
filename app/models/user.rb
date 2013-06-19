@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :phone, :position, :organization, :division, :info, :access_level,
+  attr_accessible :name, :phone, :position, :organization_id, :division, :info, :access_level,
                   :email, :photo, :dob, :permit, :work_status
                               
   WORK_STATUSES = [ [I18n.t('at_work'), 'at_work'], [I18n.t('ooo'), 'ooo'] ]
@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   
   has_attached_file :photo, :styles => { :thumb => "48x48#" }
   
-  validates :name, :phone, :position, :organization, :division, :info, :access_level,
+  validates :name, :phone, :position, :organization_id, :division, :info, :access_level,
                    :email, :photo, :dob, :permit, :work_status, :presence => true
   validates :phone, :length => { :maximum => 11 }
   

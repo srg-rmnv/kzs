@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :organization %>
-    <%= f.text_field :organization %>
+    <%= f.collection_select(:organization_id, Organization.all, :id, :title) %>
   </div>
   <div class="field">
     <%= f.label :division %>
