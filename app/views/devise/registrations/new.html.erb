@@ -1,17 +1,7 @@
-<h2>Новый сотрудник</h2>
+<h2>Создание нового пользователя</h2>
 
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
 
   <div class="field">
     <label>ФИО</label>
@@ -42,7 +32,6 @@
     <%= f.label :password_confirmation %>
   	<%= f.password_field :password_confirmation %>
   </div>
-
 
   <div class="field">
     <%= f.label :phone %>
@@ -81,8 +70,7 @@
 	<%= f.select :work_status, options_for_select(User::WORK_STATUSES, @user.work_status) %>
   </div>
 
-
-  <div class="actions">
-    <%= f.submit 'Создать', :class => 'btn btn-primary' %>
-  </div>
+  <div><%= f.submit "Sign up" %></div>
 <% end %>
+
+<%= render "devise/shared/links" %>

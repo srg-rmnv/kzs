@@ -6,19 +6,20 @@
 	  <%= content_tag(:li, (link_to "Организации", organizations_path), :class => ('active' if controller?("organizations"))) %>
       <li><a href="#">Документооборот</a></li>
 	  <li><a href="#">Зоны ответственности</a></li>
-	  <!--
+	  
+	  <% if user_signed_in? %>
+	  <li class="divider-vertical"></li>
 	  <li class="dropdown">
 	  	    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	  	      Выпадающий список
+	  	      Вы вошли как: <b><%= current_user.name %></b>
 	  	      <b class="caret"></b>
 	  	    </a>
 	  	    <ul class="dropdown-menu">
-	  	      	<li><a href="#">Организации</a></li>
-	  		    <li><a href="#">Документооборот</a></li>
-	  			<li><a href="#">Зоны ответственности</a></li>
+	  	      	<li><%= link_to "Кабинет", user_path(current_user) %></li>
+	  			<li><%= link_to "выйти", destroy_user_session_path, method: :delete %></li>
 	  	    </ul>
-	  	  </li>-->
-	  
+	  	  </li>
+	   <% end %>
     </ul>
   </div>
 </div>

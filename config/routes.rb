@@ -1,14 +1,10 @@
 Kzs::Application.routes.draw do
+  devise_for :users, :path_prefix => 'devise'
+  resources :users
   resources :rights
-
-
   resources :groups
-
-
   resources :organizations
 
-
-  resources :users
   root :to => 'users#index'
 
   # The priority is based upon order of creation:
