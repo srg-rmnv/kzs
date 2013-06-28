@@ -15,6 +15,18 @@
     <label>ФИО</label>
     <%= f.text_field :name %>
   </div>
+	
+	<label>Права</label>
+  <div class="field rights">
+    
+    <%= hidden_field_tag "user[right_ids][]", nil %>
+    <% Right.all.each do |right| %>
+    <%= check_box_tag "user[right_ids][]", right.id, @user.right_ids.include?(right.id), id: dom_id(right) %>
+    <%= label_tag dom_id(right), right.title %><br>
+    <% end %>
+  </div>
+
+
   <div class="field">
     <%= f.label :phone %>
     <%= f.text_field :phone %>
@@ -30,10 +42,6 @@
   <div class="field">
     <%= f.label :division %>
     <%= f.text_field :division %>
-  </div>
-  <div class="field">
-    <%= f.label :access_level %>
-	<%= f.select :access_level, options_for_select(User::ACCESS_LEVELS, @user.access_level) %>
   </div>
   <div class="field">
     <%= f.label :photo %>

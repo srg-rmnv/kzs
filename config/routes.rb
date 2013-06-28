@@ -1,4 +1,10 @@
 Kzs::Application.routes.draw do
+  resources :rights
+
+
+  resources :groups
+
+
   resources :organizations
 
 
