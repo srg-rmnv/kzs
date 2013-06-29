@@ -11,6 +11,38 @@ input[type="checkbox"] {
 	float: left;
 }
 
+input[type="file"] {
+	vertical-align: middle;
+}
+
 .rights label {
 	float: left;
+}
+
+/*input.error,
+select.error,
+textarea.error {
+}
+
+.field {
+	clear: both;
+}
+
+.field input, .field label {
+	float: left;
+}
+
+}*/
+
+label.error {
+    color: #9a0000;
+    display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+	margin-top: -8px;
+}
+
+label i {
+    color: grey;
+	font-size: 10px;
 }
