@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= jquery.Jcrop.min
 //= require_tree .

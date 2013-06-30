@@ -44,29 +44,34 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_path, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        if params[:user][:avatar].blank?
+              flash[:notice] = "Successfully created user."
+              redirect_to users_path
+            else
+              render :action => "crop"
+            end
+          else
+            render :action => 'new'
+          end
       end
     end
-  end
 
   # PUT /users/1
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-
-    respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
+        if params[:user][:avatar].blank?
+          flash[:notice] = "Successfully updated user."
+          sign_in(@user, :bypass => true)
+          redirect_to users_path
+        else
+          sign_in(@user, :bypass => true)
+          render :action => "crop"
+        end
       else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render :action => 'edit'
       end
-    end
   end
 
   # DELETE /users/1

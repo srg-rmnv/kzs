@@ -13,7 +13,7 @@
 
 <% @users.each do |user| %>
   <tr>
-	<td><%= image_tag user.photo.url(:thumb), :class => 'user_image' %></td>
+	<td><%= image_tag user.avatar.url(:small), :class => 'user_image' %></td>
     <td><%= user.name %></td>
 	<td><%= organzation_title(user) %></td>
 	<td style="color:<%= if user.work_status == 'at_work' then '#00bc80;' else '#9a0000;' end %>"><%= t(user.work_status) %></td>

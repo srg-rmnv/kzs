@@ -12,4 +12,5 @@
  *= require users
  *= require shared
  *= require_self
+ *= require jquery.Jcrop
  */
