@@ -35,12 +35,19 @@
     <%= f.text_field :division %>
   </div>
 <div class="fileupload fileupload-new" data-provides="fileupload">
-  <div class="fileupload-new thumbnail" style="width: 100px; height: 100px;"><%= image_tag @user.avatar.url(:large) %></div>
+  <div class="fileupload-new thumbnail" style="width: 100px; height: 100px;">
+	<% if @user.avatar? %>
+	<%= image_tag @user.avatar.url(:large) %>
+	<% else %>
+	<img src="http://www.placehold.it/100x100/EFEFEF/AAAAAA" />
+	<% end %>
+  </div>
   <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 100px; max-height: 100px;"></div>
   <div>
     <span class="btn btn-file"><span class="fileupload-new">Выбрать изображение</span><span class="fileupload-exists">Выбрать другое изображение</span><%= f.file_field :avatar %></span>
   </div>
 </div>
+
   <div class="field">
     <%= f.label :info, "Дополнительная информация" %>
     <%= f.text_area :info, :rows => '3' %>
