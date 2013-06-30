@@ -1,67 +1,59 @@
-<div class="field">
-    <label>ФИО</label>
+  <div class="field">
+    <%= f.label :name, "ФИО" %>
     <%= f.text_field :name %>
   </div>
 	
-  <label>Права</label>
-  <div class="field rights">
-    
-    <%= hidden_field_tag "user[right_ids][]", nil %>
-    <% Right.all.each do |right| %>
-    <%= check_box_tag "user[right_ids][]", right.id, @user.right_ids.include?(right.id), id: dom_id(right) %>
-    <%= label_tag dom_id(right), right.title %><br>
-    <% end %>
-  </div>
-
   <div class="field">
-	<%= f.label :email %>
+	<%= f.label :email, "Электронная почта" %>
   	<%= f.email_field :email, :autofocus => true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, "Пароль" %>
   	<%= f.password_field :password %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation, "Подтверждение пароля" %>
   	<%= f.password_field :password_confirmation %>
   </div>
 
-
   <div class="field">
-    <%= f.label :phone %>
+    <%= f.label :phone, "Телефон" %>
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-    <%= f.label :position %>
+    <%= f.label :position, "Должность" %>
     <%= f.text_field :position %>
   </div>
   <div class="field">
-    <%= f.label :organization %>
+    <%= f.label :organization_id, "Организация" %>
     <%= f.collection_select(:organization_id, Organization.all, :id, :title) %>
   </div>
   <div class="field">
-    <%= f.label :division %>
+    <%= f.label :division, "Подразделение" %>
     <%= f.text_field :division %>
   </div>
-  <div class="field">
-    <%= f.label :avatar %>
-    <%= f.file_field :avatar %>
+<div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="fileupload-new thumbnail" style="width: 100px; height: 100px;"><%= image_tag @user.avatar.url(:large) %></div>
+  <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 100px; max-height: 100px;"></div>
+  <div>
+    <span class="btn btn-file"><span class="fileupload-new">Выбрать изображение</span><span class="fileupload-exists">Выбрать другое изображение</span><%= f.file_field :avatar %></span>
   </div>
+</div>
   <div class="field">
-    <%= f.label :info %>
+    <%= f.label :info, "Дополнительная информация" %>
     <%= f.text_area :info, :rows => '3' %>
   </div>
   <div class="field">
-    <%= f.label :dob %>
+    <%= f.label :dob, "Дата рождения" %>
     <%= f.text_field :dob %>
   </div>
   <div class="field">
-    <%= f.label :permit %>
+    <%= f.label :permit, "Номер пропуска" %>
     <%= f.text_field :permit %>
   </div>
   <div class="field">
-    <%= f.label :work_status %>
+    <%= f.label :work_status, "Статус работы" %>
 	<%= f.select :work_status, options_for_select(User::WORK_STATUSES, @user.work_status) %>
   </div>

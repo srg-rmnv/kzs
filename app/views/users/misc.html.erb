@@ -1,0 +1,9 @@
+<label>Права</label>
+<div class="field rights">
+  
+  <%= hidden_field_tag "user[right_ids][]", nil %>
+  <% Right.all.each do |right| %>
+  <%= check_box_tag "user[right_ids][]", right.id, @user.right_ids.include?(right.id), id: dom_id(right) %>
+  <%= label_tag dom_id(right), right.title %><br>
+  <% end %>
+</div>
