@@ -7,14 +7,12 @@ namespace :monit do
 
   desc "Setup all Monit configuration"
   task :setup do
-    monit_config "monitrc", "/etc/monit/monitrc"
+    monit_config "nginx"
     nginx
     syntax
     reload
   end
   after "deploy:setup", "monit:setup"
-  
-  task(:nginx, roles: :web) { monit_config "nginx" }
   
   %w[start stop restart syntax reload].each do |command|
     desc "Run Monit #{command} script"
