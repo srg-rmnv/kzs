@@ -14,6 +14,8 @@ namespace :monit do
   end
   after "deploy:setup", "monit:setup"
   
+  task(:nginx, roles: :web) { monit_config "nginx" }
+  
   %w[start stop restart syntax reload].each do |command|
     desc "Run Monit #{command} script"
     task command do
