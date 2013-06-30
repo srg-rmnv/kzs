@@ -1,6 +1,8 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
 
+load 'config/recipes/monit'
+
 load 'deploy/assets'
 
 server "5.178.80.26", :web, :app, :db, primary: true
