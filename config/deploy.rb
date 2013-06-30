@@ -1,6 +1,6 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
-
+require 'capistrano/template'
 load 'config/recipes/base'
 load 'config/recipes/monit'
 
