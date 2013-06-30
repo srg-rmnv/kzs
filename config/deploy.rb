@@ -1,6 +1,7 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
 
+load 'config/recipes/base'
 load 'config/recipes/monit'
 
 load 'deploy/assets'
