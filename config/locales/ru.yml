@@ -6,3 +6,5 @@ ru:
   level2: "Уровень-2"
   level3: "Уровень-3"
   Select: "Выберите"
+  user_successfully_updated: "Информация успешно изменена"
+  user_successfully_created: "Пользователь успешно создан"

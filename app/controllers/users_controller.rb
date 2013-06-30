@@ -44,31 +44,22 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        if params[:user][:avatar].blank?
-              flash[:notice] = "Successfully created user."
-              redirect_to users_path
-            else
-              render :action => "crop"
-            end
-          else
-            render :action => 'new'
-          end
+        flash[:notice] = t("user_successfully_created")
+        redirect_to users_path
+      else
+        render :action => 'new'
       end
     end
+  end
 
   # PUT /users/1
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
       if @user.update_attributes(params[:user])
-        if params[:user][:avatar].blank?
-          flash[:notice] = "Successfully updated user."
-          sign_in(@user, :bypass => true)
-          redirect_to users_path
-        else
-          sign_in(@user, :bypass => true)
-          render :action => "crop"
-        end
+        flash[:notice] = t("user_successfully_updated")
+        sign_in(@user, :bypass => true)
+        redirect_to users_path
       else
         render :action => 'edit'
       end

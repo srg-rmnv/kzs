@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    $("#new_user").validate({
+    $("#user_form").validate({
 
        rules:{
 
