@@ -2,8 +2,20 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    
+    document = Document.order("created_at DESC")
+    
+    @documents = document.where(:recipient_id => current_user.id).all unless params[:type]
+    
+    if params[:type] == "draft"
+      @documents = document.draft.where(:user_id => current_user.id).all
+    elsif params[:type] == "sent"
+      @documents = document.sent.where(:user_id => current_user.id).all  
+    else
+      @documents = document.where(:recipient_id => current_user.id).all
+    end
 
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @documents }
@@ -44,9 +56,14 @@ class DocumentsController < ApplicationController
     
     @document.user_id = current_user.id
     @document.organization_id = current_user.organization_id
+    
+    if params[:sent]
+      @document.sent = true
+    end
+    
 
     respond_to do |format|
-      if @document.save
+      if @document.save && 
         format.html { redirect_to @document, notice: 'Document was successfully created.' }
         format.json { render json: @document, status: :created, location: @document }
       else
@@ -60,6 +77,10 @@ class DocumentsController < ApplicationController
   # PUT /documents/1.json
   def update
     @document = Document.find(params[:id])
+    
+
+    
+    
 
     respond_to do |format|
       if @document.update_attributes(params[:document])

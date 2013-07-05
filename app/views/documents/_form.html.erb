@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :recipient_id, "Получатель" %>
-    <%= f.collection_select(:recipient_id, User.all, :id, :name)%>
+    <%= f.collection_select(:recipient_id, User.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :deadline, "Срок исполнения" %>
@@ -33,6 +33,7 @@
   </div>
 </div>
   <div class="actions">
-    <%= f.submit "Создать документ", :class => 'btn btn-primary' %>
+	<%= f.submit "Отправить", :class => 'btn btn-success' %>
+    <%= f.submit "Сохранить в черновики", :class => 'btn btn-primary' %>
   </div>
 <% end %>

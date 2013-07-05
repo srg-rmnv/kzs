@@ -167,7 +167,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   jquery-rails (~> 2.3.0)
-  paperclip
+  paperclip (~> 3.0)
   pg
   populator
   rails (= 3.2.13)

@@ -16,4 +16,12 @@ module DocumentsHelper
     end
   end   
   
+  def indox(current_user)
+    Document.where(:recipient_id => current_user.id).count
+  end
+  
+  def draft(current_user)
+    Document.draft.where(:user_id => current_user.id).count
+  end
+  
 end

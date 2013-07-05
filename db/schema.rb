@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705082045) do
+ActiveRecord::Schema.define(:version => 20130705162801) do
 
   create_table "approve_users", :force => true do |t|
     t.integer  "document_id"
@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(:version => 20130705082045) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "recipient_id"
+    t.boolean  "sent",              :default => false
   end
 
   create_table "groups", :force => true do |t|

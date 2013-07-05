@@ -1,0 +1,14 @@
+<div class="span2">
+	<ul class="nav doc-left">
+	  <li class="nav-header">Папки</li>
+	  <li><%= link_to documents_path(:type => "inbox") do %>
+		  Входящие <% unless indox(current_user) < 1  %> (<%= indox(current_user) %>) <% end %>
+		  <% end %>
+	  </li>
+	  <li><%= link_to documents_path(:type => "draft") do %>
+		 Черновики <% unless draft(current_user) < 1  %> (<%= draft(current_user) %>) <% end %>
+		<% end %>
+	  </li>
+	  <li><%= link_to "Отправленные", documents_path(:type => "sent") %></li>	
+	</ul>
+</div>

@@ -15,7 +15,53 @@
 	
 }
 
-textarea.text {
-	width: 600px;
-	height: 200px;
+.new-wrap {
+	width: 100%;
+	
+	
+	span.header {
+		font-weight: bold;
+		font-family: Arial;
+		font-size: 14px;
+	}
+	
+}
+
+.new-header {
+	background-color: #f9f9f9;	
+	padding: 3px 20px;
+	border-bottom: solid 1px #dddddd;
+}
+
+.new-title {
+	background-color: white;
+	padding: 3px 20px;
+	font-family: Helvetica;
+	font-size: 13px;
+	
+	input {
+		margin-top: 10px;
+		margin-left: 10px;
+	}
+	
+	select {
+		margin-top: 10px;
+		margin-left: 18px;
+	}
+	
+		
+}
+
+.new-text-wrap {
+	border-top: solid 1px #dddddd;
+	background-color: #f9f9f9;
+	padding: 20px;
+	margin: 0px;
+	
+	textarea {
+		padding: 5px;
+		margin: 0px;
+		width: 98%;
+		height: 300px;
+	}
 }

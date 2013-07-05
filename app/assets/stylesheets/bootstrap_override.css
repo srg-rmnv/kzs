@@ -1,0 +1,4 @@
+.table-striped tbody > tr:nth-child(even) > td,
+.table-striped tbody > tr:nth-child(even) > th {
+  background-color: #f9f9f9;
+}

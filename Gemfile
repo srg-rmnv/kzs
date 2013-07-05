@@ -8,7 +8,7 @@ gem 'rvm-capistrano'
 gem 'execjs'
 gem 'therubyracer', '~> 0.10.2'
 
-gem 'paperclip'
+gem "paperclip", "~> 3.0"
 gem "russian", "~> 0.6.0"
 gem 'devise'
 
