@@ -1,4 +1,7 @@
 Kzs::Application.routes.draw do
+  resources :documents
+
+
   devise_for :users, :path_prefix => 'devise'
   resources :users
   resources :rights

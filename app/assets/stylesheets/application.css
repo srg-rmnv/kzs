@@ -11,6 +11,7 @@
  *= require bootstrap
  *= require jasny-bootstrap
  *= require users
+ *= require documents
  *= require shared
  *= require_self
  *= require jquery.Jcrop

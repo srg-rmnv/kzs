@@ -4,14 +4,19 @@
     <ul class="nav">
       <%= content_tag(:li, (link_to "Сотрудники", users_path), :class => ('active' if controller?("users"))) %>
 	  <%= content_tag(:li, (link_to "Организации", organizations_path), :class => ('active' if controller?("organizations"))) %>
-      <li><a href="#">Документооборот</a></li>
+      <%= content_tag(:li, (link_to "Документооборот", documents_path), :class => ('active' if controller?("documents"))) %>
 	  <li><a href="#">Зоны ответственности</a></li>
+	</ul>
 	  
+	
+	
 	  <% if user_signed_in? %>
-	  <li class="divider-vertical"></li>
+	<ul class="nav pull-right">
+	  <li class="divider-vertical" ></li>
+	  <li><%= image_tag(current_user.avatar.url(:small), :size => "39x39") %></li>
 	  <li class="dropdown">
 	  	    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	  	      Вы вошли как: <b><%= current_user.name %></b>
+	  	      Мой профиль
 	  	      <b class="caret"></b>
 	  	    </a>
 	  	    <ul class="dropdown-menu">

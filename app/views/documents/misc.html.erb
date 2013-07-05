@@ -1,0 +1,35 @@
+<h1>Listing documents</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>User</th>
+    <th>Organization</th>
+    <th>Recipient</th>
+    <th>Deadline</th>
+    <th>Text</th>
+    <th>File</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @documents.each do |document| %>
+  <tr>
+    <td><%= document.title %></td>
+    <td><%= document.user_id %></td>
+    <td><%= document.organization_id %></td>
+    <td><%= document.recipient %></td>
+    <td><%= document.deadline %></td>
+    <td><%= document.text %></td>
+    <td><%= document.file %></td>
+    <td><%= link_to 'Show', document %></td>
+    <td><%= link_to 'Edit', edit_document_path(document) %></td>
+    <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Document', new_document_path %>

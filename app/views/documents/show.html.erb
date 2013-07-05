@@ -1,0 +1,38 @@
+<h2><%= @document.title %></h2>
+
+<p>
+  <b>Отправитель:</b>
+	<%= doc_user(@document.user_id) %>
+</p>
+
+<p>
+  <b>Организаиция:</b>
+  <%= organization(@document.organization_id) %>
+</p>
+
+<p>
+  <b>Получатель:</b>
+  <%= doc_user(@document.recipient_id) %>
+</p>
+
+<p>
+  <b>Срок исполнения:</b>
+  <%= @document.deadline %>
+</p>
+
+<p>
+  <b>Содержание:</b>
+  <%= @document.text.html_safe %>
+</p>
+
+
+<p>
+  <b>Приложение:</b>
+	<% if @document.file? %>
+  		<%= link_to @document.file_file_name, @document.file.url(:original, false) %>
+	<% else %>
+	<i>Приложение отсутствует</i>
+	<% end %>
+</p>
+
+<%= link_to 'К документам', documents_path %>

@@ -11,7 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130629141450) do
+ActiveRecord::Schema.define(:version => 20130705082045) do
+
+  create_table "approve_users", :force => true do |t|
+    t.integer  "document_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "documents", :force => true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.string   "deadline"
+    t.string   "text"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "recipient_id"
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "title"
@@ -26,6 +48,13 @@ ActiveRecord::Schema.define(:version => 20130629141450) do
     t.integer  "rgt"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "responsible_users", :force => true do |t|
+    t.integer  "document_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "rights", :force => true do |t|

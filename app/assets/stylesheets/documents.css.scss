@@ -1,0 +1,21 @@
+// Place all the styles related to the documents controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.doc-left {
+	
+	margin-top: 50px;
+	font-family: Helvetica;
+	font-weight: bold;
+	font-size: 13px;
+	
+	li.nav-header {
+		padding: 0px;
+	}
+	
+}
+
+textarea.text {
+	width: 600px;
+	height: 200px;
+}

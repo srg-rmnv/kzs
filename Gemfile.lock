@@ -60,6 +60,13 @@ GEM
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (2.6.4)
+      activesupport (>= 2.3.9)
+    factory_girl_rails (1.7.0)
+      factory_girl (~> 2.6.0)
+      railties (>= 3.0.0)
+    faker (1.1.2)
+      i18n (~> 0.5)
     highline (1.6.19)
     hike (1.2.3)
     i18n (0.6.1)
@@ -90,6 +97,7 @@ GEM
       mime-types
     pg (0.15.1)
     polyglot (0.3.3)
+    populator (1.0.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -156,9 +164,12 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   execjs
+  factory_girl_rails
+  faker
   jquery-rails (~> 2.3.0)
   paperclip
   pg
+  populator
   rails (= 3.2.13)
   russian (~> 0.6.0)
   rvm-capistrano

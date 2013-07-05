@@ -22,6 +22,12 @@ end
 
 gem 'jquery-rails', '~> 2.3.0'
 
+group :development do
+  gem 'populator'
+  gem 'faker'
+  gem 'factory_girl_rails'
+end
+
 group :production do
   gem 'thin'
 end

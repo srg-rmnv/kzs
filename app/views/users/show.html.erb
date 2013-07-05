@@ -5,6 +5,47 @@
   <%= @user.name %>
 </p>
 
+<p>
+  <b>phone:</b>
+  <%= @user.phone %>
+</p>
+<p>
+  <b>position:</b>
+  <%= @user.position %>
+</p>
+<p>
+  <b>division:</b>
+  <%= @user.division %>
+</p>
+<p>
+  <b>info:</b>
+  <%= @user.info %>
+</p>
+<p>
+  <b>dob:</b>
+  <%= @user.dob %>
+</p>
+<p>
+  <b>permit:</b>
+  <%= @user.permit %>
+</p>
+<p>
+  <b>work_status:</b>
+  <%= @user.work_status %>
+</p>
+<p>
+  <b>organization_id:</b>
+  <%= @user.organization_id %>
+</p>
+<p>
+  <b>email:</b>
+  <%= @user.email %>
+</p>
+<p>
+  <b>avatar:</b>
+  <%= image_tag @user.avatar.url(:large) %>
+</p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

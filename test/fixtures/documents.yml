@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  user_id: 1
+  organization_id: 1
+  recipient: MyString
+  deadline: MyString
+  text: MyString
+  file: 
+
+two:
+  title: MyString
+  user_id: 1
+  organization_id: 1
+  recipient: MyString
+  deadline: MyString
+  text: MyString
+  file: 
