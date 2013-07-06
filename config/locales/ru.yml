@@ -8,3 +8,5 @@ ru:
   Select: "Выберите"
   user_successfully_updated: "Информация успешно изменена"
   user_successfully_created: "Пользователь успешно создан"
+  document_successfully_updated: "Документ успешно изменен"
+  document_successfully_created: "Документ успешно создан"
