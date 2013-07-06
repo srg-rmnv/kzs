@@ -79,7 +79,9 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     
 
-    
+    if params[:sent]
+      @document.sent = true
+    end   
     
 
     respond_to do |format|
