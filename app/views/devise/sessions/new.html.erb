@@ -13,6 +13,9 @@
 <div class="control-group">
   <div class="controls">
     <%= f.password_field :password, :placeholder => 'пароль' %>
+	<% if flash[:alert] == "Неверный адрес e-mail или пароль." %>
+		<span class="help-inline" style="color: #9a0000; font-size: 14px;"><%= flash[:alert] %></span>
+	<% end %>
   </div>
 </div>
 
