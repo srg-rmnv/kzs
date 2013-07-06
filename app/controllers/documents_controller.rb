@@ -5,14 +5,14 @@ class DocumentsController < ApplicationController
     
     document = Document.order("created_at DESC")
     
-    @documents = document.where(:recipient_id => current_user.id).all unless params[:type]
+    @documents = document.sent.where(:recipient_id => current_user.id).all unless params[:type]
     
     if params[:type] == "draft"
       @documents = document.draft.where(:user_id => current_user.id).all
     elsif params[:type] == "sent"
       @documents = document.sent.where(:user_id => current_user.id).all  
     else
-      @documents = document.where(:recipient_id => current_user.id).all
+      @documents = document.sent.where(:recipient_id => current_user.id).all
     end
 
     
