@@ -12,6 +12,8 @@ gem "paperclip", "~> 3.0"
 gem "russian", "~> 0.6.0"
 gem 'devise'
 
+gem "ckeditor"
+
 gem 'awesome_nested_set'
 
 group :assets do

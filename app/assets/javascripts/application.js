@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery-ui
+//= require ckeditor/init
 //= require jquery_ujs
 //= jquery.Jcrop.min
+//= require shared
 //= require_tree .
+

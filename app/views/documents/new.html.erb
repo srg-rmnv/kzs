@@ -23,7 +23,7 @@
 			<div class="new-title">Получатель <%= f.collection_select(:recipient_id, User.all, :id, :name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			
 			<div class="new-text-wrap">
-				<%= f.text_area :text, :class => "text" %>
+				<%= f.cktext_area :text, :class => "text", :ckeditor => {:toolbar => "mini"} %>
 			</div>
 			
 			<div class="btn-toolbar">
