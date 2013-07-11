@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710180517) do
+ActiveRecord::Schema.define(:version => 20130711063816) do
 
   create_table "approve_users", :force => true do |t|
     t.integer  "document_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20130710180517) do
     t.integer  "recipient_id"
     t.boolean  "sent",              :default => false
     t.integer  "approver_id"
-    t.boolean  "approved"
+    t.boolean  "approved",          :default => false
   end
 
   create_table "groups", :force => true do |t|

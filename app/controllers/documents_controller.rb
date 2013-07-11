@@ -5,14 +5,20 @@ class DocumentsController < ApplicationController
     
     document = Document.order("created_at DESC")
     
-    @documents = document.sent.where(:recipient_id => current_user.id).all unless params[:type]
+    
+    
+    @documents = document.sent.approved.where(:recipient_id => current_user.id).all unless params[:type]
     
     if params[:type] == "draft"
       @documents = document.draft.where(:user_id => current_user.id).all
+    elsif params[:type] == "for_approve"
+      @documents = document.sent.not_approved.where(:approver_id => current_user.id).all
+    elsif params[:type] == "approved"
+      @documents = document.sent.approved.where(:approver_id => current_user.id).all
     elsif params[:type] == "sent"
       @documents = document.sent.where(:user_id => current_user.id).all  
     else
-      @documents = document.sent.where(:recipient_id => current_user.id).all
+      @documents = document.sent.approved.where(:recipient_id => current_user.id).all
     end
 
     
@@ -103,6 +109,17 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to documents_url }
+      format.json { head :no_content }
+    end
+  end
+  
+  def approve
+    @document = Document.find(params[:id])
+    @document.approved = true
+    @document.save
+
+    respond_to do |format|
+      format.html { redirect_to documents_url, notice: t('document_approved_and_sent_to_recipient') }
       format.json { head :no_content }
     end
   end

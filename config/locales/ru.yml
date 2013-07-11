@@ -10,3 +10,4 @@ ru:
   user_successfully_created: "Пользователь успешно создан"
   document_successfully_updated: "Документ успешно изменен"
   document_successfully_created: "Документ успешно создан"
+  document_approved_and_sent_to_recipient: "Документ одобрен и отправлен получателю"

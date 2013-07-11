@@ -1,7 +1,11 @@
 Kzs::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
-  resources :documents
+  resources :documents do
+    member do
+      get 'approve'
+    end
+  end
 
 
   devise_for :users, :path_prefix => 'devise'

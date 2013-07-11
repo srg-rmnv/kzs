@@ -3,6 +3,7 @@ class Document < ActiveRecord::Base
                   :title, :user_id, :approver_id
   
   scope :sent, -> { where(sent: true) }
+  scope :not_approved, -> { where(approved: false) }
   scope :approved, -> { where(approved: true) }
   scope :draft, -> { where(sent: false) }
   

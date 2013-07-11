@@ -24,4 +24,12 @@ module DocumentsHelper
     Document.draft.where(:user_id => current_user.id).count
   end
   
+  def to_be_approved(current_user)
+    Document.sent.not_approved.where(:approver_id => current_user.id).count
+  end
+  
+  def for_approve(document)
+    if document.approver_id == current_user.id && document.approved != true then true end
+  end
+  
 end
