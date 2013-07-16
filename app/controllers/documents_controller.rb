@@ -6,19 +6,16 @@ class DocumentsController < ApplicationController
     document = Document.order("created_at DESC")
     
     
+    @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all unless params[:type]
     
-    @documents = document.sent.approved.where(:recipient_id => current_user.id).all unless params[:type]
-    
-    if params[:type] == "draft"
+    if params[:type] == "inbox"
+      @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all
+    elsif params[:type] == "draft"
       @documents = document.draft.where(:user_id => current_user.id).all
-    elsif params[:type] == "for_approve"
-      @documents = document.sent.not_approved.where(:approver_id => current_user.id).all
-    elsif params[:type] == "approved"
-      @documents = document.sent.approved.where(:approver_id => current_user.id).all
     elsif params[:type] == "sent"
       @documents = document.sent.where(:user_id => current_user.id).all  
     else
-      @documents = document.sent.approved.where(:recipient_id => current_user.id).all
+      @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all
     end
 
     
@@ -32,6 +29,11 @@ class DocumentsController < ApplicationController
   # GET /documents/1.json
   def show
     @document = Document.find(params[:id])
+    
+    if @document.user_id != current_user.id
+      @document.opened = true
+      @document.save
+    end
 
     respond_to do |format|
       format.html # show.html.erb

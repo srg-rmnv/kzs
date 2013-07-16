@@ -14,7 +14,7 @@ Kzs::Application.routes.draw do
   resources :groups
   resources :organizations
 
-  root :to => 'users#index'
+  root :to => 'documents#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

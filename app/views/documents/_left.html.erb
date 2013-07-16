@@ -10,11 +10,6 @@
 		 Черновики <% unless draft(current_user) < 1  %> (<%= draft(current_user) %>) <% end %>
 		<% end %>
 	  </li>
-	  <li><%= link_to documents_path(:type => "for_approve") do %>
-		 На подпись <% unless to_be_approved(current_user) < 1  %> (<%= to_be_approved(current_user) %>) <% end %>
-		<% end %>
-	  </li>
-	  <li><%= link_to "Одобренные", documents_path(:type => "approved") %></li>
 	  <li><%= link_to "Отправленные", documents_path(:type => "sent") %></li>	
 	</ul>
 </div>

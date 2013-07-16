@@ -17,7 +17,7 @@ module DocumentsHelper
   end   
   
   def indox(current_user)
-    Document.sent.where(:recipient_id => current_user.id).count
+    Document.sent.unopened.where(:recipient_id => current_user.id).count
   end
   
   def draft(current_user)
