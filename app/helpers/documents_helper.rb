@@ -33,7 +33,7 @@ module DocumentsHelper
   end
   
   def for_callback(document)
-    if document.user_id == current_user.id && document.opened != true then true end
+    if document.user_id == current_user.id && document.opened != true && document.callback != true then true end
   end
   
 end

@@ -73,6 +73,7 @@ class DocumentsController < ApplicationController
     
     if params[:sent]
       @document.sent = true
+      @document.callback = false
     end
     
 
@@ -95,6 +96,7 @@ class DocumentsController < ApplicationController
 
     if params[:sent]
       @document.sent = true
+      @document.callback = false
     end   
     
 
@@ -140,6 +142,17 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to documents_url, notice: t('document_called_back') }
+      format.json { head :no_content }
+    end
+  end
+  
+  def delete
+    @document = Document.find(params[:id])
+    @document.deleted = true
+    @document.save
+
+    respond_to do |format|
+      format.html { redirect_to documents_url, notice: t('document_deleted') }
       format.json { head :no_content }
     end
   end

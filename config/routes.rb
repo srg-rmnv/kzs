@@ -5,6 +5,7 @@ Kzs::Application.routes.draw do
     member do
       get 'approve'
       get 'callback'
+      get 'delete'
     end
   end
 
