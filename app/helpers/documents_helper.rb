@@ -32,4 +32,8 @@ module DocumentsHelper
     if document.approver_id == current_user.id && document.approved != true then true end
   end
   
+  def for_callback(document)
+    if document.user_id == current_user.id && document.opened != true then true end
+  end
+  
 end

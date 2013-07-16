@@ -7,6 +7,9 @@ class Document < ActiveRecord::Base
   scope :approved, -> { where(approved: true) }
   scope :draft, -> { where(sent: false) }
   scope :unopened, -> { where(opened: false) }
+  scope :deleted, -> { where(deleted: true) }
+  scope :archived, -> { where(archived: true) }
+  scope :callback, -> { where(callback: true) }
   
   
   

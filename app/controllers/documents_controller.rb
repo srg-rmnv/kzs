@@ -14,6 +14,12 @@ class DocumentsController < ApplicationController
       @documents = document.draft.where(:user_id => current_user.id).all
     elsif params[:type] == "sent"
       @documents = document.sent.where(:user_id => current_user.id).all  
+    elsif params[:type] == "deleted"
+      @documents = document.deleted.where(:user_id => current_user.id).all
+    elsif params[:type] == "archived"
+      @documents = document.archived.where(:user_id => current_user.id).all
+    elsif params[:type] == "callback"
+      @documents = document.callback.where(:user_id => current_user.id).all
     else
       @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all
     end
@@ -122,6 +128,18 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to documents_url, notice: t('document_approved_and_sent_to_recipient') }
+      format.json { head :no_content }
+    end
+  end
+  
+  def callback
+    @document = Document.find(params[:id])
+    @document.sent = false
+    @document.callback = true
+    @document.save
+
+    respond_to do |format|
+      format.html { redirect_to documents_url, notice: t('document_called_back') }
       format.json { head :no_content }
     end
   end

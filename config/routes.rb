@@ -4,6 +4,7 @@ Kzs::Application.routes.draw do
   resources :documents do
     member do
       get 'approve'
+      get 'callback'
     end
   end
 

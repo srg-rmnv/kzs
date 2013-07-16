@@ -10,6 +10,9 @@
 		 Черновики <% unless draft(current_user) < 1  %> (<%= draft(current_user) %>) <% end %>
 		<% end %>
 	  </li>
-	  <li><%= link_to "Отправленные", documents_path(:type => "sent") %></li>	
+	  <li><%= link_to "Отправленные", documents_path(:type => "sent") %></li>
+	  <li><%= link_to "Корзина", documents_path(:type => "deleted") %></li>
+	  <li><%= link_to "Архив", documents_path(:type => "archived") %></li>
+	  <li><%= link_to "Отозванные", documents_path(:type => "callback") %></li>	
 	</ul>
 </div>

@@ -47,6 +47,12 @@
 				</div>
 				<% end %>
 				
+				<% if for_callback(@document) %>
+				<div class="btn-group"   style="margin-right: 10px;">	
+					<%= link_to 'Отозвать', callback_document_path(@document), :class => "btn" %>
+				</div>
+				<% end %>
+				
 
 				<div class="btn-group">	
 					<%= link_to "назад", documents_path, :class => "btn" %>
