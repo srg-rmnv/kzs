@@ -2,8 +2,10 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
+  attr_accessor :login
 
-  attr_accessible :name, :phone, :position, :organization_id, :division, :info,
+  attr_accessible :login, :username, :name, :phone, :position, :organization_id, :division, :info,
                   :avatar, :dob, :permit, :work_status, :right_ids,
                   :email, :password, :password_confirmation, :remember_me
                   
@@ -17,6 +19,15 @@ class User < ActiveRecord::Base
   validates :phone, :length => { :maximum => 11 }
   
   has_attached_file :avatar, :styles => { :small => "48x48#", :large => "100x100#" } 
+  
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions).first
+    end
+  end
 
   
 end
