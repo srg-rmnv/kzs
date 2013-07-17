@@ -23,7 +23,7 @@ namespace :db do
       user.encrypted_password = User.new(:password => "password").encrypted_password
     end
     
-    User.create!(:username => 'babrovka', :first_name => 'Tester', :phone => '7777777', :position => 'Tester', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :permit => '777', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => 'password', :password_confirmation => 'password')
+    User.create(:username => 'babrovka', :first_name => 'babrovka', :phone => '7777777', :position => 'Tester', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :permit => '777', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => 'password', :password_confirmation => 'password')
 
     
     User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'avatars', '*')).sample); user.save! }
