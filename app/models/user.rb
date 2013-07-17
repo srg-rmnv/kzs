@@ -5,16 +5,17 @@ class User < ActiveRecord::Base
          
   attr_accessor :login
 
-  attr_accessible :login, :username, :name, :phone, :position, :organization_id, :division, :info,
-                  :avatar, :dob, :permit, :work_status, :right_ids,
-                  :email, :password, :password_confirmation, :remember_me
+  attr_accessible :phone, :position, :division, :info, :dob, :permit, :phone, 
+                  :work_status, :organization_id, :email, :password, :password_confirmation, 
+                  :avatar, :first_name, :last_name, :username, :right_ids, :remember_me,
+                  :is_staff, :is_active, :is_superuser, :date_joined
                   
   has_many :user_rights
   has_many :rights, through: :user_rights
                               
   WORK_STATUSES = [ [I18n.t('at_work'), 'at_work'], [I18n.t('ooo'), 'ooo'] ]
   
-  validates :name, :phone, :position, :organization_id, :division,
+  validates :phone, :position, :organization_id, :division,
                    :email, :dob, :permit, :work_status, :presence => true
   validates :phone, :length => { :maximum => 11 }
   
@@ -27,6 +28,14 @@ class User < ActiveRecord::Base
     else
       where(conditions).first
     end
+  end
+  
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
   end
 
   

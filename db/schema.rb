@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716124701) do
+ActiveRecord::Schema.define(:version => 20130717110716) do
 
   create_table "approve_users", :force => true do |t|
     t.integer  "document_id"
@@ -19,6 +19,21 @@ ActiveRecord::Schema.define(:version => 20130716124701) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "auth_user!", :force => true do |t|
+    t.string   "username",     :limit => 30,  :null => false
+    t.string   "first_name",   :limit => 30,  :null => false
+    t.string   "last_name",    :limit => 30,  :null => false
+    t.string   "email",        :limit => 75,  :null => false
+    t.string   "password",     :limit => 128, :null => false
+    t.boolean  "is_staff",                    :null => false
+    t.boolean  "is_active",                   :null => false
+    t.boolean  "is_superuser",                :null => false
+    t.datetime "last_login",                  :null => false
+    t.datetime "date_joined",                 :null => false
+  end
+
+  add_index "auth_user!", ["username"], :name => "auth_user_username_key", :unique => true
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -95,7 +110,6 @@ ActiveRecord::Schema.define(:version => 20130716124701) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name"
     t.decimal  "phone",                  :precision => 11, :scale => 0
     t.string   "position"
     t.string   "division"
@@ -121,9 +135,14 @@ ActiveRecord::Schema.define(:version => 20130716124701) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "username"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.boolean  "is_staff"
+    t.boolean  "is_active"
+    t.boolean  "is_superuser"
+    t.datetime "date_joined"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

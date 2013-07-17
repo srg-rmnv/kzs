@@ -3,7 +3,8 @@ class DocumentsController < ApplicationController
   # GET /documents.json
   def index
     
-    document = Document.order("created_at DESC")
+    document = Document.not_deleted.not_archived.order("created_at DESC")
+    
     
     
     @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all unless params[:type]
@@ -15,9 +16,9 @@ class DocumentsController < ApplicationController
     elsif params[:type] == "sent"
       @documents = document.sent.where(:user_id => current_user.id).all  
     elsif params[:type] == "deleted"
-      @documents = document.deleted.where(:user_id => current_user.id).all
+      @documents = Document.order("created_at DESC").deleted.where(:user_id => current_user.id).all
     elsif params[:type] == "archived"
-      @documents = document.archived.where(:user_id => current_user.id).all
+      @documents = Document.order("created_at DESC").not_deleted.archived.where(:user_id => current_user.id).all
     elsif params[:type] == "callback"
       @documents = document.callback.where(:user_id => current_user.id).all
     else
