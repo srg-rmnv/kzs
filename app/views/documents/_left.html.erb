@@ -2,17 +2,17 @@
 	
 	<ul class="nav doc-left">
 	  <li class="nav-header">Папки</li>
-	  <li><%= link_to documents_path(:type => "inbox") do %>
+	  <li><%= link_to documents_path(:type => "inbox"), :class => ('active' if params[:type] == 'inbox' || params[:type] == nil ) do %>
 		  Входящие <% unless indox(current_user) < 1  %> (<%= indox(current_user) %>) <% end %>
 		  <% end %>
 	  </li>
-	  <li><%= link_to documents_path(:type => "draft") do %>
+	  <li><%= link_to documents_path(:type => "draft"), :class => ('active' if params[:type] == 'draft') do %>
 		 Черновики
 		<% end %>
 	  </li>
-	  <li><%= link_to "Отправленные", documents_path(:type => "sent") %></li>
-	  <li><%= link_to "Корзина", documents_path(:type => "deleted") %></li>
-	  <li><%= link_to "Архив", documents_path(:type => "archived") %></li>
-	  <li><%= link_to "Отозванные", documents_path(:type => "callback") %></li>	
+	  <li><%= link_to "Отправленные", documents_path(:type => "sent"), :class => ('active' if params[:type] == 'sent') %></li>
+	  <li><%= link_to "Корзина", documents_path(:type => "deleted"), :class => ('active' if params[:type] == 'deleted') %></li>
+	  <li><%= link_to "Архив", documents_path(:type => "archived"), :class => ('active' if params[:type] == 'archived') %></li>
+	  <li><%= link_to "Отозванные", documents_path(:type => "callback"), :class => ('active' if params[:type] == 'callback') %></li>	
 	</ul>
 </div>
