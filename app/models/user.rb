@@ -15,9 +15,8 @@ class User < ActiveRecord::Base
                               
   WORK_STATUSES = [ [I18n.t('at_work'), 'at_work'], [I18n.t('ooo'), 'ooo'] ]
   
-  validates :phone, :position, :organization_id, :division,
-                   :email, :dob, :permit, :work_status, :presence => true
-  validates :phone, :length => { :maximum => 11 }
+  validates :position, :organization_id, :division,
+            :email, :work_status, :presence => true
   
   has_attached_file :avatar, :styles => { :small => "48x48#", :large => "100x100#" } 
   
