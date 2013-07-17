@@ -2,7 +2,7 @@ module DocumentsHelper
   
   def doc_user(user_id)
     if User.exists?(user_id)
-      User.find(user_id).name
+      User.find(user_id).first_name_with_last_name
     else
       "Deleted"
     end
