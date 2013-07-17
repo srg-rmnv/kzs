@@ -52,6 +52,8 @@ class DocumentsController < ApplicationController
   # GET /documents/new.json
   def new
     @document = Document.new
+    
+    @users = User.where(:first_name != "false")
 
     respond_to do |format|
       format.html # new.html.erb
