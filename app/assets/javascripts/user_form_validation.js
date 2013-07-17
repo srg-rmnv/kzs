@@ -30,13 +30,6 @@ $(document).ready(function(){
 				equalTo: "#user_password",
             },
 
-			"user[phone]":{
-                required: true,
-                digits: true,
-				minlength: 7,
-                maxlength: 16,
-            },
-
 			"user[position]":{
                 required: true,
 				minlength: 3,
@@ -51,17 +44,6 @@ $(document).ready(function(){
                 required: true,
 				minlength: 3,
                 maxlength: 16,
-            },
-
-			"user[dob]":{
-                required: true,
-				dateISO: true,
-            },
-
-			"user[permit]":{
-                required: true,
-				minlength: 4,
-                maxlength: 4,
             },
 
 			"user[work_status]":{
