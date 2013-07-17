@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
   def email_changed?
     false
   end
+  
+  def first_name_with_last_name
+      "#{last_name} #{first_name}"
+    end
 
   
 end

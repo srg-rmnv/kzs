@@ -20,9 +20,9 @@
 			
 			<div class="new-title">Тема письма <%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'введите тему письма...' %></div>
 			
-			<div class="new-title">Получатель <%= f.collection_select(:recipient_id, User.all, :id, :name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+			<div class="new-title">Получатель <%= f.collection_select(:recipient_id, User.all, :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			
-			<div class="new-title">Согласовать<%= f.collection_select(:approver_id, User.all, :id, :name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+			<div class="new-title">Согласовать<%= f.collection_select(:approver_id, User.all, :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			
 			<div class="new-text-wrap">
 				<%= f.cktext_area :text, :class => "text", :ckeditor => {:toolbar => "mini"} %>
