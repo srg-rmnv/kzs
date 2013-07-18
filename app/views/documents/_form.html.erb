@@ -33,13 +33,23 @@
 					<%= f.submit "отправить", :class => "btn btn-large btn-success", :name => "sent" %>
 				</div>
 				
+
+				
 				<div class="btn-group" style="margin-left: 10px; margin-top: -10px;">	
 					<%= f.submit "в черновики", :class => "btn btn-primary" %>
 				</div>
+				
+				<% unless @document.sent? %>
+				<div class="btn-group"   style="margin-top: -10px; margin-left: 10px">	
+					<%= link_to 'Удалить', delete_document_path(@document), :class => "btn btn-danger" %>
+				</div>
+				<% end %>
 
 				<div class="btn-group"  style="margin-left: 10px; margin-top: -10px;">	
 					<%= link_to "отмена", documents_path, :class => "btn" %>
 				</div>
+				
+
 			</div>
 		
 			<% end %>
