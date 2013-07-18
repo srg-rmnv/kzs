@@ -37,7 +37,7 @@
 			
 			
 			<div class="btn-toolbar">
-				<% unless @document.sent? %>
+				<% unless @document.sent? || @document.deleted? %>
 				<div class="btn-group"   style="margin-right: 10px;">	
 					<%= link_to 'Редактировать', edit_document_path(@document), :class => "btn btn-large btn-success" %>
 				</div>
@@ -55,7 +55,7 @@
 				</div>
 				<% end %>
 				
-				<% unless @document.sent? %>
+				<% unless @document.sent? || @document.deleted? %>
 				<div class="btn-group"   style="margin-right: 10px;">	
 					<%= link_to 'Удалить', delete_document_path(@document), :class => "btn btn-danger" %>
 				</div>
