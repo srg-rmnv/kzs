@@ -5,13 +5,19 @@ Kzs::Application.routes.draw do
     member do
       get 'approve'
       get 'callback'
+      get 'archive'
       get 'delete'
+    end
+    collection do
+      get 'sents'
+      get 'drafts'
+      get 'callbacks'
     end
   end
 
 
   devise_for :users, :path_prefix => 'devise'
-  resources :users
+  resources :users, :controller => "users"
   resources :rights
   resources :groups
   resources :organizations

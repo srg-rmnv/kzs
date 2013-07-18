@@ -1,39 +1,60 @@
 class DocumentsController < ApplicationController
-  # GET /documents
-  # GET /documents.json
+  
+  # collection
+  
   def index
-    
     document = Document.not_deleted.not_archived.order("created_at DESC")
-    
-    
-    
     @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all unless params[:type]
     
     if params[:type] == "inbox"
       @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all
-    elsif params[:type] == "draft"
-      @documents = document.draft.where(:user_id => current_user.id).all
-    elsif params[:type] == "sent"
-      @documents = document.sent.where(:user_id => current_user.id).all  
     elsif params[:type] == "deleted"
       @documents = Document.order("created_at DESC").deleted.where(:user_id => current_user.id).all
     elsif params[:type] == "archived"
       @documents = Document.order("created_at DESC").not_deleted.archived.where(:user_id => current_user.id).all
-    elsif params[:type] == "callback"
-      @documents = document.callback.where(:user_id => current_user.id).all
     else
       @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all
     end
 
-    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @documents }
     end
   end
 
-  # GET /documents/1
-  # GET /documents/1.json
+  def sents
+    document = Document.not_deleted.not_archived.order("created_at DESC")
+    @documents = document.sent.where(:user_id => current_user.id).all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @documents }
+    end
+  end
+  
+  def drafts
+    document = Document.not_deleted.not_archived.order("created_at DESC")
+    @documents = document.draft.where(:user_id => current_user.id).all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @documents }
+    end
+  end
+  
+  def callbacks
+    document = Document.not_deleted.not_archived.order("created_at DESC")
+    @documents = document.callback.where(:user_id => current_user.id).all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @documents }
+    end
+  end
+  
+
+  # member
+  
   def show
     @document = Document.find(params[:id])
     
@@ -149,13 +170,24 @@ class DocumentsController < ApplicationController
     end
   end
   
+  def archive
+    @document = Document.find(params[:id])
+    @document.archived = true
+    @document.save
+
+    respond_to do |format|
+      format.html { redirect_to :back, notice: t('document_archived') }
+      format.json { head :no_content }
+    end
+  end
+  
   def delete
     @document = Document.find(params[:id])
     @document.deleted = true
     @document.save
 
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: t('document_deleted') }
+      format.html { redirect_to documents_path, notice: t('document_deleted') }
       format.json { head :no_content }
     end
   end

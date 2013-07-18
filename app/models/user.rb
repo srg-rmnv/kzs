@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   
   validates :position, :organization_id, :division,
             :email, :work_status, :presence => true
+            
+  validates :username, uniqueness: true
   
   has_attached_file :avatar, :styles => { :small => "48x48#", :large => "100x100#" } 
   

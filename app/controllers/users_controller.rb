@@ -41,15 +41,15 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
+    
     respond_to do |format|
       if @user.save
-        flash[:notice] = t("user_successfully_created")
-        redirect_to users_path
+        format.html { redirect_to users_path, notice: t("user_successfully_created") }
       else
-        render :action => 'new'
+        format.html { render action: "new" }
       end
     end
+
   end
 
   # PUT /users/1

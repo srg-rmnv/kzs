@@ -3,6 +3,10 @@ $(document).ready(function(){
     $("#user_form").validate({
 
        rules:{
+	
+			"user[username]":{
+                required: true,
+            },
 
             "user[name]":{
                 required: true,
@@ -55,6 +59,10 @@ $(document).ready(function(){
        },
 
        messages:{
+	
+			"user[username]":{
+                required: "Это поле обязательно для заполнения",
+            },
 
             "user[name]":{
                 required: "Это поле обязательно для заполнения",

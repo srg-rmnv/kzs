@@ -3,7 +3,7 @@
 <%= form_for @user, :html => { :id => "user_form" } do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+      <h4 style="color: #9a0000;">Пожалуйста, исправьте некорректные поля:</h4>
 
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
