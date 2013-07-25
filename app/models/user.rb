@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
                   
   has_many :user_rights
   has_many :rights, through: :user_rights
+  has_many :open_notices
   
   scope :superuser, -> { where(is_superuser: true) }
                               

@@ -32,6 +32,8 @@ class DocumentsController < ApplicationController
     organization = current_user.organization_id
     document = Document.not_deleted.not_archived.order("created_at DESC")
     @documents = document.sent.where(:sender_organization_id => organization).all
+    
+    current_user.open_notices.destroy_all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -65,9 +67,14 @@ class DocumentsController < ApplicationController
   def show
     @document = Document.find(params[:id])
     
-    if current_user.is_superuser && @document.organization_id == current_user.organization_id
+    if current_user.is_superuser && @document.organization_id == current_user.organization_id && @document.opened != true
       @document.opened = true
       @document.save
+      
+      users = User.superuser.where(:organization_id => @document.sender_organization_id)
+      users.each do |user|
+        OpenNotice.create!(:user_id => user.id, :document_id => @document.id)
+      end
     end
 
     respond_to do |format|
@@ -169,6 +176,8 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @document.sent = true
     @document.save
+    
+
     
 
     respond_to do |format|

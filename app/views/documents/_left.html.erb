@@ -17,7 +17,10 @@
 		  <% end %>
 		  <% end %>
 	  </li>
-	  <li><%= link_to "Отправленные", sents_documents_path, :class => ('active' if action?("sents")) %></li>
+	  <li><%= link_to sents_documents_path, :class => ('active' if action?("sents")) do %>
+		   Отправленные <% unless current_user.open_notices.count < 1 %>(<%= current_user.open_notices.count %>) <% end %>
+		  <% end %>
+	  </li>
 	  
 	  <li><%= link_to "Корзина", documents_path(:type => "deleted"), :class => ('active' if params[:type] == 'deleted') %></li>
 	</ul>
