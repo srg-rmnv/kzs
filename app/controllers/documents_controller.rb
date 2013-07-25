@@ -10,7 +10,7 @@ class DocumentsController < ApplicationController
     if params[:type] == "inbox"
       @documents = document.sent.where(:organization_id => organization).all
     elsif params[:type] == "prepared"
-      @documents = document.prepared.where(:sender_organization_id => organization).all
+      @documents = document.prepared.not_sent.where(:sender_organization_id => organization).all
     elsif params[:type] == "approved"
       @documents = document.approved.where(:sender_organization_id => organization).all
     elsif params[:type] == "archived"
@@ -65,7 +65,7 @@ class DocumentsController < ApplicationController
   def show
     @document = Document.find(params[:id])
     
-    if @document.user_id != current_user.id
+    if current_user.is_superuser && @document.organization_id == current_user.organization_id
       @document.opened = true
       @document.save
     end
