@@ -19,7 +19,7 @@ module DocumentsHelper
   end   
   
   def indox(current_user)
-    Document.sent.unopened.where(:recipient_id => current_user.id).count
+    Document.sent.unopened.where(:organization_id => current_user.organization_id).count
   end
   
   def draft(current_user)
@@ -27,7 +27,11 @@ module DocumentsHelper
   end
   
   def to_be_approved(current_user)
-    Document.sent.not_approved.where(:approver_id => current_user.id).count
+    Document.prepared.not_approved.where(:approver_id => current_user.id).count
+  end
+  
+  def to_be_sent(current_user)
+    Document.prepared.approved.not_sent.where(:user_id => current_user.id).count
   end
   
   def for_approve(document)
