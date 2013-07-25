@@ -44,9 +44,9 @@ module DocumentsHelper
   
   def document_status(document)
     if document.opened?
-      '<span class="label label-success">Открыт</span>'.html_safe
+      '<span class="label label-success">Прочитан</span>'.html_safe
     elsif document.sent?
-       '<span class="label label-info">Отправлен</span>'.html_safe
+       '<span class="label label-info">Не прочитан</span>'.html_safe
      elsif document.approved?
        '<span class="label label-warning">Подписан</span>'.html_safe    
      elsif document.prepared?
