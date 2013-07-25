@@ -4,6 +4,7 @@
   <table class="table table-striped">
   <tr>
 	<th>Логин</th>
+	<th>Организация</th>
     <th>Имя</th>
     <th>Фамилия</th>
 	<th>Email</th>
@@ -15,6 +16,7 @@
 <% @users.each do |user| %>
   <tr>
 	<td><%= user.username %></td>
+	<td><%= organzation_title(user) %></td>
     <td><%= user.first_name %></td>
 	<td><%= user.last_name %></td>
 	<td><%= user.email %></td>

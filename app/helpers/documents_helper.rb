@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module DocumentsHelper
   
   def doc_user(user_id)
@@ -38,6 +40,20 @@ module DocumentsHelper
   
   def for_callback(document)
     if document.user_id == current_user.id && document.opened != true && document.callback != true && document.sent == true then true end
+  end
+  
+  def document_status(document)
+    if document.sent?
+       '<span class="label label-success">Отправлен</span>'.html_safe
+     elsif document.approved?
+       '<span class="label label-warning">Подписан</span>'.html_safe    
+     elsif document.prepared?
+       '<span class="label">Подготовлен</span>'.html_safe
+    elsif document.draft?
+      '<span class="label label-inverse">Черновик</span>'.html_safe
+    else
+      nil
+    end
   end
   
 end

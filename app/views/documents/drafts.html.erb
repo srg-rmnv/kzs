@@ -39,10 +39,10 @@
 		
 		<table class="table table-striped">
 		  	 <tr>
-			    <th>Получатель</th>
+			    <th>Получатель</th>	
+			    <th>Статус</th>
 			    <th>Тип</th>
 			    <th>Тема письма</th>
-				<th>Редактировать</th>
 			    <th>Детали</th>
 				<th>Удалить</th>
 			    <th style="width: 110px">Дата/Время</th>
@@ -51,9 +51,9 @@
 			<% @documents.each do |document| %>
 			  <tr>
 			    <td><%= organization(document.organization_id) %></td>
+			    <td><%= document_status(document) %></td>
 			    <td><span class="label label-info">Письмо</span></td>
 			    <td><%= document.title %></td>
-				<td><%= link_to 'Редактировать', edit_document_path(document) %></td>
 			    <td><%= link_to "Подробнее", document %></td>
 				<th><%= link_to 'Удалить', delete_document_path(document) %></th>
 			    <td><%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %></td>

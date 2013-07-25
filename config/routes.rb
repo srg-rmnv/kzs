@@ -3,6 +3,7 @@ Kzs::Application.routes.draw do
 
   resources :documents do
     member do
+      get 'prepare'
       get 'approve'
       get 'callback'
       get 'archive'

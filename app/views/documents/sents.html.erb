@@ -50,13 +50,7 @@
 			<% @documents.each do |document| %>
 			  <tr>
 			    <td><%= organization(document.organization_id) %></td>
-				<td>
-					<% if document.approved? %>
-					  <span class="label label-success">Одобрено</span>
-					<% else %>
-					  <span class="label label-warning">Не одобрено</span>
-					<% end %>
-				</td>
+				<td><%= document_status(document) %></td>
 			    <td><span class="label label-info">Письмо</span></td>
 			    <td><%= document.title %></td>
 			    <td><%= link_to "Подробнее", document %></td>

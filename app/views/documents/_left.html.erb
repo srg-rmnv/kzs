@@ -6,10 +6,10 @@
 		  Входящие <% unless indox(current_user) < 1  %> (<%= indox(current_user) %>) <% end %>
 		  <% end %>
 	  </li>
-	  <li><%= link_to "Подготовленные", documents_path(:type => "prepared"), :class => ('active' if params[:type] == 'prepared') %></li>
-	  <li><%= link_to "Подписанные", documents_path(:type => "approved"), :class => ('active' if params[:type] == 'approved') %></li>
-	  <li><%= link_to "Отправленные", sents_documents_path, :class => ('active' if action?("sents")) %></li>
 	  <li><%= link_to "Черновики", drafts_documents_path, :class => ('active' if action?("drafts")) %></li>
+	  <li><%= link_to "На отправку", documents_path(:type => "prepared"), :class => ('active' if params[:type] == 'prepared') %></li>
+	  <li><%= link_to "Отправленные", sents_documents_path, :class => ('active' if action?("sents")) %></li>
+	  
 	  <li><%= link_to "Корзина", documents_path(:type => "deleted"), :class => ('active' if params[:type] == 'deleted') %></li>
 	</ul>
 </div>

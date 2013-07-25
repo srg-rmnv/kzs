@@ -5,10 +5,10 @@ class DocumentsController < ApplicationController
   def index
     document = Document.not_deleted.not_archived.order("created_at DESC")
     organization = current_user.organization_id
-    @documents = document.sent.where("organization_id = ?", organization).all unless params[:type]
+    @documents = document.sent.where(:organization_id => organization).all unless params[:type]
     
     if params[:type] == "inbox"
-      @documents = document.sent.where("organization_id = ?", organization).all
+      @documents = document.sent.where(:organization_id => organization).all
     elsif params[:type] == "prepared"
       @documents = document.prepared.where(:sender_organization_id => organization).all
     elsif params[:type] == "approved"
