@@ -7,7 +7,6 @@ module OrganizationsHelper
   		'-'
   	end
 	end
-	
 
   
 end

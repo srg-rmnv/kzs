@@ -29,7 +29,11 @@ module DocumentsHelper
   end
   
   def for_approve(document)
-    if document.approver_id == current_user.id && document.approved != true && document.sent == true then true end
+    if document.approver_id == current_user.id && document.approved != true then true end
+  end
+  
+  def for_send(document)
+    if document.approver_id == current_user.id && document.sent != true && document.approved? then true end
   end
   
   def for_callback(document)

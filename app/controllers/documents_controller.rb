@@ -4,16 +4,22 @@ class DocumentsController < ApplicationController
   
   def index
     document = Document.not_deleted.not_archived.order("created_at DESC")
-    @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all unless params[:type]
+    organization = current_user.organization_id
+    @documents = document.sent.where("organization_id = ?", organization).all unless params[:type]
     
     if params[:type] == "inbox"
-      @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all
-    elsif params[:type] == "deleted"
-      @documents = Document.order("created_at DESC").deleted.where(:user_id => current_user.id).all
+      @documents = document.sent.where("organization_id = ?", organization).all
+    elsif params[:type] == "prepared"
+      @documents = document.prepared.where(:sender_organization_id => organization).all
+    elsif params[:type] == "approved"
+      @documents = document.approved.where(:sender_organization_id => organization).all
     elsif params[:type] == "archived"
       @documents = Document.order("created_at DESC").not_deleted.archived.where(:user_id => current_user.id).all
+    elsif params[:type] == "deleted"
+      @documents = Document.order("created_at DESC").deleted.where(:user_id => current_user.id).all
+
     else
-      @documents = document.sent.where("recipient_id = ? OR approver_id = ?", current_user.id, current_user.id).all
+      @documents = document.sent.where("organization_id = ?", organization).all
     end
 
     respond_to do |format|
@@ -23,8 +29,9 @@ class DocumentsController < ApplicationController
   end
 
   def sents
+    organization = current_user.organization_id
     document = Document.not_deleted.not_archived.order("created_at DESC")
-    @documents = document.sent.where(:user_id => current_user.id).all
+    @documents = document.sent.where(:sender_organization_id => organization).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -69,8 +76,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # GET /documents/new
-  # GET /documents/new.json
   def new
     @document = Document.new
 
@@ -80,24 +85,20 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # GET /documents/1/edit
   def edit
     @document = Document.find(params[:id])
   end
 
-  # POST /documents
-  # POST /documents.json
   def create
     @document = Document.new(params[:document])
     
     @document.user_id = current_user.id
-    @document.organization_id = current_user.organization_id
+    @document.sender_organization_id = current_user.organization_id
     
-    if params[:sent]
-      @document.sent = true
-      @document.callback = false
+    if params[:prepare]
+      @document.prepared = true
+      @document.draft = false
     end
-    
 
     respond_to do |format|
       if @document.save && 
@@ -121,6 +122,11 @@ class DocumentsController < ApplicationController
       @document.callback = false
     end   
     
+    if params[:prepare]
+      @document.prepared = true
+      @document.draft = false
+    end
+    
 
     respond_to do |format|
       if @document.update_attributes(params[:document])
@@ -133,25 +139,40 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # DELETE /documents/1
-  # DELETE /documents/1.json
-  def destroy
+  
+  def prepare
     @document = Document.find(params[:id])
-    @document.destroy
+    
+    @document.prepared = true
+    @document.draft = false
+    @document.save
 
     respond_to do |format|
-      format.html { redirect_to documents_url }
+      format.html { redirect_to documents_url, notice: t('document_prepared') }
       format.json { head :no_content }
     end
   end
   
   def approve
     @document = Document.find(params[:id])
+    @document.draft = false
     @document.approved = true
     @document.save
 
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: t('document_approved_and_sent_to_recipient') }
+      format.html { redirect_to documents_url, notice: t('document_approved') }
+      format.json { head :no_content }
+    end
+  end
+  
+  def send_document
+    @document = Document.find(params[:id])
+    @document.sent = true
+    @document.save
+    
+
+    respond_to do |format|
+      format.html { redirect_to documents_url, notice: t('document_successfully_sent') }
       format.json { head :no_content }
     end
   end

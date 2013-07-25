@@ -3,6 +3,13 @@
   <%= f.text_field :username %>
 </div>
 
+<div class="field">
+  <%= f.check_box :is_superuser %>
+  <%= f.label :is_superuser, "Право на согласование" %>
+</div>
+
+
+
   <div class="field">
     <%= f.label :first_name, "Имя" %>
     <%= f.text_field :first_name %>
@@ -74,3 +81,4 @@
     <%= f.label :work_status, "Статус работы" %>
 	<%= f.select :work_status, options_for_select(User::WORK_STATUSES, @user.work_status) %>
   </div>
+

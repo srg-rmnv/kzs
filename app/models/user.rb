@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
                   
   has_many :user_rights
   has_many :rights, through: :user_rights
+  
+  scope :superuser, -> { where(is_superuser: true) }
                               
   WORK_STATUSES = [ [I18n.t('at_work'), 'at_work'], [I18n.t('ooo'), 'ooo'] ]
   

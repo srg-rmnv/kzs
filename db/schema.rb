@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717110716) do
+ActiveRecord::Schema.define(:version => 20130724151607) do
 
   create_table "approve_users", :force => true do |t|
     t.integer  "document_id"
@@ -61,17 +61,20 @@ ActiveRecord::Schema.define(:version => 20130717110716) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "recipient_id"
-    t.boolean  "sent",              :default => false
+    t.boolean  "sent",                   :default => false
     t.integer  "approver_id"
-    t.boolean  "approved",          :default => false
-    t.boolean  "opened",            :default => false
-    t.boolean  "for_approve",       :default => false
-    t.boolean  "deleted",           :default => false
-    t.boolean  "archived",          :default => false
-    t.boolean  "callback",          :default => false
+    t.boolean  "approved",               :default => false
+    t.boolean  "opened",                 :default => false
+    t.boolean  "for_approve",            :default => false
+    t.boolean  "deleted",                :default => false
+    t.boolean  "archived",               :default => false
+    t.boolean  "callback",               :default => false
+    t.boolean  "prepared",               :default => false
+    t.boolean  "draft",                  :default => true
+    t.integer  "sender_organization_id"
   end
 
   create_table "groups", :force => true do |t|

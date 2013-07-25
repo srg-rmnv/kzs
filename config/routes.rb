@@ -7,6 +7,7 @@ Kzs::Application.routes.draw do
       get 'callback'
       get 'archive'
       get 'delete'
+      get 'send_document'
     end
     collection do
       get 'sents'

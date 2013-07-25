@@ -22,13 +22,15 @@
 			</div>
 			
 			<div class="new-title">
-				<b>Отправитель: </b><%= link_to doc_user(@document.user_id), user_path(@document.user_id) %>
-				<b style="margin-left: 40px;">Ответственный: </b><%= link_to doc_user(@document.recipient_id), user_path(@document.recipient_id) %>
-				<b style="margin-left: 40px;">Согласующий: </b><%= link_to doc_user(@document.approver_id), user_path(@document.approver_id) %>
+				<b>Организация-отправитель: </b><%= organzation_title_by_user_id(@document.user_id) %>
+			</div>
+			
+			<div class="new-title">
+				<b>Согласующий: </b><%= link_to doc_user(@document.approver_id), user_path(@document.approver_id) %>
 			</div>
 			
 			<% if @document.organization_id? %>
-			<div class="new-title"><b>Организация: </b><%= link_to organization(@document.organization_id), organization_path(@document.organization_id) %><!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+			<div class="new-title"><b>Организация-получатель: </b><%= organization(@document.organization_id) %><!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			<% end %>
 			
 			<div class="new-text-wrap">
@@ -37,15 +39,22 @@
 			
 			
 			<div class="btn-toolbar">
-				<% unless @document.sent? || @document.deleted? %>
+				
+				<% unless @document.approved? || @document.deleted? %>
 				<div class="btn-group"   style="margin-right: 10px;">	
-					<%= link_to 'Редактировать', edit_document_path(@document), :class => "btn btn-large btn-success" %>
+					<%= link_to 'Редактировать', edit_document_path(@document), :class => "btn btn-success" %>
+				</div>
+				<% end %>
+				
+				<% if for_send(@document) %>
+				<div class="btn-group"   style="margin-right: 10px;">	
+					<%= link_to 'Отправить', send_document_document_path(@document), :class => "btn btn-success" %>
 				</div>
 				<% end %>
 				
 				<% if for_approve(@document) %>
 				<div class="btn-group"   style="margin-right: 10px;">	
-					<%= link_to 'Одобрить', approve_document_path(@document), :class => "btn btn-large btn-success" %>
+					<%= link_to 'Подписать', approve_document_path(@document), :class => "btn btn-success" %>
 				</div>
 				<% end %>
 				

@@ -20,7 +20,7 @@ $(document).ready(function(){
 
 			"user[password]":{
                 required: true,
-                minlength: 8,
+                minlength: 3,
                 maxlength: 16,
             },
 

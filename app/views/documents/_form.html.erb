@@ -18,11 +18,19 @@
 			<%= form_for(@document) do |f| %>
 			<div class="new-header"><span class="header">Новое письмо | <%= Russian::strftime(Time.new, "%d %B %Y %H:%M") %></span><span class="label label-info" style="float: right; margin-top: 7px">Письмо</span></div>
 			
+			<% if current_user.organization_id? %>
+			<div class="new-title">Организация-отправитель <span style="padding-left: 15px; font-weight: bold;"><%= organzation_title(current_user) %></span></div>
+			<% end %>
+			
+			<div class="new-title">Организация-получатель <%= f.collection_select(:organization_id, Organization.all, :id, :title) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+			
+			<div class="new-title">Согласовать<%= f.collection_select(:approver_id, User.superuser, :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+			
 			<div class="new-title">Тема письма <%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'введите тему письма...' %></div>
 			
-			<div class="new-title">Получатель <%= f.collection_select(:recipient_id, User.where(:first_name != 'false'), :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			
-			<div class="new-title">Согласовать<%= f.collection_select(:approver_id, User.all, :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+			
+			
 			
 			<div class="new-text-wrap">
 				<%= f.cktext_area :text, :class => "text", :ckeditor => {:toolbar => "mini"} %>
@@ -30,24 +38,19 @@
 			
 			<div class="btn-toolbar">
 				<div class="btn-group">	
-					<%= f.submit "отправить", :class => "btn btn-large btn-success", :name => "sent" %>
+					<%= f.submit "подготовить", :class => "btn btn-success", :name => "prepare" %>
 				</div>
 				
-
-				
-				<div class="btn-group" style="margin-left: 10px; margin-top: -10px;">	
+				<div class="btn-group" style="margin-left: 10px;">	
 					<%= f.submit "в черновики", :class => "btn btn-primary" %>
 				</div>
 				
 				<% unless @document.sent? || action?('new') %>
-				<div class="btn-group"   style="margin-top: -10px; margin-left: 10px">	
+				<div class="btn-group"   style="margin-left: 10px">	
 					<%= link_to 'Удалить', delete_document_path(@document), :class => "btn btn-danger" %>
 				</div>
 				<% end %>
 
-				<div class="btn-group"  style="margin-left: 10px; margin-top: -10px;">	
-					<%= link_to "отмена", documents_path, :class => "btn" %>
-				</div>
 				
 
 			</div>

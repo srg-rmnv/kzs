@@ -49,7 +49,7 @@
 
 			<% @documents.each do |document| %>
 			  <tr>
-			    <td><%= doc_user(document.recipient_id) %></td>
+			    <td><%= organization(document.organization_id) %></td>
 				<td>
 					<% if document.approved? %>
 					  <span class="label label-success">Одобрено</span>
