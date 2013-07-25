@@ -43,7 +43,11 @@ class User < ActiveRecord::Base
   
   def first_name_with_last_name
       "#{last_name} #{first_name}"
-    end
+  end
+  
+  def self.superusers_from_orgranization(organization_id)
+        superuser.where(:organization_id => organization_id)
+  end
 
   
 end
