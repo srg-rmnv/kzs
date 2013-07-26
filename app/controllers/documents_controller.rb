@@ -167,7 +167,7 @@ class DocumentsController < ApplicationController
     @document.save
 
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: t('document_approved') }
+      format.html { redirect_to document_path(@document), notice: t('document_approved') }
       format.json { head :no_content }
     end
   end

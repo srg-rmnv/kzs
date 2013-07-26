@@ -22,7 +22,7 @@
 			<div class="new-title">Организация-отправитель <span style="padding-left: 15px; font-weight: bold;"><%= organzation_title(current_user) %></span></div>
 			<% end %>
 			
-			<div class="new-title">Организация-получатель <%= f.collection_select(:organization_id, Organization.all, :id, :title) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+			<div class="new-title">Организация-получатель <%= f.collection_select(:organization_id, Organization.where('id != ?', current_user.organization_id), :id, :title) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			
 			<div class="new-title">Согласовать<%= f.collection_select(:approver_id, User.superusers_from_orgranization(current_user.organization_id), :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			
