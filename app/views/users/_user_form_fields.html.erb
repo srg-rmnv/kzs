@@ -4,11 +4,13 @@
 </div>
 
 <div class="field">
-  <%= f.check_box :is_superuser %>
-  <%= f.label :is_superuser, "Право на согласование" %>
+<label>Права</label>
+<%= hidden_field_tag "user[permission_ids][]", nil %>
+<% Permission.all.each do |permission| %>
+  <%= check_box_tag "user[permission_ids][]", permission.id, @user.permission_ids.include?(permission.id), id: dom_id(permission) %>
+  <%= label_tag dom_id(permission), permission.title %><br>
+<% end %>
 </div>
-
-
 
   <div class="field">
     <%= f.label :first_name, "Имя" %>

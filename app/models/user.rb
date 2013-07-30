@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
   attr_accessible :phone, :position, :division, :info, :dob, :permit, :phone, 
                   :work_status, :organization_id, :email, :password, :password_confirmation, 
                   :avatar, :first_name, :last_name, :username, :right_ids, :remember_me,
-                  :is_staff, :is_active, :is_superuser, :date_joined
+                  :is_staff, :is_active, :is_superuser, :date_joined, :permission_ids
                   
-  has_many :user_rights
-  has_many :rights, through: :user_rights
+  has_many :user_permissions
+  has_many :permissions, through: :user_permissions
   has_many :open_notices
   
   scope :superuser, -> { where(is_superuser: true) }

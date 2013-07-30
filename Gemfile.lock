@@ -33,6 +33,7 @@ GEM
       activerecord (>= 3.0.0)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
+    cancan (1.6.8)
     capistrano (2.15.4)
       highline
       net-scp (>= 1.0.0)
@@ -163,6 +164,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_nested_set
+  cancan
   capistrano
   ckeditor
   coffee-rails (~> 3.2.1)

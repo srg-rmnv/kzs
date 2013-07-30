@@ -20,5 +20,14 @@
   <%= organzation_title(@user) %>
 </p>
 
+<p>
+  <b>Права:</b>
+  <ul>
+  <% @user.permissions.each do |permission| %>
+    <li><%= permission.title %></li>
+  <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

@@ -12,6 +12,7 @@ gem "paperclip", "~> 3.0"
 gem "russian", "~> 0.6.0"
 gem 'devise'
 
+gem "cancan"
 gem "ckeditor"
 
 gem 'awesome_nested_set'

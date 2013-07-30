@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725150018) do
+ActiveRecord::Schema.define(:version => 20130730144222) do
 
   create_table "approve_users", :force => true do |t|
     t.integer  "document_id"
@@ -99,6 +99,13 @@ ActiveRecord::Schema.define(:version => 20130725150018) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "permissions", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "responsible_users", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"
@@ -110,6 +117,13 @@ ActiveRecord::Schema.define(:version => 20130725150018) do
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_permissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "permission_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "user_rights", :force => true do |t|

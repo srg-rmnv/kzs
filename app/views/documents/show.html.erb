@@ -62,10 +62,13 @@
 				</div>
 				<% end %>
 				
+				
+				<% if can? :approve, @document %>
 				<% if for_approve(@document) %>
 				<div class="btn-group"   style="margin-right: 10px;">	
 					<%= link_to 'Подписать', approve_document_path(@document), :class => "btn btn-success" %>
 				</div>
+				<% end %>
 				<% end %>
 				
 				<% if for_callback(@document) %>
