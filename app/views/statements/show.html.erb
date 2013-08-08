@@ -1,6 +1,6 @@
 <div class="row">
 	
-	<%= render 'left' %>
+	<%= render 'documents/left' %>
 	
 	<div class="span8">
 		
@@ -15,21 +15,8 @@
 		</div>
 		
 		<div class="new-wrap">
-			<%= render @document %>
+			<%= render @statement %>
 	    </div>	
-	
-		<% if @document.document_type == 'writ' %>
-		<div class="new-wrap">
-			<% if @document.statements.empty? %>
-			  <h5>Акты отсутствуют</h5>
-			<% else %>
-			  <h5>Акты</h5>
-			  <% @document.statements.each do |statement| %>
-			  <%= statement.title %>
-			  <% end %>
-			<% end %>
-	    </div>
-		<% end %>
 		
 	
     </div>

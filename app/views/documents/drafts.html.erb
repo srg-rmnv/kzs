@@ -21,7 +21,15 @@
 			  <tr>
 			    <td><%= organization(document.organization_id) %></td>
 			    <td><%= document_status(document) %></td>
-			    <td><span class="label label-info">Письмо</span></td>
+			    <td>
+				  <% if document.document_type == 'mail' %>
+				    <span class="label label-info">Письмо</span>
+				  <% elsif document.document_type == 'writ' %>
+					<span class="label">Распоряжение</span>
+				  <% elsif document.document_type == 'act' %>
+					<span class="label label-warning">Акт</span>
+				  <% end %>
+				</td>
 			    <td><%= document.title %></td>
 			    <td><%= link_to "Подробнее", document %></td>
 				<th><%= link_to 'Удалить', delete_document_path(document) %></th>

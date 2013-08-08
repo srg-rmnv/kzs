@@ -1,4 +1,8 @@
 Kzs::Application.routes.draw do
+  get "statements/new"
+
+  get "statements/show"
+
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :documents do
@@ -9,11 +13,19 @@ Kzs::Application.routes.draw do
       get 'archive'
       get 'delete'
       get 'send_document'
+      get 'execute'
     end
     collection do
       get 'sents'
       get 'drafts'
       get 'callbacks'
+    end
+  end
+  
+  resources :statements do
+    member do 
+      get 'accept'
+      get 'refuse'
     end
   end
 
@@ -23,6 +35,8 @@ Kzs::Application.routes.draw do
   resources :rights
   resources :groups
   resources :organizations
+  resources :projects
+  resources :statements
 
   root :to => 'documents#index'
 

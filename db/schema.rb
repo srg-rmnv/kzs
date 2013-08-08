@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730144222) do
+ActiveRecord::Schema.define(:version => 20130808114708) do
 
   create_table "approve_users", :force => true do |t|
     t.integer  "document_id"
@@ -75,6 +75,11 @@ ActiveRecord::Schema.define(:version => 20130730144222) do
     t.boolean  "prepared",               :default => false
     t.boolean  "draft",                  :default => true
     t.integer  "sender_organization_id"
+    t.string   "document_type"
+    t.boolean  "with_comments",          :default => false
+    t.boolean  "executed",               :default => false
+    t.boolean  "for_confirmation",       :default => false
+    t.integer  "project_id"
   end
 
   create_table "groups", :force => true do |t|
@@ -106,6 +111,12 @@ ActiveRecord::Schema.define(:version => 20130730144222) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "projects", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "responsible_users", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"
@@ -117,6 +128,36 @@ ActiveRecord::Schema.define(:version => 20130730144222) do
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "statement_approvers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "statement_id"
+    t.boolean  "accepted"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "statements", :force => true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.integer  "sender_organization_id"
+    t.integer  "organization_id"
+    t.integer  "document_id"
+    t.text     "text"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.boolean  "draft",                  :default => true
+    t.boolean  "prepared",               :default => false
+    t.boolean  "opened",                 :default => false
+    t.boolean  "accepted",               :default => false
+    t.boolean  "not_accepted",           :default => false
+    t.boolean  "sent",                   :default => false
+    t.boolean  "deleted",                :default => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "user_permissions", :force => true do |t|

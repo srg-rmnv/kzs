@@ -17,20 +17,17 @@
 		<div class="new-wrap">
 			<%= render @document %>
 	    </div>	
-	
-		<% if @document.document_type == 'writ' %>
+		
+		
 		<div class="new-wrap">
-			<% if @document.statements.empty? %>
-			  <h5>Акты отсутствуют</h5>
-			<% else %>
-			  <h5>Акты</h5>
-			  <% @document.statements.each do |statement| %>
-			  <%= statement.title %>
-			  <% end %>
+			<h5>Акты</h5>
+			<% @document.statements.each do |statement| %>
+			
+			<%= statement.title %>
+		
+		
 			<% end %>
 	    </div>
-		<% end %>
-		
 	
     </div>
 

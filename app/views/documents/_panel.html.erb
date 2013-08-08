@@ -6,9 +6,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
-    <li><%= link_to "Письмо", new_document_path %></li>	
-	<li><%= link_to "Распоряжение", "#" %></li>	
-	<li><%= link_to "Акт", "#" %></li>	
+    <li><%= link_to "Письмо", new_document_path(:type => 'mail') %></li>	
+	<li><%= link_to "Распоряжение", new_document_path(:type => 'writ') %></li>	
+	<li><%= link_to "Акт", new_statement_path %></li>	
   </ul>
 </div>
 

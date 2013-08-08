@@ -2,7 +2,7 @@
 	
 	<ul class="nav doc-left">
 	  <li class="nav-header">Папки</li>
-	  <li><%= link_to documents_path(:type => "inbox"), :class => ('active' if params[:type] == 'inbox' || action?("index") && params[:type] == nil ) do %>
+	  <li><%= link_to documents_path(:type => "inbox"), :class => ('active' if params[:type] == 'inbox' || controller?("documents") && action?("index") && params[:type] == nil ) do %>
 		  Входящие <% unless indox(current_user) < 1  %> (<%= indox(current_user) %>) <% end %>
 		  <% end %>
 	  </li>
@@ -19,6 +19,10 @@
 	  </li>
 	  <li><%= link_to sents_documents_path, :class => ('active' if action?("sents")) do %>
 		   Отправленные <% unless current_user.open_notices.count < 1 %>(<%= current_user.open_notices.count %>) <% end %>
+		  <% end %>
+	  </li>
+	  <li><%= link_to statements_path, :class => ('active' if controller?('statements') && action?("index")) do %>
+		   Акты
 		  <% end %>
 	  </li>
 	  

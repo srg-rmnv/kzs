@@ -176,10 +176,7 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @document.sent = true
     @document.save
-    
-
-    
-
+  
     respond_to do |format|
       format.html { redirect_to documents_url, notice: t('document_successfully_sent') }
       format.json { head :no_content }
@@ -197,6 +194,23 @@ class DocumentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def execute
+    @document = Document.find(params[:id])
+    
+    if Project.exists?(@document.project_id)
+      @project = Project.find(@document.project_id)
+    else
+      @project = Project.new(:title => @document.title)
+      @document.project_id = @project.id
+    end
+
+    respond_to do |format|
+      format.html 
+      format.json 
+    end
+  end
+  
   
   def archive
     @document = Document.find(params[:id])

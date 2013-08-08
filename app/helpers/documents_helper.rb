@@ -16,7 +16,15 @@ module DocumentsHelper
     else
       "Deleted"
     end
-  end   
+  end  
+  
+  def recipient(document)
+    if current_user.organization_id == document.organization_id
+      true
+    else
+      false
+    end
+  end
   
   def indox(current_user)
     Document.sent.unopened.where(:organization_id => current_user.organization_id).count
@@ -46,6 +54,10 @@ module DocumentsHelper
     if document.user_id == current_user.id && document.opened != true && document.callback != true && document.sent == true then true end
   end
   
+  def for_execution(document)
+    if action?('execute') == false && current_user.is_superuser && @document.statements.present? && @document.organization_id == current_user.organization_id then true end
+  end
+  
   def document_status(document)
     if document.opened?
       '<span class="label label-success">Прочитан</span>'.html_safe
@@ -61,5 +73,6 @@ module DocumentsHelper
       nil
     end
   end
+  
   
 end

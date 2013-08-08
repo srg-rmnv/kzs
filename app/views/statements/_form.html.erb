@@ -1,6 +1,6 @@
 <div class="row">
 	
-	<%= render 'left' %>
+	<%= render 'documents/left' %>
 	
 	<div class="span8">
 		
@@ -15,27 +15,36 @@
 		</div>
 		
 		<div class="new-wrap">
-			<%= form_for(@document) do |f| %>
-			<div class="new-header">
-			  <span class="header">Новый документ | <%= Russian::strftime(Time.new, "%d %B %Y %H:%M") %></span>
-			<% if params[:type == 'mail'] %>
-			  <span class="label label-info" style="float: right; margin-top: 7px">Письмо</span>
-			<% else %>
-			  <span class="label" style="float: right; margin-top: 7px">Распоряжение</span>
-			<% end %>
-			</div>
-			
+			<%= form_for(@statement) do |f| %>
+			<div class="new-header"><span class="header">Новый документ | <%= Russian::strftime(Time.new, "%d %B %Y %H:%M") %></span><span class="label label-warning" style="float: right; margin-top: 7px">Акт</span></div>
 			<% if current_user.organization_id? %>
 			<div class="new-title">Организация-отправитель <span style="padding-left: 15px; font-weight: bold;"><%= organzation_title(current_user) %></span></div>
 			<% end %>
 			
-			<%= f.hidden_field :document_type, :value => params[:type] %>
+			<div class="new-title">Распоряжение <%= f.collection_select(:document_id, Document.writs, :id, :title) %> </div>
 			
 			<div class="new-title">Организация-получатель <%= f.collection_select(:organization_id, Organization.where('id != ?', current_user.organization_id), :id, :title) %> </div>
 			
-			<div class="new-title">Согласовать<%= f.collection_select(:approver_id, User.superusers_from_orgranization(current_user.organization_id), :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			
-			<div class="new-title">Тема письма <%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'введите тему письма...' %></div>
+			
+	       <div class="new-title">
+				<%= hidden_field_tag "statement[user_ids][]", nil %>
+				<h4>Согласовать с:</h4>
+				
+				<div class="approvers">
+				<% @approvers.each do |user| %>
+				  <div class="approver">
+				    <%= check_box_tag "statement[user_ids][]", user.id, @statement.user_ids.include?(user.id), id: dom_id(user) %>
+				    <%= label_tag dom_id(user), user.first_name_with_last_name %>
+				  </div>
+				<% end %>
+				</div>
+
+			
+		   </div>
+			
+			
+			<div class="new-title">Заголовок <%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'введите тему письма...' %></div>
 			
 			
 			
@@ -55,9 +64,9 @@
 					<%= f.submit "в черновики", :class => "btn btn-primary" %>
 				</div>
 				
-				<% unless @document.sent? || action?('new') %>
+				<% unless @statement.sent? || action?('new') %>
 				<div class="btn-group"   style="margin-left: 10px">	
-					<%= link_to 'Удалить', delete_document_path(@document), :class => "btn btn-danger" %>
+					<%= link_to 'Удалить', delete_document_path(@statement), :class => "btn btn-danger" %>
 				</div>
 				<% end %>
 

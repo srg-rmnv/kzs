@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
                   
   has_many :user_permissions
   has_many :permissions, through: :user_permissions
+  has_many :statement_approvers
+  has_many :statements, through: :statement_approvers
   has_many :open_notices
   
   scope :superuser, -> { where(is_superuser: true) }

@@ -1,0 +1,29 @@
+<%= form_for(@document) do |f| %>
+<div class="new-header">
+	<span class="header"><%= @document.title %> | <%= Russian::strftime(@document.created_at, "%d %B %Y, %H:%M") %></span>
+	<span class="label label-info" style="float: right; margin-top: 7px">Письмо</span>
+</div>
+
+<div class="new-title">
+	<b>Организация-отправитель: </b><%= organzation_title_by_user_id(@document.user_id) %>
+</div>
+
+<div class="new-title">
+	<b>Тип документа: </b><%= t(document.document_type) %>
+</div>
+
+<div class="new-title">
+	<b>Согласующий: </b><%= link_to doc_user(@document.approver_id), user_path(@document.approver_id) %>
+</div>
+
+<% if @document.organization_id? %>
+<div class="new-title"><b>Организация-получатель: </b><%= organization(@document.organization_id) %><!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+<% end %>
+
+<div class="new-text-wrap">
+	<%= @document.text.html_safe %>
+</div>
+
+<%= render 'actions' %>
+
+<% end %>

@@ -1,0 +1,33 @@
+<%= form_for(@statement) do |f| %>
+<div class="new-header">
+	<span class="header"><%= @statement.title %> | <%= Russian::strftime(@statement.created_at, "%d %B %Y, %H:%M") %></span>
+	<span class="label label-warning" style="float: right; margin-top: 7px">Акт</span>
+</div>
+
+<div class="new-title">
+	<b>Организация-отправитель: </b><%= organzation_title_by_user_id(@statement.user_id) %>
+</div>
+
+<div class="new-title">
+	<b>Тип документа:</b> Акт
+</div>
+
+<div class="new-title">
+	<b>Статус:</b>
+	<% if @statement.accepted? %>Принят
+	<% else %>
+	Отклонен
+	<% end %>
+</div>
+
+<% if @statement.organization_id? %>
+<div class="new-title"><b>Организация-получатель: </b><%= organization(@statement.organization_id) %><!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+<% end %>
+
+<div class="new-text-wrap">
+	<%= @statement.text.html_safe %>
+</div>
+
+<%= render 'actions' %>
+
+<% end %>

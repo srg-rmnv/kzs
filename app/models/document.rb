@@ -1,6 +1,10 @@
 class Document < ActiveRecord::Base
   attr_accessible :deadline, :file, :organization_id, :recipient_id, :text,
-                  :title, :user_id, :approver_id, :opened, :for_approve, :deleted, :archived, :callback, :prepared
+                  :title, :user_id, :approver_id, :opened, :for_approve, 
+                  :deleted, :archived, :callback, :prepared, :document_type
+                  
+  belongs_to :project
+  has_many :statements
   
   scope :draft, -> { where(draft: true) }   
   scope :prepared, -> { where(prepared: true) }    
@@ -18,8 +22,12 @@ class Document < ActiveRecord::Base
   
   scope :callback, -> { where(callback: true) }
   
-      
+  scope :mails, -> { where(document_type: 'mail') }
+  scope :writs, -> { where(document_type: 'writ') }
   
+  DOCUMENT_TYPES = ["mail", "writ"]
   
   has_attached_file :file
+  
+
 end
