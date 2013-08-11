@@ -51,15 +51,17 @@ module DocumentsHelper
   end
   
   def for_callback(document)
-    if document.user_id == current_user.id && document.opened != true && document.callback != true && document.sent == true then true end
+    if document.user_id == current_user.id && document.opened != true && document.sent == true then true end
   end
   
   def for_execution(document)
-    if action?('execute') == false && current_user.is_superuser && @document.statements.present? && @document.organization_id == current_user.organization_id then true end
+    if action?('execute') == false && @document.for_confirmation == false && @document.statements.present? && @document.organization_id == current_user.organization_id then true end
   end
   
   def document_status(document)
     if document.opened?
+      '<span class="label label-success">Проверка исполнения</span>'.html_safe    
+    elsif document.opened?
       '<span class="label label-success">Прочитан</span>'.html_safe
     elsif document.sent?
        '<span class="label label-info">Не прочитан</span>'.html_safe

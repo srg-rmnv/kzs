@@ -23,3 +23,16 @@ ru:
   statement_accepted: "Акт принят"
   statement_refused: "Акт отклонен"
   statement_successfully_updated: "Акт успешно изменен"
+  properties: "Свойста"
+  activerecord:
+    models: 
+      permission:
+        one: "Право"
+        other: "Права"
+      user:
+        one: "Пользователь"
+        other: "Пользователи"
+    attributes:
+      permission:
+        title: "Название"
+        description: "Описание"

@@ -27,21 +27,7 @@
 			
 			
 			
-	       <div class="new-title">
-				<%= hidden_field_tag "statement[user_ids][]", nil %>
-				<h4>Согласовать с:</h4>
-				
-				<div class="approvers">
-				<% @approvers.each do |user| %>
-				  <div class="approver">
-				    <%= check_box_tag "statement[user_ids][]", user.id, @statement.user_ids.include?(user.id), id: dom_id(user) %>
-				    <%= label_tag dom_id(user), user.first_name_with_last_name %>
-				  </div>
-				<% end %>
-				</div>
-
-			
-		   </div>
+	       
 			
 			
 			<div class="new-title">Заголовок <%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'введите тему письма...' %></div>

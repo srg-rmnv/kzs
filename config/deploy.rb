@@ -39,10 +39,24 @@ namespace :deploy do
   end
 end
 
-namespace(:customs) do
-  task :restart do
-    run "cd #{current_path}; thin restart"
+namespace(:thin) do
+  task :stop do
+    run "thin stop -C /etc/thin/kzs.yml"
    end
+  
+  task :start do
+    run "thin start -C /etc/thin/kzs.yml"
+  end
+
+  task :restart do
+    run "thin restart -C /etc/thin/kzs.yml"
+  end
+end
+
+namespace :deploy do
+  task :setup_solr_data_dir do
+    run "mkdir -p #{shared_path}/solr/data"
+  end
 end
 
 before "deploy:assets:precompile", "copy_database_config"

@@ -14,7 +14,7 @@ gem 'devise'
 
 gem "cancan"
 gem "ckeditor"
-
+gem 'activeadmin'
 gem 'awesome_nested_set'
 
 group :assets do

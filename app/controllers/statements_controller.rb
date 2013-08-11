@@ -11,7 +11,7 @@ class StatementsController < ApplicationController
   
   def new
     @statement = Statement.new
-    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 1 AND organization_id = #{current_user.organization_id}")
+    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id = #{current_user.organization_id}")
 
     respond_to do |format|
       format.html # new.html.erb

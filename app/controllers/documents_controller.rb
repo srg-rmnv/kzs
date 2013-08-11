@@ -197,13 +197,8 @@ class DocumentsController < ApplicationController
   
   def execute
     @document = Document.find(params[:id])
-    
-    if Project.exists?(@document.project_id)
-      @project = Project.find(@document.project_id)
-    else
-      @project = Project.new(:title => @document.title)
-      @document.project_id = @project.id
-    end
+    @document.for_confirmation = true
+    @document.save    
 
     respond_to do |format|
       format.html 

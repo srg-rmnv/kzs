@@ -1,5 +1,6 @@
 <div class="btn-toolbar">
 	
+	<% if for_accept(@statement) %>
 
 	<div class="btn-group"   style="margin-right: 10px;">	
 		<%= link_to 'Подписать', accept_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-success" %>
@@ -8,4 +9,8 @@
 	<div class="btn-group"   style="margin-right: 10px;">	
 		<%= link_to 'Отклонить', refuse_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-danger" %>
 	</div>
+	
+	<% end %>
+	
+	
 </div>
