@@ -32,6 +32,8 @@ ActiveAdmin.register User do
        f.input :work_status
        f.input :password
        f.input :password_confirmation
+       f.input :permissions, :as => :check_boxes
+       
      end
      f.actions
    end

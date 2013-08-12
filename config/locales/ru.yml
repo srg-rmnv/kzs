@@ -24,6 +24,7 @@ ru:
   statement_refused: "Акт отклонен"
   statement_successfully_updated: "Акт успешно изменен"
   properties: "Свойста"
+  permissions: "Права"
   activerecord:
     models: 
       permission:
@@ -32,7 +33,12 @@ ru:
       user:
         one: "Пользователь"
         other: "Пользователи"
+      group:
+        one: "Группа"
+        other: "Группы"
     attributes:
       permission:
         title: "Название"
         description: "Описание"
+      group:
+        title: "Название"  
