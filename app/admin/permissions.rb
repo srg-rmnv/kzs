@@ -2,6 +2,7 @@ ActiveAdmin.register Permission do
   config.batch_actions = false
   config.clear_sidebar_sections!
   actions :index, :show
+  config.sort_order = "id_asc"
   
    index do 
      column :id

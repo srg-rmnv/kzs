@@ -25,6 +25,7 @@ ru:
   statement_successfully_updated: "Акт успешно изменен"
   properties: "Свойста"
   permissions: "Права"
+  you_have_no_permission_to_access_administration_panel: "У вас нет прав на доступ в административную панель"
   activerecord:
     models: 
       permission:

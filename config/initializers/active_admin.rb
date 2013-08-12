@@ -1,11 +1,23 @@
 ActiveAdmin.setup do |config|
-
+  
+  
+  ActiveAdmin::ResourceController.class_eval do
+    def check_admin_role
+      return if current_user.permissions.exists?('3')
+      flash[:alert] = I18n.t('you_have_no_permission_to_access_administration_panel')
+      redirect_to root_path
+    end
+  end
   # == Site Title
   #
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
   config.site_title = "Kzs"
+  
+  
+  
+  config.before_filter :check_admin_role
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.

@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
   config.batch_actions = false
-  config.clear_sidebar_sections!
+  filter :username
   
    index do 
      column :id
@@ -60,5 +60,15 @@ ActiveAdmin.register User do
       row :work_status
       row :created_at
     end  
+   end
+   
+   controller do
+     def update
+         if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+             params[:user].delete(:password)
+             params[:user].delete(:password_confirmation)
+         end
+         super
+     end 
    end
 end

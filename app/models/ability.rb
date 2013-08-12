@@ -5,9 +5,6 @@ class Ability
     
     can :approve, Document if user.permissions.exists?('1')
     
-
-    
-    
     
     # Define abilities for the passed in user here. For example:
     #
