@@ -31,6 +31,9 @@ ru:
       permission:
         one: "Право"
         other: "Права"
+      organization:
+        one: "Организация"
+        other: "Организации"
       user:
         one: "Пользователь"
         other: "Пользователи"
@@ -38,9 +41,25 @@ ru:
         one: "Группа"
         other: "Группы"
     attributes:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        phone: "Телефон"
+        position: "Должность"
+        division: "Подразделение"
+        dob: "Дата рождения"
+        avatar: "Фото"
+        organization_id: "Организация"
+        work_status: "Статус работы"
+        permissions: "Права"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
       permission:
         title: "Название"
         description: "Описание"
       group:
         title: "Название"  
         permissions: "Права"
+      organization:
+        title: "Название"
+        parent_id: "Руководящая организация"

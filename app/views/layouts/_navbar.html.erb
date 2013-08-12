@@ -2,8 +2,6 @@
   <div class="navbar-inner">
     <a class="brand" href="/">САКЭ КЗС dev.</a>
     <ul class="nav">
-      <%= content_tag(:li, (link_to "Сотрудники", users_path), :class => ('active' if controller?("users"))) %>
-	  <%= content_tag(:li, (link_to "Организации", organizations_path), :class => ('active' if controller?("organizations"))) %>
       <%= content_tag(:li, (link_to "Документооборот", documents_path), :class => ('active' if controller?("documents"))) %>
 	</ul>
 	  

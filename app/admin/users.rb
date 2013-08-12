@@ -17,16 +17,13 @@ ActiveAdmin.register User do
    form do |f|  
      f.inputs t('properties') do
        f.input :username
+       f.input :first_name
+       f.input :last_name
        f.input :phone
        f.input :position
        f.input :division
        f.input :dob
-       f.input :is_superuser
-       f.input :is_staff
-       f.input :first_name
-       f.input :last_name
        f.input :avatar
-       f.input :permit
        f.input :email
        f.input :organization_id, :as => :select, :collection => Organization.all
        f.input :work_status
