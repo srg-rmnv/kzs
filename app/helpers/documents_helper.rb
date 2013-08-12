@@ -59,7 +59,11 @@ module DocumentsHelper
   end
   
   def document_status(document)
-    if document.opened?
+    if document.executed?
+      '<span class="label label-success">Исполнен</span>'.html_safe
+    elsif document.with_comments?
+      '<span class="label llabel-warning">Не принят</span>'.html_safe
+    elsif document.for_confirmation?
       '<span class="label label-success">Проверка исполнения</span>'.html_safe    
     elsif document.opened?
       '<span class="label label-success">Прочитан</span>'.html_safe

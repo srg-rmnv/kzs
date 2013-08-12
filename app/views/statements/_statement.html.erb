@@ -14,10 +14,7 @@
 
 <div class="new-title">
 	<b>Статус:</b>
-	<% if @statement.accepted? %>Принят
-	<% else %>
-	Отклонен
-	<% end %>
+	<%= statement_status(@statement) %>
 </div>
 
 <% if @statement.organization_id? %>

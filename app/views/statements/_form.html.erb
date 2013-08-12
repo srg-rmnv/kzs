@@ -23,18 +23,7 @@
 			
 			<div class="new-title">Распоряжение <%= f.collection_select(:document_id, Document.writs, :id, :title) %> </div>
 			
-			<div class="new-title">Организация-получатель <%= f.collection_select(:organization_id, Organization.where('id != ?', current_user.organization_id), :id, :title) %> </div>
-			
-			
-			
-	       
-			
-			
 			<div class="new-title">Заголовок <%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'введите тему письма...' %></div>
-			
-			
-			
-			
 			
 			<div class="new-text-wrap">
 				<%= f.cktext_area :text, :class => "text", :ckeditor => {:toolbar => "mini"} %>

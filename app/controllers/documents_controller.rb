@@ -67,11 +67,10 @@ class DocumentsController < ApplicationController
   def show
     @document = Document.find(params[:id])
     
-    if current_user.is_superuser && @document.organization_id == current_user.organization_id && @document.opened != true
+    if current_user.permissions.exists?('1') && @document.organization_id == current_user.organization_id && @document.opened != true
       @document.opened = true
       @document.save
-      
-      users = User.superuser.where(:organization_id => @document.sender_organization_id)
+      users = User.where(:organization_id => @document.sender_organization_id)
       users.each do |user|
         OpenNotice.create!(:user_id => user.id, :document_id => @document.id)
       end

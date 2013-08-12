@@ -18,6 +18,8 @@
 	</div>
 	<% elsif recipient(@document) %>
 		<%= nil %>
+	<% elsif @document.for_confirmation? %>
+		<%= nil %>
 	<% else %>
 	<div class="btn-group"   style="margin-right: 10px;">	
 		<%= link_to 'Отправить', "#", :class => "btn disabled" %>

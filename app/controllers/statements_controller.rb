@@ -24,6 +24,7 @@ class StatementsController < ApplicationController
     
     @statement.user_id = current_user.id
     @statement.sender_organization_id = current_user.organization_id
+    @statement.organization_id = @statement.document.sender_organization_id
     
     if params[:prepare]
       @statement.prepared = true
@@ -70,6 +71,9 @@ class StatementsController < ApplicationController
     @statement.not_accepted = false
     @statement.save
     
+    document = Document.find(@statement.document)
+    document.executed = true
+    document.save    
 
     respond_to do |format|
       format.html { redirect_to statements_path, notice: t('statement_accepted') }
@@ -82,6 +86,11 @@ class StatementsController < ApplicationController
     @statement.accepted = false
     @statement.not_accepted = true
     @statement.save
+    
+    document = Document.find(@statement.document)
+    document.with_comments = true
+    document.executed = false
+    document.save
     
 
     respond_to do |format|

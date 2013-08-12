@@ -55,6 +55,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    
     @user = User.find(params[:id])
       if @user.update_attributes(params[:user])
         flash[:notice] = t("user_successfully_updated")
