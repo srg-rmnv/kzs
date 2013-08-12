@@ -26,7 +26,7 @@ ActiveAdmin.register User do
        f.input :avatar
        f.input :email
        f.input :organization_id, :as => :select, :collection => Organization.all
-       f.input :work_status
+       f.input :work_status, :as => :select, :collection => User::WORK_STATUSES.map { |a| [ t(a), a ] }, :include_blank => false
        f.input :password
        f.input :password_confirmation
        f.input :permissions, :as => :check_boxes
@@ -54,7 +54,9 @@ ActiveAdmin.register User do
       row :sign_in_count
       row :email
       row :organization_id
-      row :work_status
+      row :work_status do |row|
+        I18n.t(row.work_status)
+      end
       row :created_at
     end  
    end

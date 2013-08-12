@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   
   scope :superuser, -> { where(is_superuser: true) }
                               
-  WORK_STATUSES = [ [I18n.t('at_work'), 'at_work'], [I18n.t('ooo'), 'ooo'] ]
+  WORK_STATUSES = %w[at_work ooo]
   
   validates :position, :organization_id, :division,
             :email, :work_status, :presence => true
