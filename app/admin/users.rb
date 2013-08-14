@@ -30,25 +30,22 @@ ActiveAdmin.register User do
        f.input :password
        f.input :password_confirmation
        f.input :permissions, :as => :check_boxes
+       f.input :groups, :as => :check_boxes
        
      end
      f.actions
    end
 
-  show do
+  show do |user|
     attributes_table do
       row :username
       row :phone
       row :position
       row :division
       row :dob
-      row :date_joined
-      row :is_superuser
-      row :is_staff
       row :first_name
       row :last_name
       row :avatar
-      row :permit
       row :current_sign_in_ip
       row :last_sign_in_at
       row :sign_in_count
@@ -58,16 +55,50 @@ ActiveAdmin.register User do
         I18n.t(row.work_status)
       end
       row :created_at
-    end  
+    end
+      
+     panel t('permissions') do 
+       table_for user.permissions do 
+         column :title
+         column :description
+       end
+     end
+     
+     panel t('groups') do 
+       table_for user.groups do 
+         column :title
+       end
+     end
+      
    end
    
    controller do
+     
+     
      def update
-         if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-             params[:user].delete(:password)
-             params[:user].delete(:password_confirmation)
+       @user = User.find(params[:id])
+       
+        
+       group_ids = params[:user][:group_ids]
+       permission_ids = Permission.includes(:groups).where("groups.id" => group_ids)
+        
+           
+        if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+            params[:user].delete(:password)
+            params[:user].delete(:password_confirmation)
+        end
+       
+       respond_to do |format|
+         if @user.update_attributes(params[:user]) && @user.permissions << permission_ids
+           format.html { redirect_to admin_user_path(@user), notice: t('user_successfully_updated') }
+           format.json { head :no_content }
+         else
+           format.html { render action: "edit" }
+           format.json { render json: @user.errors, status: :unprocessable_entity }
          end
-         super
-     end 
+       end
+     end
+      
    end
+   
 end

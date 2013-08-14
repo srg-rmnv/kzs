@@ -8,10 +8,12 @@ class User < ActiveRecord::Base
   attr_accessible :phone, :position, :division, :info, :dob, :permit, :phone, 
                   :work_status, :organization_id, :email, :password, :password_confirmation, 
                   :avatar, :first_name, :last_name, :username, :right_ids, :remember_me,
-                  :is_staff, :is_active, :is_superuser, :date_joined, :permission_ids
+                  :is_staff, :is_active, :is_superuser, :date_joined, :permission_ids, :group_ids
                   
   has_many :user_permissions
-  has_many :permissions, through: :user_permissions
+  has_many :permissions, through: :user_permissions, :uniq => true
+  has_many :user_groups
+  has_many :groups, through: :user_groups, :uniq => true
   has_many :statement_approvers
   has_many :statements, through: :statement_approvers
   has_many :open_notices

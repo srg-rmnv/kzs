@@ -25,6 +25,7 @@ ru:
   statement_successfully_updated: "Акт успешно изменен"
   properties: "Свойста"
   permissions: "Права"
+  groups: "Группы"
   you_have_no_permission_to_access_administration_panel: "У вас нет прав на доступ в административную панель"
   activerecord:
     models: 
@@ -52,6 +53,7 @@ ru:
         organization_id: "Организация"
         work_status: "Статус работы"
         permissions: "Права"
+        groups: "Группы"
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
       permission:
