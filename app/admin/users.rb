@@ -73,6 +73,22 @@ ActiveAdmin.register User do
    
    controller do
      
+     def create
+       @user = User.new(params[:user])
+ 
+       group_ids = params[:user][:group_ids]
+       permission_ids = Permission.includes(:groups).where("groups.id" => group_ids)      
+       
+       respond_to do |format|
+         if @user.save && @user.permissions << permission_ids
+           format.html { redirect_to admin_user_path(@user), notice: t('user_successfully_created') }
+         else
+           format.html { render action: "new" }
+           format.json { render json: @user.errors, status: :unprocessable_entity }
+         end
+       end
+     end
+     
      
      def update
        @user = User.find(params[:id])
