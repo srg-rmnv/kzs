@@ -29,7 +29,6 @@ ActiveAdmin.register User do
        f.input :work_status, :as => :select, :collection => User::WORK_STATUSES.map { |a| [ t(a), a ] }, :include_blank => false
        f.input :password
        f.input :password_confirmation
-       f.input :permissions, :as => :check_boxes
        f.input :groups, :as => :check_boxes
        
      end
@@ -78,6 +77,8 @@ ActiveAdmin.register User do
      def update
        @user = User.find(params[:id])
        
+       @user.groups.clear
+       @user.permissions.clear
         
        group_ids = params[:user][:group_ids]
        permission_ids = Permission.includes(:groups).where("groups.id" => group_ids)
