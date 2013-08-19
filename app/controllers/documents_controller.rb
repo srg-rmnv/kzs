@@ -84,6 +84,8 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
+    
+    @executors = User.where(:organization_id => current_user.organization_id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -93,6 +95,7 @@ class DocumentsController < ApplicationController
 
   def edit
     @document = Document.find(params[:id])
+    @executors = User.where(:organization_id => current_user.organization_id)
   end
 
   def create
@@ -136,7 +139,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.update_attributes(params[:document])
-        format.html { redirect_to documents_path, notice: t('document_successfully_updated') }
+        format.html { redirect_to document_path(@document), notice: t('document_successfully_updated') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -38,6 +38,7 @@ Kzs::Application.routes.draw do
   resources :organizations
   resources :projects
   resources :statements
+  resources :document_attachments
 
   root :to => 'documents#index'
   

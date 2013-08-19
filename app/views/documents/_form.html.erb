@@ -29,11 +29,19 @@
 			<div class="new-title">Организация-отправитель <span style="padding-left: 15px; font-weight: bold;"><%= organzation_title(current_user) %></span></div>
 			<% end %>
 			
-			<%= f.hidden_field :document_type, :value => params[:type] %>
+			
+				<% unless action?('edit') %>
+				<%= f.hidden_field :document_type, :value => params[:type] %>
+				<% end %>
 			
 			<div class="new-title">Организация-получатель <%= f.collection_select(:organization_id, Organization.where('id != ?', current_user.organization_id), :id, :title) %> </div>
 			
 			<div class="new-title">Согласовать<%= f.collection_select(:approver_id, User.superusers_from_orgranization(current_user.organization_id), :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+			
+			<div class="new-title">
+				Исполнитель:
+				<%= f.collection_select(:executor_id, @executors.all, :id, :first_name_with_last_name) %>
+			</div>
 			
 			<div class="new-title">Тема письма <%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'введите тему письма...' %></div>
 			
@@ -43,6 +51,23 @@
 			
 			<div class="new-text-wrap">
 				<%= f.cktext_area :text, :class => "text", :ckeditor => {:toolbar => "mini"} %>
+			</div>
+			
+			<div class="new-title confidential">
+			  <%= f.check_box :confidential %>
+			  <%= f.label :confidential, "Конфиденциально" %>
+			</div>
+				
+		    <div class="new-title">
+				<%= f.fields_for :document_attachments do |builder| %>
+				  <%= render 'document_attachment_fields', f: builder %>
+				<% end %>
+				<%= link_to_add_fields "Добавить приложение", f, :document_attachments	 %>
+			</div>
+			
+
+			
+			
 			</div>
 			
 			<div class="btn-toolbar">

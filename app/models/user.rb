@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
   def self.superusers_from_orgranization(organization_id)
         superuser.where(:organization_id => organization_id)
   end
+  
+  def has_permission?(role)
+    permissions.exists?(role)
+  end
 
   
 end

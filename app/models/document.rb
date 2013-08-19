@@ -1,10 +1,13 @@
 class Document < ActiveRecord::Base
   attr_accessible :deadline, :file, :organization_id, :recipient_id, :text,
                   :title, :user_id, :approver_id, :opened, :for_approve, 
-                  :deleted, :archived, :callback, :prepared, :document_type
+                  :deleted, :archived, :callback, :prepared, :document_type,
+                  :attachment, :executor_id, :confidential, :document_attachments_attributes
                   
   belongs_to :project
   has_many :statements
+  has_many :document_attachments
+  accepts_nested_attributes_for :document_attachments, allow_destroy: true
   
   scope :draft, -> { where(draft: true) }   
   scope :prepared, -> { where(prepared: true) }    
@@ -26,8 +29,6 @@ class Document < ActiveRecord::Base
   scope :writs, -> { where(document_type: 'writ') }
   
   DOCUMENT_TYPES = ["mail", "writ"]
-  
-  has_attached_file :file
   
 
 end

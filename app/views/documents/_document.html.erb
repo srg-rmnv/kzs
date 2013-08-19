@@ -16,12 +16,39 @@
 	<b>Согласующий: </b><%= link_to doc_user(@document.approver_id), user_path(@document.approver_id) %>
 </div>
 
+<div class="new-title">
+	<b>Исполнитель: </b><%= link_to doc_user(@document.executor_id), user_path(@document.executor_id) %>
+</div>
+
 <% if @document.organization_id? %>
 <div class="new-title"><b>Организация-получатель: </b><%= organization(@document.organization_id) %><!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 <% end %>
 
 <div class="new-text-wrap">
 	<%= @document.text.html_safe %>
+</div>
+
+<div class="new-title">
+	<b>Конфиденциально:</b> <% if @document.confidential? %> Да <% else %> Нет <% end %>
+</div>
+
+
+<% unless @document.document_attachments.blank? %>
+<div class="new-title">
+	<b>Приложения:</b>
+	<ul>
+		<% @document.document_attachments.each do |attachment| %>
+		  <li><%= link_to attachment.attachment_file_name, attachment.attachment.url(:original, false), :target => '_blank' %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="new-title">
+	<b>Привязанные документы:</b>
+	<ul>
+		
+	</ul>
 </div>
 
 <%= render 'actions' %>
