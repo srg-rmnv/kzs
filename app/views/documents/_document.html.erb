@@ -47,7 +47,9 @@
 <div class="new-title">
 	<b>Привязанные документы:</b>
 	<ul>
-		
+			<% @document.documents.each do |document| %>
+			  <li><%= link_to document.title, document_path(document), :target => '_blank' %></li>
+			<% end %>
 	</ul>
 </div>
 

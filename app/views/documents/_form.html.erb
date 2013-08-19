@@ -65,6 +65,14 @@
 				<%= link_to_add_fields "Добавить приложение", f, :document_attachments	 %>
 			</div>
 			
+			<div class="new-title">
+				<label>Документы:</label>
+				<%= hidden_field_tag "document[document_ids][]", nil %>
+				<% Document.all.each do |document| %>
+				  <%= check_box_tag "document[document_ids][]", document.id, @document.document_ids.include?(document.id), id: dom_id(document) %>
+				  <%= label_tag dom_id(document), document.title %><br>
+				<% end %>
+			</div>
 
 			
 			

@@ -2,12 +2,16 @@ class Document < ActiveRecord::Base
   attr_accessible :deadline, :file, :organization_id, :recipient_id, :text,
                   :title, :user_id, :approver_id, :opened, :for_approve, 
                   :deleted, :archived, :callback, :prepared, :document_type,
-                  :attachment, :executor_id, :confidential, :document_attachments_attributes
+                  :attachment, :executor_id, :confidential, :document_attachments_attributes,
+                  :document_ids
                   
   belongs_to :project
   has_many :statements
   has_many :document_attachments
   accepts_nested_attributes_for :document_attachments, allow_destroy: true
+  
+  has_many :document_relations
+  has_many :documents, through: :document_relations
   
   scope :draft, -> { where(draft: true) }   
   scope :prepared, -> { where(prepared: true) }    
