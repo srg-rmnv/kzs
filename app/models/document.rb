@@ -32,6 +32,8 @@ class Document < ActiveRecord::Base
   scope :mails, -> { where(document_type: 'mail') }
   scope :writs, -> { where(document_type: 'writ') }
   
+  scope :confidential, -> { where(confidential: true) }
+  
   DOCUMENT_TYPES = ["mail", "writ"]
   
 

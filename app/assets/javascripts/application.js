@@ -16,5 +16,6 @@
 //= require jquery_ujs
 //= jquery.Jcrop.min
 //= require shared
+//= require ckeditor/ckeditor
 //= require_tree .
 
