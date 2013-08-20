@@ -27,7 +27,12 @@ module DocumentsHelper
   end
   
   def indox(current_user)
-    Document.sent.unopened.where(:organization_id => current_user.organization_id).count
+    if current_user.has_permission?(5)
+      count = Document.sent.unopened.where(:organization_id => current_user.organization_id).count
+    else
+      count = Document.sent.unopened.not_confidential.where(:organization_id => current_user.organization_id).count
+    end
+    count
   end
   
   def draft(current_user)

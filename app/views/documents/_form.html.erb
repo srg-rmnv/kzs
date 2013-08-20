@@ -36,7 +36,7 @@
 			
 			<div class="new-title">Организация-получатель <%= f.collection_select(:organization_id, Organization.where('id != ?', current_user.organization_id), :id, :title) %> </div>
 			
-			<div class="new-title">Согласовать<%= f.collection_select(:approver_id, User.superusers_from_orgranization(current_user.organization_id), :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
+			<div class="new-title">Контрольное лицо<%= f.collection_select(:approver_id, User.superusers_from_orgranization(current_user.organization_id), :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			
 			<div class="new-title">
 				Исполнитель:
@@ -53,10 +53,13 @@
 				<%= f.cktext_area :text, :class => "text", :ckeditor => {:toolbar => "Pure"} %>
 			</div>
 			
+			
+			<% if current_user.has_permission?(5) %>
 			<div class="new-title confidential">
 			  <%= f.check_box :confidential %>
 			  <%= f.label :confidential, "Конфиденциально" %>
 			</div>
+			<% end %>
 				
 		    <div class="new-title">
 				<%= f.fields_for :document_attachments do |builder| %>

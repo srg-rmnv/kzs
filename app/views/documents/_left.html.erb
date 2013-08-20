@@ -8,7 +8,7 @@
 	  </li>
 	  <li><%= link_to "Черновики", drafts_documents_path, :class => ('active' if action?("drafts")) %></li>
 	  <li><%= link_to documents_path(:type => "prepared"), :class => ('active' if params[:type] == 'prepared') do %>
-		  На отправку 
+		  Исходящие 
 		
 		  <% if current_user.is_superuser? %>
 		  <% unless to_be_approved(current_user) < 1  %> (<%= to_be_approved(current_user) %>) <% end %>

@@ -3,7 +3,13 @@ class DocumentsController < ApplicationController
   # collection
   
   def index
-    document = Document.not_deleted.not_archived.order("created_at DESC")
+    
+    if current_user.has_permission?(5)
+      document = Document.not_deleted.not_archived.order("created_at DESC")
+    else
+      document = Document.not_deleted.not_archived.not_confidential.order("created_at DESC")
+    end
+    
     organization = current_user.organization_id
     @documents = document.sent.where(:organization_id => organization).all unless params[:type]
     
@@ -29,8 +35,14 @@ class DocumentsController < ApplicationController
   end
 
   def sents
+    
+    if current_user.has_permission?(5)
+      document = Document.not_deleted.not_archived.order("created_at DESC")
+    else
+      document = Document.not_deleted.not_archived.not_confidential.order("created_at DESC")
+    end
+    
     organization = current_user.organization_id
-    document = Document.not_deleted.not_archived.order("created_at DESC")
     @documents = document.sent.where(:sender_organization_id => organization).all
     
     current_user.open_notices.destroy_all
@@ -42,7 +54,13 @@ class DocumentsController < ApplicationController
   end
   
   def drafts
-    document = Document.not_deleted.not_archived.order("created_at DESC")
+    
+    if current_user.has_permission?(5)
+      document = Document.not_deleted.not_archived.order("created_at DESC")
+    else
+      document = Document.not_deleted.not_archived.not_confidential.order("created_at DESC")
+    end
+    
     @documents = document.draft.where(:user_id => current_user.id).all
 
     respond_to do |format|
@@ -52,7 +70,13 @@ class DocumentsController < ApplicationController
   end
   
   def callbacks
-    document = Document.not_deleted.not_archived.order("created_at DESC")
+    
+    if current_user.has_permission?(5)
+      document = Document.not_deleted.not_archived.order("created_at DESC")
+    else
+      document = Document.not_deleted.not_archived.not_confidential.order("created_at DESC")
+    end
+    
     @documents = document.callback.where(:user_id => current_user.id).all
 
     respond_to do |format|
@@ -111,7 +135,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save && 
-        format.html { redirect_to documents_path, notice: t('document_successfully_created') }
+        format.html { redirect_to document_path(@document), notice: t('document_successfully_created') }
         format.json { render json: @document, status: :created, location: @document }
       else
         format.html { render action: "new" }
