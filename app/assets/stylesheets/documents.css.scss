@@ -39,10 +39,10 @@
 	font-family: Helvetica;
 	font-size: 13px;
 	
-	input {
-		margin-top: 10px;
-		margin-left: 10px;
+	label {
+		text-indent: 10px;
 	}
+	
 	
 	select {
 		margin-top: 10px;
@@ -72,6 +72,5 @@
 
 
 .confidential label {
-	margin-top: 5px;
 	text-indent: 10px;
 }
