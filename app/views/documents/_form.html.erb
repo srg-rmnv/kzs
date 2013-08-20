@@ -70,8 +70,12 @@
 				<%= hidden_field_tag "document[document_ids][]", nil %>
 				<% Document.all.each do |document| %>
 				
-				  <%= check_box_tag "document[document_ids][]", document.id, @document.document_ids.include?(document.id), id: dom_id(document) %>
-				  <%= label_tag dom_id(document), document.title %>
+				<label class="checkbox">
+			      <%= check_box_tag "document[document_ids][]", document.id, @document.document_ids.include?(document.id), id: dom_id(document) %>
+			 	  <b><%= document.title %></b> ||
+			      <%= t(document.document_type) %> ||
+				  <%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %>
+			    </label>
 				<% end %>
 			</div>
 
