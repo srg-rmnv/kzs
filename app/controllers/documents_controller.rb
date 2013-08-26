@@ -109,7 +109,7 @@ class DocumentsController < ApplicationController
   def new
     @document = Document.new
     @executors = User.where(:organization_id => current_user.organization_id)
-    @documents = Document.where('id != ?', @document.id)
+    @documents = Document.all
 
     respond_to do |format|
       format.html # new.html.erb

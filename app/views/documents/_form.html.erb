@@ -17,7 +17,17 @@
 		<div class="new-wrap">
 			<%= form_for(@document) do |f| %>
 			<div class="new-header">
-			  <span class="header">Новый документ | <%= Russian::strftime(Time.new, "%d %B %Y %H:%M") %></span>
+			  <span class="header">
+				<% if action?('new') %>
+				  <% if params[:type == 'mail'] %>
+					Новое письмо | 
+				  <% elsif params[:type == 'writ'] %>
+					Новое распоряжение | 
+				  <% end %>
+				<% else %>
+				  №<%= @document.id %> | 
+				<% end %>
+				<%= Russian::strftime(Time.new, "%d %B %Y %H:%M") %></span>
 			<% if params[:type == 'mail'] %>
 			  <span class="label label-info" style="float: right; margin-top: 7px">Письмо</span>
 			<% else %>

@@ -10,9 +10,9 @@ class Document < ActiveRecord::Base
   has_many :document_attachments
   accepts_nested_attributes_for :document_attachments, allow_destroy: true
   
-  has_and_belongs_to_many :documents, class_name: "Document", uniq: true, 
-                          foreign_key: "document_id", 
+  has_and_belongs_to_many :documents, class_name: "Document", uniq: true,
                           join_table: "document_relations", 
+                          foreign_key: "document_id", 
                           association_foreign_key: "relational_document_id"
  
   belongs_to :parent_document, class_name: "Document"

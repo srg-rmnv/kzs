@@ -8,6 +8,7 @@
 		
 		<table class="table table-striped">
 		  	 <tr>
+				<th>№</th>
 			    <th>Отправитель</th>
 				<th>Статус</th>
 			    <th>Тип</th>
@@ -18,6 +19,7 @@
 
 			<% @statements.each do |statement| %>
 			  <tr>
+				<td><%= statement.id %></td>
 			    <td><%= doc_user(statement.user_id) %></td>
 				<td><%= statement_status(statement) %></td>
 			    <td><span class="label label-warning">Акт</span></td>

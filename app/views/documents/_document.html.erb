@@ -1,6 +1,6 @@
 <%= form_for(@document) do |f| %>
 <div class="new-header">
-	<span class="header"><%= @document.title %> | <%= Russian::strftime(@document.created_at, "%d %B %Y, %H:%M") %></span>
+	<span class="header">№<%= @document.id %> | <%= @document.title %> | <%= Russian::strftime(@document.created_at, "%d %B %Y, %H:%M") %></span>
 	<span class="label label-info" style="float: right; margin-top: 7px">Письмо</span>
 </div>
 
