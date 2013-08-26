@@ -71,9 +71,14 @@
 			<div class="new-title">
 				<label style="text-indent: 0px; font-weight: bold;">Документы:</label>
 				<%= hidden_field_tag "document[document_ids][]", nil %>
-				<% Document.all.each do |enclosed_document| %>
-				  <%= check_box_tag "document[document_ids][]", enclosed_document.id, @document.document_ids.include?(enclosed_document.id), id: dom_id(enclosed_document) %>
-				  <%= label_tag dom_id(enclosed_document), enclosed_document.title %><br>
+				<% @documents.each do |document| %>
+				
+				<label class="checkbox">
+			      <%= check_box_tag "document[document_ids][]", document.id, @document.document_ids.include?(document.id), id: dom_id(document) %>
+			 	  <b><%= document.title %></b> ||
+			      <%= t(document.document_type) %> ||
+				  <%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %>
+			    </label>
 				<% end %>
 			</div>
 

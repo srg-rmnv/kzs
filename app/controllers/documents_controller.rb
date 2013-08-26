@@ -108,8 +108,8 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
-    
     @executors = User.where(:organization_id => current_user.organization_id)
+    @documents = Document.where('id != ?', @document.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -120,6 +120,7 @@ class DocumentsController < ApplicationController
   def edit
     @document = Document.find(params[:id])
     @executors = User.where(:organization_id => current_user.organization_id)
+    @documents = Document.where('id != ?', @document.id)
   end
 
   def create
