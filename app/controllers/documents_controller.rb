@@ -4,6 +4,8 @@ class DocumentsController < ApplicationController
   
   def index
     
+    
+    
     if current_user.has_permission?(5)
       document = Document.not_deleted.not_archived.order("created_at DESC")
     else
@@ -109,6 +111,7 @@ class DocumentsController < ApplicationController
   def new
     @document = Document.new
     @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all
 
     respond_to do |format|
@@ -120,6 +123,7 @@ class DocumentsController < ApplicationController
   def edit
     @document = Document.find(params[:id])
     @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.where('id != ?', @document.id)
   end
 
@@ -255,4 +259,16 @@ class DocumentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # misc
+  
+  def executor_phone
+      @user = User.find(params[:user])
+
+      respond_to do |format|
+         format.js {  }
+      end
+  end
+  
+  
 end

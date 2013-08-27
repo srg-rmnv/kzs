@@ -70,7 +70,23 @@
 	color: red;
 }
 
-
-.confidential label {
-	text-indent: 10px;
+.confidential {
+	height: 45px;
 }
+
+.confidential label, input {
+	display: inline-block;
+	padding-top: 10px;
+
+}
+
+.confidential input[type="checkbox"] {
+	float :none;
+	margin: 0px;
+}
+
+.confidential select {
+	display: inline-block;
+	margin-top: 0px;
+}
+

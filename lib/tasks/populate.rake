@@ -1,6 +1,7 @@
 # coding: utf-8
 
 require 'csv'
+require 'faker'
 
 namespace :csv do
   desc "Import permissions"
@@ -24,4 +25,19 @@ namespace :csv do
     
   end
 end
+
+namespace :users do
+  desc "Import permissions"
+  task :add_phones => :environment do
+    
+    User.all.each do |user|
+      user.phone = nil
+      user.phone = '88123361' + rand(100..999).to_s
+    end
+    
+    puts "Phones added!"
+    
+  end
+end
+
 

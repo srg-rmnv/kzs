@@ -24,6 +24,8 @@ Kzs::Application.routes.draw do
     end
   end
   
+  match '/document/executor_phone' => 'documents#executor_phone'
+  
   resources :statements do
     member do 
       get 'accept'

@@ -27,6 +27,7 @@ ru:
   permissions: "Права"
   groups: "Группы"
   you_have_no_permission_to_access_administration_panel: "У вас нет прав на доступ в административную панель"
+  choose_executor: "Выберите исполнителя"
   activerecord:
     models: 
       permission:

@@ -7,6 +7,7 @@ ActiveAdmin.register User do
      column :username
      column :first_name
      column :last_name
+     column :phone
 
      default_actions
 

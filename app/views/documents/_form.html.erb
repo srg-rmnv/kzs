@@ -50,8 +50,23 @@
 			
 			<div class="new-title">
 				Исполнитель:
-				<%= f.collection_select(:executor_id, @executors.all, :id, :first_name_with_last_name) %>
+				<%= f.collection_select(:executor_id, @executors.all, :id, :first_name_with_last_name, :prompt => t('choose_executor')) %>
+				<span id="executor_tel"></span>
 			</div>
+			
+			<% if current_user.has_permission?(5) %>
+			<div class="new-title confidential">
+			  <%= f.check_box :confidential %>
+			  <%= f.label :confidential, "Конфиденциально" %>
+			
+				<% if @document.confidential? %>
+				<%= f.collection_select(:recipient_id, @recipients.all, :id, :first_name_with_last_name, {}, {}) %>
+				<% else %>
+				<%= f.collection_select(:recipient_id, @recipients.all, :id, :first_name_with_last_name, {}, {:style=>'display:none'}) %>
+				<% end %>
+			
+			</div>
+			<% end %>
 			
 			<div class="new-title">Тема письма <%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'введите тему письма...' %></div>
 			
@@ -62,14 +77,6 @@
 			<div class="new-text-wrap">
 				<%= f.cktext_area :text, :class => "text", :ckeditor => {:toolbar => "Pure"} %>
 			</div>
-			
-			
-			<% if current_user.has_permission?(5) %>
-			<div class="new-title confidential">
-			  <%= f.check_box :confidential %>
-			  <%= f.label :confidential, "Конфиденциально" %>
-			</div>
-			<% end %>
 				
 		    <div class="new-title">
 				<%= f.fields_for :document_attachments do |builder| %>

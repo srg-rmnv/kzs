@@ -28,9 +28,12 @@
 	<%= @document.text.html_safe %>
 </div>
 
+<% if @document.confidential? %> 
 <div class="new-title">
-	<b>Конфиденциально:</b> <% if @document.confidential? %> Да <% else %> Нет <% end %>
+	<b>Конфиденциально</b>
+	<b style="margin-left: 30px;">Получатель:</b> <%= link_to doc_user(@document.recipient_id), user_path(@document.recipient_id) %>
 </div>
+<% end %>
 
 
 <% unless @document.document_attachments.blank? %>
