@@ -128,25 +128,30 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = Document.new(params[:document])
     
-    @document.user_id = current_user.id
-    @document.sender_organization_id = current_user.organization_id
+    organizations = params[:document][:organization_ids]
     
-    if params[:prepare]
-      @document.prepared = true
-      @document.draft = false
-    end
-
-    respond_to do |format|
-      if @document.save && 
-        format.html { redirect_to document_path(@document), notice: t('document_successfully_created') }
-        format.json { render json: @document, status: :created, location: @document }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
+    organizations = organizations.delete_if{ |x| x.empty? }
+    
+    organizations.each do |organization|
+      document = Document.new(params[:document])
+      document.organization_id = organization
+      document.user_id = current_user.id
+      document.sender_organization_id = current_user.organization_id
+    
+      if params[:prepare]
+        document.prepared = true
+        document.draft = false
       end
+      
+      document.save!
     end
+    
+    redirect_to documents_path, notice: t('document_successfully_created')
+    
+    
+    
+
   end
 
   # PUT /documents/1
@@ -263,6 +268,7 @@ class DocumentsController < ApplicationController
   # misc
   
   def executor_phone
+    
       @user = User.find(params[:user])
 
       respond_to do |format|

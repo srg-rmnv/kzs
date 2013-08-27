@@ -3,7 +3,9 @@ class Document < ActiveRecord::Base
                   :title, :user_id, :approver_id, :opened, :for_approve, 
                   :deleted, :archived, :callback, :prepared, :document_type,
                   :attachment, :executor_id, :confidential, :document_attachments_attributes,
-                  :document_ids
+                  :document_ids, :organization_ids
+                  
+  attr_accessor :organization_ids
                   
   belongs_to :project
   has_many :statements

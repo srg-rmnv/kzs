@@ -18,4 +18,5 @@
  *= require shared
  *= require_self
  *= require jquery.Jcrop
+ *= require chosen
  */

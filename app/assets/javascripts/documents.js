@@ -12,12 +12,26 @@ $(document).ready(function(){
 
 	});
 	
+
+	
 	$('#document_executor_id').on("change", function() {
+		
+		  if ($('#document_executor_id option:selected').val() == "") {
+			$('#executor_tel').hide();
+		  } else {
+		    $('#executor_tel').show();
+		  }
+		
 		$.ajax({
 		    url: "/document/executor_phone",
 		    type: "GET",
 		    data: 'user=' + $('#document_executor_id option:selected').val(),
 		  })
+		
+
+		
+
+		
 	});
 	
 	
