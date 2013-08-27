@@ -16,9 +16,11 @@
 	<b>Согласующий: </b><%= link_to doc_user(@document.approver_id), user_path(@document.approver_id) %>
 </div>
 
+<% unless @document.executor_id.nil? %>
 <div class="new-title">
 	<b>Исполнитель: </b><%= link_to doc_user(@document.executor_id), user_path(@document.executor_id) %>
 </div>
+<% end %>
 
 <% if @document.organization_id? %>
 <div class="new-title"><b>Организация-получатель: </b><%= organization(@document.organization_id) %><!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
