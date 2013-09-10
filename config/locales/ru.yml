@@ -28,6 +28,15 @@ ru:
   groups: "Группы"
   you_have_no_permission_to_access_administration_panel: "У вас нет прав на доступ в административную панель"
   choose_executor: "Выберите исполнителя"
+  access_denied: "Доступ запрещен"
+  permanent: "Постоянный"
+  temporary: "Временный"
+  permit_request_created: "Заявка на пропуск успешно создана"
+  permit_successfully_updated: "Пропуск успешно изменен"
+  permit_agreed: "Пропуск утвержден"
+  permit_canceled: "Пропуск аннанулирован"
+  permit_released: "Пропус выпущен"
+  permit_issued: "Пропус выдан"
   activerecord:
     models: 
       permission:
@@ -66,3 +75,13 @@ ru:
       organization:
         title: "Название"
         parent_id: "Руководящая организация"
+      permission:
+        number: "Номер"
+        user_id: "Пользователь"
+        purpose: "Цель пребывание"
+        start_date: "Начало срока действия"
+        expiration_date: "Окончание срока действия"
+        requested_duration: "Запрашеваемый временной интерал действия"
+        granted_area: "Сектор зоны действия"
+        granted_object: "Объект посещения"
+        permit_type: "Тип пропуска"

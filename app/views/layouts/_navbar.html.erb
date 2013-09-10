@@ -3,6 +3,7 @@
     <a class="brand" href="/">САКЭ КЗС dev.</a>
     <ul class="nav">
       <%= content_tag(:li, (link_to "Документооборот", documents_path), :class => ('active' if controller?("documents"))) %>
+	  <%= content_tag(:li, (link_to "Пропуска", permits_path), :class => ('active' if controller?("permits"))) %>
 	</ul>
 	  
 	

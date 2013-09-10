@@ -1,4 +1,5 @@
 Kzs::Application.routes.draw do
+
   get "/users/sign_out" => "sessions#destroy"
   devise_for :users
   get "statements/new"
@@ -25,6 +26,15 @@ Kzs::Application.routes.draw do
   end
   
   match '/document/executor_phone' => 'documents#executor_phone'
+  
+  resources :permits do
+    member do
+      get 'agree'
+      get 'cancel'
+      get 'release'
+      get 'issue'
+    end
+  end
   
   resources :statements do
     member do 

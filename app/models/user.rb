@@ -17,13 +17,14 @@ class User < ActiveRecord::Base
   has_many :statement_approvers
   has_many :statements, through: :statement_approvers
   has_many :open_notices
+  has_one :permit
   
   scope :superuser, -> { where(is_superuser: true) }
                               
   WORK_STATUSES = %w[at_work ooo]
   
-  validates :position, :organization_id, :division,
-            :email, :work_status, :presence => true
+  validates :username, :first_name, :last_name, :phone, :position,
+            :division, :dob, :organization_id, :work_status, :presence => true
             
   validates :username, uniqueness: true
   

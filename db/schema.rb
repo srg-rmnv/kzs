@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826120214) do
+ActiveRecord::Schema.define(:version => 20130910104448) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -52,21 +52,6 @@ ActiveRecord::Schema.define(:version => 20130826120214) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
-
-  create_table "auth_user!", :force => true do |t|
-    t.string   "username",     :limit => 30,  :null => false
-    t.string   "first_name",   :limit => 30,  :null => false
-    t.string   "last_name",    :limit => 30,  :null => false
-    t.string   "email",        :limit => 75,  :null => false
-    t.string   "password",     :limit => 128, :null => false
-    t.boolean  "is_staff",                    :null => false
-    t.boolean  "is_active",                   :null => false
-    t.boolean  "is_superuser",                :null => false
-    t.datetime "last_login",                  :null => false
-    t.datetime "date_joined",                 :null => false
-  end
-
-  add_index "auth_user!", ["username"], :name => "auth_user_username_key", :unique => true
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -172,6 +157,24 @@ ActiveRecord::Schema.define(:version => 20130826120214) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "permits", :force => true do |t|
+    t.string   "number"
+    t.integer  "user_id"
+    t.string   "purpose"
+    t.date     "start_date"
+    t.date     "expiration_date"
+    t.string   "requested_duration"
+    t.string   "granted_area"
+    t.string   "granted_object"
+    t.string   "permit_type"
+    t.boolean  "agreed",             :default => false
+    t.boolean  "canceled",           :default => false
+    t.boolean  "released",           :default => false
+    t.boolean  "issued",             :default => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.datetime "created_at", :null => false
@@ -183,12 +186,6 @@ ActiveRecord::Schema.define(:version => 20130826120214) do
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "rights", :force => true do |t|
-    t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "statement_approvers", :force => true do |t|
@@ -233,13 +230,6 @@ ActiveRecord::Schema.define(:version => 20130826120214) do
     t.integer  "permission_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-  end
-
-  create_table "user_rights", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "right_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

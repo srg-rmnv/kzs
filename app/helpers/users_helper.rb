@@ -16,5 +16,9 @@ module UsersHelper
   		'-'
   	end
 	end
+	
+	def user(user_id)
+	  User.find(user_id)
+  end
   
 end

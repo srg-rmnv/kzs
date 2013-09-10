@@ -14,6 +14,7 @@ ActiveAdmin.register Permission do
    form do |f|  
      f.inputs t('properties') do
        f.input :title
+       f.input :description
      end
      f.actions
    end

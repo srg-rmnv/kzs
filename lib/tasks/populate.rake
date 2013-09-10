@@ -27,7 +27,18 @@ namespace :csv do
 end
 
 namespace :users do
-  desc "Import permissions"
+  task :create => :environment do
+    
+    
+    
+    User.create!(:username => 'babrovka', :first_name => 'babrovka', :phone => '7777777', :position => 'babrovka', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :organization_id => '3', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => '111', :password_confirmation => '111')
+    
+    puts "Users create!"
+    
+  end
+end
+
+namespace :users do
   task :add_phones => :environment do
     
     User.all.each do |user|

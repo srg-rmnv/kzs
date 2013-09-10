@@ -3,9 +3,9 @@ class Ability
 
   def initialize(user)  
     
-    can :approve, Document if user.permissions.exists?('1')
-    
-    
+    can :approve, Document if user.permissions.exists?('1')    
+    can :create, Permit if user.permissions.exists?('6')
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
