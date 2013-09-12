@@ -47,7 +47,7 @@ class PermitsController < ApplicationController
   def agree
     @permit = Permit.find(params[:id])
     @permit.agreed = true
-    @permit.canceled = false
+    @permit.rejected = false
     @permit.save    
 
     respond_to do |format|
@@ -56,10 +56,21 @@ class PermitsController < ApplicationController
     end
   end
   
+  def reject
+    @permit = Permit.find(params[:id])
+    @permit.agreed = false
+    @permit.rejected = true
+    @permit.save    
+
+    respond_to do |format|
+      format.html { redirect_to permit_path(@permit), notice: t('permit_rejected') }
+      format.json 
+    end
+  end
+  
   def cancel
     @permit = Permit.find(params[:id])
     @permit.canceled = true
-    @permit.agreed = false
     @permit.save    
 
     respond_to do |format|

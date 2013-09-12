@@ -37,6 +37,7 @@ ru:
   permit_canceled: "Пропуск аннанулирован"
   permit_released: "Пропус выпущен"
   permit_issued: "Пропус выдан"
+  permit_rejected: "Пропуск отклонен"
   activerecord:
     models: 
       permission:

@@ -1,6 +1,6 @@
 <div class="btn-toolbar">
 
-<% unless @permit.agreed == true %>
+<% unless @permit.canceled == true || @permit.agreed == true %>
 <% if current_user.has_permission?(6) %>
 <div class="btn-group">	
 	<%= link_to "Редактировать", edit_permit_path(@permit), :class=> "btn btn-primary" %>	
@@ -16,13 +16,15 @@
 <% end %>
 <% end %>
 
+<% unless @permit.rejected == true || @permit.agreed	 == true %>
 <% if current_user.has_permission?(7) %>
 <div class="btn-group">	
-	<%= link_to "Аннулировать", cancel_permit_path(@permit), :class=> "btn btn-danger" %>	
+	<%= link_to "Отклонить", reject_permit_path(@permit), :class=> "btn btn-danger" %>	
 </div>
 <% end %>
+<% end %>
 
-<% if @permit.agreed == true %>
+<% if @permit.agreed == true && @permit.released == false %>
 <% if current_user.has_permission?(8) %>
 <div class="btn-group">	
 	<%= link_to "Выпустить", release_permit_path(@permit), :class=> "btn btn-success" %>	
@@ -30,7 +32,7 @@
 <% end %>
 <% end %>
 
-<% if @permit.released == true %>
+<% if @permit.released == true && @permit.issued == false %>
 <% if current_user.has_permission?(9) %>
 <div class="btn-group">	
 	<%= link_to "Выдать", issue_permit_path(@permit), :class=> "btn btn-success" %>	
@@ -38,6 +40,13 @@
 <% end %>
 <% end %>
 
+<% if @permit.issued == true && @permit.canceled == false %>
+<% if current_user.has_permission?(7) %>
+<div class="btn-group">	
+	<%= link_to "Аннулировать", cancel_permit_path(@permit), :class=> "btn btn-danger" %>	
+</div>
+<% end %>
+<% end %>
 
 
 </div>

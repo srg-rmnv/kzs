@@ -33,6 +33,7 @@ Kzs::Application.routes.draw do
       get 'cancel'
       get 'release'
       get 'issue'
+      get 'reject'
     end
   end
   
