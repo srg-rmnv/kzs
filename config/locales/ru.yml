@@ -78,6 +78,10 @@ ru:
         title: "Название"
         parent_id: "Руководящая организация"
         logo: "Логотип"
+        address: "Адрес"
+        phone: "Телефон"
+        mail: "Электронная почта"
+        director_id: "Генеральный директор"
       permission:
         number: "Номер"
         user_id: "Пользователь"
