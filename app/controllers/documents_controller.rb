@@ -104,12 +104,18 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @document }
+      format.pdf do
+        pdf = DocumentPdf.new(@document, view_context)
+        send_data pdf.render, filename: "document_#{@document.id}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
     end
   end
 
   def new
     @document = Document.new
+    @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all
@@ -122,6 +128,7 @@ class DocumentsController < ApplicationController
 
   def edit
     @document = Document.find(params[:id])
+    @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.where('id != ?', @document.id)
@@ -265,12 +272,27 @@ class DocumentsController < ApplicationController
     end
   end
   
+  def copy
+    @original_document = Document.find(params[:id]) # find original object
+    @document = Document.new(:organization_id => @original_document.organization_id,
+                             :approver_id => @original_document.approver_id,
+                             :executor_id => @original_document.executor_id,
+                             :title => @original_document.title,
+                             :text => @original_document.text,
+                             :document_type => @original_document.document_type,
+                             :document_attachments => @original_document.document_attachments,
+                             :document_ids => @original_document.document_ids)
+    @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
+    @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @documents = Document.all
+    render :new # render same view as "new", but with @prescription attributes already filled in
+  end
+  
   # misc
   
   def executor_phone
-    
       @user = User.find(params[:user])
-
       respond_to do |format|
          format.js {  }
       end

@@ -12,6 +12,14 @@
 			<div class="btn-group">	
 				<a class="btn btn-success" href="javascript:if(window.print)window.print()" style="margin-left: 20px"><%= image_tag('print.png') %></a>
 			</div>
+			
+			<div class="btn-group">	
+				<%= link_to "pdf", document_path(@document, format: "pdf"), :class => "btn" %>
+			</div>
+			
+			<div class="btn-group">	
+				<%= link_to "создать по образу", copy_document_path(@document), :class => "btn" %>
+			</div>
 		</div>
 		
 		<div class="new-wrap">

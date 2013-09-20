@@ -17,6 +17,7 @@ Kzs::Application.routes.draw do
       get 'delete'
       get 'send_document'
       get 'execute'
+      get 'copy'
     end
     collection do
       get 'sents'

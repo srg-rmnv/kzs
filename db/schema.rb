@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912084011) do
+ActiveRecord::Schema.define(:version => 20130919133212) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -119,6 +119,9 @@ ActiveRecord::Schema.define(:version => 20130912084011) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.string   "sn"
+    t.datetime "date"
+    t.integer  "version",                 :default => 1
   end
 
   create_table "groups", :force => true do |t|
@@ -139,8 +142,16 @@ ActiveRecord::Schema.define(:version => 20130912084011) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "mail"
+    t.integer  "director_id"
   end
 
   create_table "permission_groups", :force => true do |t|
@@ -265,6 +276,7 @@ ActiveRecord::Schema.define(:version => 20130912084011) do
     t.boolean  "is_active"
     t.boolean  "is_superuser"
     t.datetime "date_joined"
+    t.string   "middle_name"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

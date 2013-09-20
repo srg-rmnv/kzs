@@ -18,6 +18,11 @@ ActiveAdmin.register Organization do
        f.inputs t('properties') do
          f.input :title
          f.input :parent_id, :as => :select, :collection => Organization.all
+         f.input :logo, :as => :file
+         f.input :address
+         f.input :phone
+         f.input :mail
+         f.input :director_id, :as => :select, :collection => User.all
        end
        f.actions
      end
@@ -26,6 +31,13 @@ ActiveAdmin.register Organization do
       attributes_table do
         row :title
         row :parent_id
+        row :logo do |row|
+          image_tag row.logo.url(:pdf)
+        end
+        row :address
+        row :phone
+        row :mail
+        row :director_id
       end  
      end
 end

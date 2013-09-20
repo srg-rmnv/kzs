@@ -20,6 +20,7 @@ ActiveAdmin.register User do
        f.input :username
        f.input :first_name
        f.input :last_name
+       f.input :middle_name
        f.input :phone
        f.input :position
        f.input :division
@@ -39,6 +40,9 @@ ActiveAdmin.register User do
   show do |user|
     attributes_table do
       row :username
+      row :organization_id do |row|
+        Organization.find(user.organization_id).title
+      end
       row :phone
       row :position
       row :division

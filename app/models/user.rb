@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :phone, :position, :division, :info, :dob, :permit, :phone, 
                   :work_status, :organization_id, :email, :password, :password_confirmation, 
-                  :avatar, :first_name, :last_name, :username, :right_ids, :remember_me,
+                  :avatar, :first_name, :last_name, :middle_name, :username, :right_ids, :remember_me,
                   :is_staff, :is_active, :is_superuser, :date_joined, :permission_ids, :group_ids
                   
   has_many :user_permissions
@@ -20,10 +20,11 @@ class User < ActiveRecord::Base
   has_one :permit
   
   scope :superuser, -> { where(is_superuser: true) }
+  scope :approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '1'")
                               
   WORK_STATUSES = %w[at_work ooo]
   
-  validates :username, :first_name, :last_name, :phone, :position,
+  validates :username, :first_name, :last_name, :middle_name, :phone, :position,
             :division, :dob, :organization_id, :work_status, :presence => true
             
   validates :username, uniqueness: true
@@ -50,6 +51,10 @@ class User < ActiveRecord::Base
   def first_name_with_last_name
       "#{last_name} #{first_name}"
   end
+  
+  def last_name_with_initials
+       "#{last_name} #{first_name.first}.#{middle_name.first}."
+   end
   
   def self.superusers_from_orgranization(organization_id)
         superuser.where(:organization_id => organization_id)
