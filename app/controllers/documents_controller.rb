@@ -289,6 +289,19 @@ class DocumentsController < ApplicationController
     render :new # render same view as "new", but with @prescription attributes already filled in
   end
   
+  def to_drafts
+    @document = Document.find(params[:id])
+    @document.prepared = false
+    @document.draft = true
+    @document.user_id = current_user.id
+    @document.save
+
+    respond_to do |format|
+      format.html { redirect_to documents_url, notice: t('document_prepared') }
+      format.json { head :no_content }
+    end
+  end
+  
   # misc
   
   def executor_phone

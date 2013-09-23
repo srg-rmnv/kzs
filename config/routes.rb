@@ -18,6 +18,7 @@ Kzs::Application.routes.draw do
       get 'send_document'
       get 'execute'
       get 'copy'
+      get 'to_drafts'
     end
     collection do
       get 'sents'
