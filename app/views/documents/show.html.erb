@@ -12,6 +12,10 @@
 			<div class="btn-group">	
 				<%= link_to "создать по образу и подобию", copy_document_path(@document), :class => "btn" %>
 			</div>
+			
+			<div class="btn-group">	
+				<%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn" %>
+			</div>
 
 			<%= render 'actions' %>
 
