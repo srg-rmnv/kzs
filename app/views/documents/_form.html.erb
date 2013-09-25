@@ -28,7 +28,7 @@
 				  №<%= @document.id %> | 
 				<% end %>
 				<%= Russian::strftime(Time.new, "%d %B %Y %H:%M") %></span>
-			<% if params[:type == 'mail'] || @document.document_type == 'mail' %>
+			<% if params[:type] == 'mail' || @document.document_type == 'mail' %>
 			  <span class="label label-info" style="float: right; margin-top: 7px">Письмо</span>
 			<% else %>
 			  <span class="label" style="float: right; margin-top: 7px">Распоряжение</span>
