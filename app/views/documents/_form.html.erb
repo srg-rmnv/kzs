@@ -121,7 +121,7 @@
 				</div>
 				
 				<div class="btn-group" style="margin-left: 10px;">	
-					<%= f.submit "в черновики", :class => "btn btn-primary" %>
+					<%= f.submit "в черновики", :class => "btn btn-primary", :name => "to_draft" %>
 				</div>
 				
 				<% unless @document.sent? || action?('new') || action?('copy')  %>

@@ -172,6 +172,11 @@ class DocumentsController < ApplicationController
       @document.draft = false
     end
     
+    if params[:to_draft]
+      @document.prepared = false
+      @document.draft = true
+    end
+    
     respond_to do |format|
       if @document.update_attributes(params[:document])
         format.html { redirect_to document_path(@document), notice: t('document_successfully_updated') }
