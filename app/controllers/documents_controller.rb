@@ -24,7 +24,7 @@ class DocumentsController < ApplicationController
     elsif params[:type] == "archived"
       @documents = Document.order("created_at DESC").not_deleted.archived.where(:user_id => current_user.id).all
     elsif params[:type] == "deleted"
-      @documents = Document.order("created_at DESC").deleted.where(:user_id => current_user.id).all
+      @documents = Document.order("created_at DESC").deleted.where(:sender_organization_id => organization).all
 
     else
       @documents = document.sent.where("organization_id = ?", organization).all
@@ -257,8 +257,12 @@ class DocumentsController < ApplicationController
   
   def delete
     @document = Document.find(params[:id])
-    @document.deleted = true
-    @document.save
+    if @document.draft?
+      @document.destroy
+    else
+      @document.deleted = true
+      @document.save
+    end
 
     respond_to do |format|
       format.html { redirect_to documents_path, notice: t('document_deleted') }
