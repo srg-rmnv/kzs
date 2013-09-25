@@ -3,26 +3,24 @@
 	<%= render 'left' %>
 	
 	<div class="span8">
-		
+	
 		<div class="btn-toolbar">
 			<div class="btn-group">	
 				<%= link_to " назад", documents_path, :class => "btn" %>
 			</div>
-			
+
 			<div class="btn-group">	
 				<%= link_to "создать по образу и подобию", copy_document_path(@document), :class => "btn" %>
 			</div>
-			
+
 			<div class="btn-group">	
 				<%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn" %>
 			</div>
-
-			<%= render 'actions' %>
-
 		</div>
-		
+
 		<div class="new-wrap">
-			<%= render @document %>
+			<iframe style="width: 800px; height: 1030px;" src="/documents/<%= @document.id %>.pdf"/></iframe>
+			<%= render 'actions_show' %>
 	    </div>	
 	
 		<% if @document.document_type == 'writ' %>
