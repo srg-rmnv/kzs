@@ -12,6 +12,7 @@ class DocumentPdf < Prawn::Document
     @organization = Organization.find(@document.sender_organization_id)
     @director = User.find(@organization.director_id)
     @sender = User.find(@document.user_id)
+    
     @view = view
     russian_font
     logo
@@ -37,9 +38,12 @@ class DocumentPdf < Prawn::Document
     text "#{@director.last_name_with_initials}", :align => :right, :size => 10, :inline_format => true
     text "#{@organization.title}", :size => 10
     move_down 20
-    text "<color rgb='989898'>Исп: #{@sender.position} отдела: #{@sender.division}</color>", :size => 10, :inline_format => true
-    text "<color rgb='989898'>#{@organization.title}</color>", :size => 10, :inline_format => true
-    text "#{@sender.last_name_with_initials}", :size => 10, :inline_format => true
+    if @document.executor_id
+      @executor = User.find(@document.executor_id)
+      text "<color rgb='989898'>Исп: #{@executor.position} отдела: #{@executor.division}</color>", :size => 10, :inline_format => true
+      text "<color rgb='989898'>#{@organization.title}</color>", :size => 10, :inline_format => true
+      text "#{@executor.last_name_with_initials}", :size => 10, :inline_format => true
+    end
   end
   
 
