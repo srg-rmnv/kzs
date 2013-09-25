@@ -16,14 +16,6 @@
 	<div class="btn-group"   style="margin-right: 10px;">	
 		<%= link_to 'Отправить', send_document_document_path(@document), :class => "btn btn-success" %>
 	</div>
-	<% elsif recipient(@document) %>
-		<%= nil %>
-	<% elsif @document.for_confirmation? %>
-		<%= nil %>
-	<% else %>
-	<div class="btn-group"   style="margin-right: 10px;">	
-		<%= link_to 'Отправить', "#", :class => "btn disabled" %>
-	</div>
 	<% end %>
 	
 	
@@ -31,9 +23,6 @@
 	<% if for_approve(@document) %>
 	<div class="btn-group"   style="margin-right: 10px;">	
 		<%= link_to 'Подписать', approve_document_path(@document), :class => "btn btn-success" %>
-	</div>
-	<div class="btn-group"   style="margin-right: 10px;">	
-		<%= link_to 'В черновики', to_drafts_document_path(@document), :class => "btn btn-success" %>
 	</div>
 	<% end %>
 	<% end %>
@@ -44,11 +33,6 @@
 	</div>
 	<% end %>
 	
-	<% unless @document.sent? || @document.deleted? %>
-	<div class="btn-group"   style="margin-right: 10px;">	
-		<%= link_to 'Удалить', delete_document_path(@document), :class => "btn btn-danger" %>
-	</div>
-	<% end %>
 	
 	<% if for_execution(@document) %>
 	<div class="btn-group"   style="margin-right: 10px;">	

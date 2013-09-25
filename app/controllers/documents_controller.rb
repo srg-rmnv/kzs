@@ -128,7 +128,7 @@ class DocumentsController < ApplicationController
 
   def edit
     @document = Document.find(params[:id])
-    @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
+    @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.where('id != ?', @document.id)
@@ -165,19 +165,13 @@ class DocumentsController < ApplicationController
   # PUT /documents/1.json
   def update
     @document = Document.find(params[:id])
-    
-
-    if params[:sent]
-      @document.sent = true
-      @document.callback = false
-    end   
+    @document.user_id = current_user.id
     
     if params[:prepare]
       @document.prepared = true
       @document.draft = false
     end
     
-
     respond_to do |format|
       if @document.update_attributes(params[:document])
         format.html { redirect_to document_path(@document), notice: t('document_successfully_updated') }

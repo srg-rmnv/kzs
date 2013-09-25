@@ -9,6 +9,11 @@
 </div>
 
 <div class="new-title">
+	<b>Составитель: </b><%= user(@document.user_id).first_name_with_last_name %>
+</div>
+
+
+<div class="new-title">
 	<b>Организация-отправитель: </b><%= organzation_title_by_user_id(@document.user_id) %>
 </div>
 

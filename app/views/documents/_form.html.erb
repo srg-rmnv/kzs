@@ -35,6 +35,16 @@
 			<% end %>
 			</div>
 			
+			<div class="new-title">Составитель <span style="padding-left: 15px; font-weight: bold;">
+			<% if action?('edit') %>
+			<%= user(@document.user_id).first_name_with_last_name %>
+			<% else %>
+			<%= user(current_user.id).first_name_with_last_name %>
+			<% end %>
+			</span></div>
+
+			
+			
 			<% if current_user.organization_id? %>
 			<div class="new-title">Организация-отправитель <span style="padding-left: 15px; font-weight: bold;"><%= organzation_title(current_user) %></span></div>
 			<% end %>
