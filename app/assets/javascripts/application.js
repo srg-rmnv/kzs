@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery-ui
 //= require chosen-jquery
-//= require chosen_attach
+//= require documents
 //= require ckeditor/init
 //= require jquery_ujs
 //= jquery.Jcrop.min

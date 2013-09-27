@@ -55,7 +55,7 @@
 				<%= f.hidden_field :document_type, :value => @document.document_type %>
 				<% end %>
 			
-			<div class="new-title"><span style="margin-right: 20px;">Организация-получатель</span> <%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:400px', :'data-placeholder' => "Выберите организацию"}) %> </div>
+			<div class="new-title"><span style="margin-right: 20px;">Организация-получатель</span> <%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:400px', :'data-placeholder' => "Выберите организацию"}) %> <%= link_to "Отправить всем", "#", :id => :select_all_organizations %></div>
 			
 			<div class="new-title">Контрольное лицо<%= f.collection_select(:approver_id, @approvers, :id, :first_name_with_last_name) %> <!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
 			

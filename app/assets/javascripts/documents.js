@@ -15,7 +15,6 @@ $(document).ready(function(){
 
 	
 	$('#document_executor_id').on("change", function() {
-		
 		  if ($('#document_executor_id option:selected').val() == "") {
 			$('#executor_tel').hide();
 		  } else {
@@ -26,12 +25,14 @@ $(document).ready(function(){
 		    url: "/document/executor_phone",
 		    type: "GET",
 		    data: 'user=' + $('#document_executor_id option:selected').val(),
-		  })
-		
-
-		
-
-		
+		  })		
+	});
+	
+	
+	$('#document_organization_ids').chosen();
+	$('#select_all_organizations').click(function(){
+	    $('#document_organization_ids_chosen option').prop('selected', true);
+		return false
 	});
 	
 	
