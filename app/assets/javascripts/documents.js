@@ -31,8 +31,8 @@ $(document).ready(function(){
 	
 	$('#document_organization_ids').chosen();
 	$('#select_all_organizations').click(function(){
-	    $('#document_organization_ids_chosen option').prop('selected', true);
-		return false
+		$('#document_organization_ids').find("option").attr('selected', 'selected');
+		$("#document_organization_ids").trigger("chosen:updated");
 	});
 	
 	
