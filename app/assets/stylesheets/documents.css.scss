@@ -3,10 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .doc-left {
-	
 	margin-top: 50px;
 	font-family: Helvetica;
-	font-weight: bold;
 	font-size: 13px;
 	
 	li.nav-header {
@@ -68,6 +66,7 @@
 
 .doc-left a.active {
 	color: red;
+	font-weight: bold;
 }
 
 .confidential {

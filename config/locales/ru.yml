@@ -38,6 +38,7 @@ ru:
   permit_released: "Пропус выпущен"
   permit_issued: "Пропус выдан"
   permit_rejected: "Пропуск отклонен"
+  documents_updated: "Документы изменены"
   activerecord:
     models: 
       permission:

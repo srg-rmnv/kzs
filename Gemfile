@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
+gem "squeel"
 
 gem 'capistrano'
 gem 'rvm-capistrano'

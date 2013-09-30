@@ -3,91 +3,51 @@ class DocumentsController < ApplicationController
   # collection
   
   def index
-    
-    
-    
+    #check if user can view confindetnial documents
     if current_user.has_permission?(5)
-      document = Document.not_deleted.not_archived.order("created_at DESC")
+      documents = Document.all
     else
-      document = Document.not_deleted.not_archived.not_confidential.order("created_at DESC")
+      documents = Document.not_confidential
     end
-    
     organization = current_user.organization_id
-    @documents = document.sent.where(:organization_id => organization).all unless params[:type]
     
-    if params[:type] == "inbox"
-      @documents = document.sent.where(:organization_id => organization).all
-    elsif params[:type] == "prepared"
-      @documents = document.prepared.not_sent.where(:sender_organization_id => organization).all
-    elsif params[:type] == "approved"
-      @documents = document.approved.where(:sender_organization_id => organization).all
-    elsif params[:type] == "archived"
-      @documents = Document.order("created_at DESC").not_deleted.archived.where(:user_id => current_user.id).all
-    elsif params[:type] == "deleted"
-      @documents = Document.order("created_at DESC").deleted.where(:sender_organization_id => organization).all
-
+    #default scope
+    documents = Document.not_deleted.not_archived.order("created_at DESC").where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
+    
+    # mails
+    if params[:type] == "mails"
+      @documents = documents.where(:document_type => 'mail')
+      
+    # writs
+    elsif params[:type] == "writs"
+      @documents = documents.where(:document_type => 'writ')
+      
+    # any other case
     else
-      @documents = document.sent.where("organization_id = ?", organization).all
-    end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @documents }
-    end
-  end
-
-  def sents
+      @documents = documents
+    end  
+      
+    # elsif params[:type] == "prepared"
+    #   @documents = documents.prepared.not_sent.where(:sender_organization_id => organization).all
+    # elsif params[:type] == "approved"
+    #  @documents = documents.approved.where(:sender_organization_id => organization).all
+    # elsif params[:type] == "archived"
+    #  @documents = Document.order("created_at DESC").not_deleted.archived.where(:user_id => current_user.id).all
     
-    if current_user.has_permission?(5)
-      document = Document.not_deleted.not_archived.order("created_at DESC")
-    else
-      document = Document.not_deleted.not_archived.not_confidential.order("created_at DESC")
-    end
-    
-    organization = current_user.organization_id
-    @documents = document.sent.where(:sender_organization_id => organization).all
-    
-    current_user.open_notices.destroy_all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @documents }
-    end
   end
   
-  def drafts
-    
-    if current_user.has_permission?(5)
-      document = Document.not_deleted.not_archived.order("created_at DESC")
-    else
-      document = Document.not_deleted.not_archived.not_confidential.order("created_at DESC")
-    end
-    
-    @documents = document.draft.where(:user_id => current_user.id).all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @documents }
-    end
+  def drafts    
+    @documents = Document.not_deleted.not_archived.order("created_at DESC").draft.where(:user_id => current_user.id)
   end
   
-  def callbacks
-    
-    if current_user.has_permission?(5)
-      document = Document.not_deleted.not_archived.order("created_at DESC")
-    else
-      document = Document.not_deleted.not_archived.not_confidential.order("created_at DESC")
+  def batch
+    documents_ids = params[:document_ids]
+    if params[:prepare]
+      Document.update_all({prepared: true, draft: false}, {id: documents_ids})
     end
-    
-    @documents = document.callback.where(:user_id => current_user.id).all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @documents }
-    end
+    redirect_to documents_path, notice: t('documents_updated')
   end
   
-
   # member
   
   def show
@@ -135,34 +95,22 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    
     organizations = params[:document][:organization_ids]
-    
     organizations = organizations.delete_if{ |x| x.empty? }
-    
     organizations.each do |organization|
       document = Document.new(params[:document])
       document.organization_id = organization
       document.user_id = current_user.id
       document.sender_organization_id = current_user.organization_id
-    
       if params[:prepare]
         document.prepared = true
         document.draft = false
       end
-      
       document.save!
     end
-    
     redirect_to documents_path, notice: t('document_successfully_created')
-    
-    
-    
-
   end
 
-  # PUT /documents/1
-  # PUT /documents/1.json
   def update
     @document = Document.find(params[:id])
     @document.user_id = current_user.id
@@ -191,14 +139,12 @@ class DocumentsController < ApplicationController
   
   def prepare
     @document = Document.find(params[:id])
-    
     @document.prepared = true
     @document.draft = false
     @document.save
 
     respond_to do |format|
       format.html { redirect_to documents_url, notice: t('document_prepared') }
-      format.json { head :no_content }
     end
   end
   
@@ -210,7 +156,6 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to document_path(@document), notice: t('document_approved') }
-      format.json { head :no_content }
     end
   end
   

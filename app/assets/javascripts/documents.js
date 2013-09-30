@@ -1,18 +1,19 @@
 $(document).ready(function(){
 	
-	$('#document_confidential').on("click", function() {
-		
+	$('#select_all_documents').on("click", function() {	
+		$(document).find(':checkbox').prop('checked', this.checked);
+	});
+	
+	$('#select_all_documents').on("click", function() {	
 		checked = $("#document_confidential").is(':checked')
-				
 		  if (checked == true) {
 			$('#document_recipient_id').show();
 		  } else {
 		    $('#document_recipient_id').hide();
 		  }
-
 	});
 	
-
+	
 	
 	$('#document_executor_id').on("change", function() {
 		  if ($('#document_executor_id option:selected').val() == "") {
@@ -20,7 +21,6 @@ $(document).ready(function(){
 		  } else {
 		    $('#executor_tel').show();
 		  }
-		
 		$.ajax({
 		    url: "/document/executor_phone",
 		    type: "GET",
@@ -36,7 +36,6 @@ $(document).ready(function(){
 	});
 	
 	
-
 });
 
 $(function() {

@@ -7,8 +7,15 @@ Kzs::Application.routes.draw do
   get "statements/show"
 
   mount Ckeditor::Engine => '/ckeditor'
+  
+  match '/documents/batch' => 'documents#batch'
 
   resources :documents do
+    collection do
+      get 'sents'
+      get 'drafts'
+      get 'callbacks'
+    end
     member do
       get 'prepare'
       get 'approve'
@@ -19,11 +26,6 @@ Kzs::Application.routes.draw do
       get 'execute'
       get 'copy'
       get 'to_drafts'
-    end
-    collection do
-      get 'sents'
-      get 'drafts'
-      get 'callbacks'
     end
   end
   
