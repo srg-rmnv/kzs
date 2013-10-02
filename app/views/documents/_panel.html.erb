@@ -33,12 +33,12 @@
 
 <% if can? :approve, Document %>
 <div class="btn-group">				
-  <%= submit_tag "подписать", :class => "btn btn-success", :name => "approve" %>
+  <%= submit_tag "подписать", :class => "btn disabled", :name => "approve", :id => 'approve_link' %>
 </div>
 <% end %>
 
 <div class="btn-group">				
-  <%= submit_tag "отправить", :class => "btn btn-success", :name => "send" %>
+  <%= submit_tag "отправить", :class => "btn disabled", :name => "send", :id => 'send_link' %>
 </div>
 
 
