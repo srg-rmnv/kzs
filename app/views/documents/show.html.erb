@@ -25,7 +25,7 @@
 	
 		<% unless @conversation.nil? %>
 		Цепочка переписки:<br>
-		<% @conversation.documents.each do |document| %>
+		<% @conversation.documents.order('created_at DESC').each do |document| %>
 		<%= link_to document.title, document_path(document) %><br>
 		<% end %>
 		<% end %>
