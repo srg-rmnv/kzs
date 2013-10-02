@@ -51,9 +51,13 @@
 				
 				<% if action?('new') %>
 				<%= f.hidden_field :document_type, :value => params[:type] %>
+				<% elsif action?('reply') %>
+				<%= f.hidden_field :document_type, :value => @original_document.document_type %>
 				<% elsif %>
 				<%= f.hidden_field :document_type, :value => @document.document_type %>
 				<% end %>
+				
+				<%= f.hidden_field :document_conversation_id, :value => @document_conversation_id %>
 			
 			<div class="new-title"><span style="margin-right: 20px;">Организация-получатель</span> <%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:400px', :'data-placeholder' => "Выберите организацию"}) %> <%= link_to "Отправить всем", "#", :id => :select_all_organizations %></div>
 			

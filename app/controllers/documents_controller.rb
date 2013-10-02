@@ -241,6 +241,21 @@ class DocumentsController < ApplicationController
     render :new # render same view as "new", but with @prescription attributes already filled in
   end
   
+  def reply
+    @original_document = Document.find(params[:id])
+    @document_conversation_id = DocumentConversation.where(:id => @original_document.document_conversation_id).first_or_create!
+    @document_conversation_id = @document_conversation_id.id
+    @original_document.document_conversation_id = @document_conversation_id
+    @original_document.save!
+    @document = Document.new
+    @document_conversation_id
+    @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
+    @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @documents = Document.all
+    render :new
+  end
+  
   def to_drafts
     @document = Document.find(params[:id])
     @document.prepared = false

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925121318) do
+ActiveRecord::Schema.define(:version => 20131002131414) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -86,6 +86,11 @@ ActiveRecord::Schema.define(:version => 20130925121318) do
     t.datetime "updated_at",              :null => false
   end
 
+  create_table "document_conversations", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "document_relations", :force => true do |t|
     t.integer "document_id"
     t.integer "relational_document_id"
@@ -101,26 +106,26 @@ ActiveRecord::Schema.define(:version => 20130925121318) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "recipient_id"
-    t.boolean  "sent",                    :default => false
+    t.boolean  "sent",                     :default => false
     t.integer  "approver_id"
-    t.boolean  "approved",                :default => false
-    t.boolean  "opened",                  :default => false
-    t.boolean  "for_approve",             :default => false
-    t.boolean  "deleted",                 :default => false
-    t.boolean  "archived",                :default => false
-    t.boolean  "callback",                :default => false
-    t.boolean  "prepared",                :default => false
-    t.boolean  "draft",                   :default => true
+    t.boolean  "approved",                 :default => false
+    t.boolean  "opened",                   :default => false
+    t.boolean  "for_approve",              :default => false
+    t.boolean  "deleted",                  :default => false
+    t.boolean  "archived",                 :default => false
+    t.boolean  "callback",                 :default => false
+    t.boolean  "prepared",                 :default => false
+    t.boolean  "draft",                    :default => true
     t.integer  "sender_organization_id"
     t.string   "document_type"
-    t.boolean  "with_comments",           :default => false
-    t.boolean  "executed",                :default => false
-    t.boolean  "for_confirmation",        :default => false
+    t.boolean  "with_comments",            :default => false
+    t.boolean  "executed",                 :default => false
+    t.boolean  "for_confirmation",         :default => false
     t.integer  "project_id"
-    t.boolean  "confidential",            :default => false
+    t.boolean  "confidential",             :default => false
     t.integer  "executor_id"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
@@ -128,7 +133,8 @@ ActiveRecord::Schema.define(:version => 20130925121318) do
     t.datetime "attachment_updated_at"
     t.string   "sn"
     t.datetime "date"
-    t.integer  "version",                 :default => 1
+    t.integer  "version",                  :default => 1
+    t.integer  "document_conversation_id"
   end
 
   create_table "groups", :force => true do |t|
