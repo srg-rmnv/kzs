@@ -44,6 +44,10 @@ class DocumentsController < ApplicationController
     documents_ids = params[:document_ids]
     if params[:prepare]
       Document.update_all({prepared: true, draft: false}, {id: documents_ids})
+    elsif params[:approve]
+      Document.update_all({approved: true, draft: false}, {id: documents_ids})
+    elsif params[:send]
+      Document.update_all({sent: true}, {id: documents_ids})
     end
     redirect_to documents_path, notice: t('documents_updated')
   end
@@ -75,7 +79,7 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
-    @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
+    @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all

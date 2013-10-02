@@ -12,17 +12,37 @@
   </ul>
 </div>
 
+
 <div class="btn-group">				
   <a class="btn btn-success" href="javascript:location.reload(true);"><%= image_tag('refresh.png') %></a>
 </div>
 
-<div class="btn-group">				
-  <a class="btn btn-success" href="javascript:location.reload(true);"><%= image_tag('create_copy.png') %></a>
+<div class="btn-group">	
+	<%= link_to image_tag('create_copy.png'), "#", :class => "btn disabled", :title => "Создать по образу и подобию" %>
 </div>
 
+<div class="btn-group">	
+	<%= link_to "редактировать", "#", :class => "btn disabled" %>
+</div>
+
+<% if action?('drafts') %>
 <div class="btn-group">				
   <%= submit_tag "подготовить", :class => "btn btn-success", :name => "prepare" %>
 </div>
+<% end %>
+
+<% if can? :approve, Document %>
+<div class="btn-group">				
+  <%= submit_tag "подписать", :class => "btn btn-success", :name => "approve" %>
+</div>
+<% end %>
+
+<div class="btn-group">				
+  <%= submit_tag "отправить", :class => "btn btn-success", :name => "send" %>
+</div>
+
+
+
 
 
 

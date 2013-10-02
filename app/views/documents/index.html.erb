@@ -1,7 +1,9 @@
 <div class="row">
   <%= render 'left' %>
   <div class="span8">
+	<%= form_tag documents_batch_path, method: :put do %>
 	<%= render 'panel' %>
 	<%= render 'table'%>
+	<% end %>
   </div>
 </div>

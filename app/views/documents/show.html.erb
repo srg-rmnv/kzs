@@ -10,11 +10,11 @@
 			</div>
 
 			<div class="btn-group">	
-				<%= link_to "создать по образу и подобию", copy_document_path(@document), :class => "btn" %>
+				<%= link_to image_tag('create_copy.png'), copy_document_path(@document), :class => "btn btn-success", :title => "Создать по образу и подобию" %>
 			</div>
 
 			<div class="btn-group">	
-				<%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn" %>
+				<%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn btn-success" %>
 			</div>
 		</div>
 
