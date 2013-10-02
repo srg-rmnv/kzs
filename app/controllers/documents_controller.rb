@@ -56,6 +56,9 @@ class DocumentsController < ApplicationController
   
   def show
     @document = Document.find(params[:id])
+    if DocumentConversation.exists?(@document.document_conversation_id)
+      @conversation = DocumentConversation.find(@document.document_conversation_id)
+    end
     
     if current_user.permissions.exists?('1') && @document.organization_id == current_user.organization_id && @document.opened != true
       @document.opened = true

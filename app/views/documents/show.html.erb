@@ -21,7 +21,14 @@
 		<div class="new-wrap">
 			<iframe style="width: 800px; height: 1030px;" src="/documents/<%= @document.id %>.pdf"/></iframe>
 			<%= render 'actions_show' %>
-	    </div>	
+	    </div>
+	
+		<% unless @conversation.nil? %>
+		Цепочка переписки:<br>
+		<% @conversation.documents.each do |document| %>
+		<%= link_to document.title, document_path(document) %><br>
+		<% end %>
+		<% end %>
 	
 		<% if @document.document_type == 'writ' %>
 		<div class="new-wrap">
