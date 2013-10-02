@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
-	$('#select_all_documents').on("click", function() {	
-		$(document).find(':checkbox').prop('checked', this.checked);
-	});
+
+	
+
 	
 	$('#select_all_documents').on("click", function() {	
 		checked = $("#document_confidential").is(':checked')
@@ -35,27 +35,38 @@ $(document).ready(function(){
 		$("#document_organization_ids").trigger("chosen:updated");
 	});
 	
+	$('#select_all_documents').on("click", function() {	
+		$(document).find(':checkbox').prop('checked', this.checked);
+		myFunction();
+	});
+	
 	$('.document_operation').on("change", function() {
-		if ($('.document_operation:checked').length == 1) {
-		$( "input[name$='prepare'], #create_copy_link, #edit_link" ).removeClass('disabled').addClass('btn-success');
-		$("#edit_link").attr("href", "/documents/" + $(this).val() + "/edit");
-		$("#create_copy_link").attr("href", "/documents/" + $(this).val() + "/copy");
-	  } else {
-	    $( "input[name$='prepare'], #create_copy_link, #edit_link" ).removeClass('btn-success').addClass('disabled');
-	  }
+		myFunction();
 	});
 	
 	
 	
-
-
-	
 	
 });
+
+
 
 $(function() {
     $( "#datepicker" ).datepicker();
 });
+
+function myFunction() {
+  	if ($('.document_operation:checked').length == 1) {
+	$( "input[name$='prepare'], #create_copy_link, #edit_link" ).removeClass('disabled').addClass('btn-success');
+	$("#edit_link").attr("href", "/documents/" + $(this).val() + "/edit");
+	$("#create_copy_link").attr("href", "/documents/" + $(this).val() + "/copy");
+  } else if ($('.document_operation:checked').length > 1)  {
+	$( "input[name$='prepare']" ).removeClass('disabled').addClass('btn-success');
+	$( "#create_copy_link, #edit_link" ).removeClass('btn-success').addClass('disabled');
+  } else {
+    $( "input[name$='prepare'], #create_copy_link, #edit_link" ).removeClass('btn-success').addClass('disabled');
+  }
+};
 
 
 
