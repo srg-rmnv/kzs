@@ -18,16 +18,16 @@
 </div>
 
 <div class="btn-group">	
-	<%= link_to image_tag('create_copy.png'), "#", :class => "btn disabled", :title => "Создать по образу и подобию" %>
+	<%= link_to image_tag('create_copy.png'), "#", :class => "btn disabled", :title => "Создать по образу и подобию", :id => 'create_copy_link' %>
 </div>
 
 <div class="btn-group">	
-	<%= link_to "редактировать", "#", :class => "btn disabled" %>
+	<%= link_to "редактировать", "#", :class => "btn disabled", :id => 'edit_link' %>
 </div>
 
 <% if action?('drafts') %>
 <div class="btn-group">				
-  <%= submit_tag "подготовить", :class => "btn btn-success", :name => "prepare" %>
+  <%= submit_tag "подготовить", :class => "btn disabled", :name => "prepare" %>
 </div>
 <% end %>
 

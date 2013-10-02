@@ -13,7 +13,7 @@
 
 	<% @documents.each do |document| %>
 	  <tr>
-		<td><%= check_box_tag "document_ids[]", document.id %></td>
+		<td><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %></td>
 		<td><%= document.id %></td>
 	    <td><%= organization(document.sender_organization_id) %></td>
 		<td><%= organization(document.organization_id) %></td>

@@ -35,6 +35,21 @@ $(document).ready(function(){
 		$("#document_organization_ids").trigger("chosen:updated");
 	});
 	
+	$('.document_operation').on("change", function() {
+		if ($('.document_operation:checked').length == 1) {
+		$( "input[name$='prepare'], #create_copy_link, #edit_link" ).removeClass('disabled').addClass('btn-success');
+		$("#edit_link").attr("href", "/documents/" + $(this).val() + "/edit");
+		$("#create_copy_link").attr("href", "/documents/" + $(this).val() + "/copy");
+	  } else {
+	    $( "input[name$='prepare'], #create_copy_link, #edit_link" ).removeClass('btn-success').addClass('disabled');
+	  }
+	});
+	
+	
+	
+
+
+	
 	
 });
 
