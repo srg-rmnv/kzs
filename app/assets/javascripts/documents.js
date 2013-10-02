@@ -41,7 +41,8 @@ $(document).ready(function(){
 	});
 	
 	$('.document_operation').on("change", function() {
-		myFunction();
+		elem = $(this)
+		myFunction(elem);
 	});
 	
 	
@@ -55,11 +56,11 @@ $(function() {
     $( "#datepicker" ).datepicker();
 });
 
-function myFunction() {
+function myFunction(elem) {
   	if ($('.document_operation:checked').length == 1) {
 	$( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link" ).removeClass('disabled').addClass('btn-success');
-	$("#edit_link").attr("href", "/documents/" + $(this).val() + "/edit");
-	$("#create_copy_link").attr("href", "/documents/" + $(this).val() + "/copy");
+	$("#edit_link").attr("href", "/documents/" + elem.val() + "/edit");
+	$("#create_copy_link").attr("href", "/documents/" + elem.val() + "/copy");
   } else if ($('.document_operation:checked').length > 1)  {
 	$( "input[name$='prepare'], #approve_link, #send_link" ).removeClass('disabled').addClass('btn-success');
 	$( "#create_copy_link, #edit_link" ).removeClass('btn-success').addClass('disabled');
