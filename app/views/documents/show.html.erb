@@ -24,10 +24,8 @@
 	    </div>
 	
 		<% unless @conversation.nil? %>
-		Цепочка переписки:<br>
-		<% @conversation.documents.order('created_at DESC').each do |document| %>
-		<%= link_to document.title, document_path(document) %><br>
-		<% end %>
+		<p>История переписки</p>
+		<%= render 'table', :@documents => @conversation.documents %>
 		<% end %>
 	
 		<% if @document.document_type == 'writ' %>
