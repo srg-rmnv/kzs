@@ -1,3 +1,4 @@
+# coding: utf-8
 module ApplicationHelper
   
   def link_to_add_fields(name, f, association)
@@ -23,5 +24,13 @@ module ApplicationHelper
      direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
      link_to title, {:sort => column, :direction => direction}, {:class => css_class}
    end
+   
+   
+   def sortable_status 
+     css_class = params[:status_sort] == true ? "current #{sort_direction}" : nil
+     direction = params[:status_sort] == true && direction == "asc" ? "desc" : "asc"
+     link_to "Статус", {:status_sort => 'true', :direction => direction}, {:class => css_class}
+   end
+   
   
 end

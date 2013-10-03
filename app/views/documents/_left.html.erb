@@ -7,7 +7,7 @@
 		  <% end %>
 	  </li>
 	  <li><%= link_to "Письма", documents_path(:type => "mails"), :class => ('active' if params[:type] == "mails") %></li>
-	  <li><%= link_to "Распоряжение", documents_path(:type => "writs"), :class => ('active' if params[:type] == "writs") %></li>
+	  <li><%= link_to "Распоряжения", documents_path(:type => "writs"), :class => ('active' if params[:type] == "writs") %></li>
 	  <li><%= link_to statements_path, :class => ('active' if controller?('statements') && action?("index")) do %>
 		   Акты
 		  <% end %>

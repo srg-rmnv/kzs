@@ -12,7 +12,14 @@ class DocumentsController < ApplicationController
     organization = current_user.organization_id
     
     #default scope
-    documents = Document.not_deleted.not_archived.order(sort_column + " " + sort_direction).where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
+    
+    if params[:status_sort] == true
+      sort_type = "opened DESC, sent DESC, approved DESC, prepared DESC"
+    else
+      sort_type = sort_column + " " + sort_direction
+    end
+    
+    documents = Document.not_deleted.not_archived.order(sort_type).where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
     
     # mails
     if params[:type] == "mails"
