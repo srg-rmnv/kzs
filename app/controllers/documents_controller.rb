@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  
+  helper_method :sort_column, :sort_direction
   # collection
   
   def index
@@ -12,7 +12,7 @@ class DocumentsController < ApplicationController
     organization = current_user.organization_id
     
     #default scope
-    documents = Document.not_deleted.not_archived.order("created_at DESC").where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
+    documents = Document.not_deleted.not_archived.order(sort_column + " " + sort_direction).where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
     
     # mails
     if params[:type] == "mails"
@@ -279,6 +279,16 @@ class DocumentsController < ApplicationController
       respond_to do |format|
          format.js {  }
       end
+  end
+  
+  private
+  
+  def sort_column
+    Document.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
   
   
