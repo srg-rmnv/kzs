@@ -1,6 +1,8 @@
 <table class="table table-striped" style="font-size: 12px; width: 900px;">
   	 <tr>
+		<% unless action?('show') %>
 	    <th><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %></th>
+		<% end %>
 	    <th><%= sortable "id", "№" %></th>
 	    <th><%= sortable "sender_organization_id", "Отправитель" %></th>
 		<th><%= sortable "organization_id", "Получатель" %></th> 
@@ -13,7 +15,9 @@
 
 	<% @documents.each do |document| %>
 	  <tr>
+		<% unless action?('show') %>
 		<td><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %></td>
+		<% end %>
 		<td><%= document.id %></td>
 	    <td><%= organization(document.sender_organization_id) %></td>
 		<td><%= organization(document.organization_id) %></td>
