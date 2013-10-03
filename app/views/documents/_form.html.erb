@@ -23,15 +23,17 @@
 					Новое письмо | 
 				  <% elsif params[:type == 'writ'] %>
 					Новое распоряжение | 
+				  <% else%>
+				    Новое письмо | 
 				  <% end %>
 				<% else %>
 				  №<%= @document.id %> | 
 				<% end %>
 				<%= Russian::strftime(Time.new, "%d %B %Y %H:%M") %></span>
-			<% if params[:type] == 'mail' || @document.document_type == 'mail' %>
-			  <span class="label label-info" style="float: right; margin-top: 7px">Письмо</span>
-			<% else %>
+			<% if params[:type] == 'writ' || @document.document_type == 'writ' %>
 			  <span class="label" style="float: right; margin-top: 7px">Распоряжение</span>
+			<% else %>
+			  <span class="label label-info" style="float: right; margin-top: 7px">Письмо</span>
 			<% end %>
 			</div>
 			
