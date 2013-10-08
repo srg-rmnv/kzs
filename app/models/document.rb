@@ -3,7 +3,7 @@ class Document < ActiveRecord::Base
                   :title, :user_id, :approver_id, :opened, :for_approve, 
                   :deleted, :archived, :callback, :prepared, :document_type,
                   :attachment, :executor_id, :confidential, :document_attachments_attributes,
-                  :document_ids, :organization_ids, :document_attachments, :document_conversation_id
+                  :document_ids, :organization_ids, :document_attachments, :document_conversation_id, :sender_organization_id
                   
   attr_accessor :organization_ids
                   
