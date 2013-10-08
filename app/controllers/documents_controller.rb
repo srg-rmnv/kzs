@@ -12,9 +12,8 @@ class DocumentsController < ApplicationController
     organization = current_user.organization_id
     
     #default scope
-    
     if params[:status_sort] == true
-      sort_type = "opened DESC, sent DESC, approved DESC, prepared DESC"
+      sort_type = "opened DESC", "sent DESC", "approved DESC", "prepared DESC"
     else
       sort_type = sort_column + " " + sort_direction
     end
@@ -93,11 +92,6 @@ class DocumentsController < ApplicationController
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @document }
-    end
   end
 
   def edit
@@ -106,6 +100,12 @@ class DocumentsController < ApplicationController
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.where('id != ?', @document.id)
+    
+    if @document.user_id != current_user.id
+      redirect_to :back, :alert => t('access_denied')
+    end
+    
+      
   end
 
   def create
@@ -263,7 +263,13 @@ class DocumentsController < ApplicationController
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all
-    render :new
+    
+    if current_user.organization_id != @original_document.sender_organization_id
+      render :new
+    else
+      redirect_to :back, :alert => t('only_mails_from_other_organizations_could_be_answered')
+    end
+      
   end
   
   def to_drafts
@@ -296,6 +302,11 @@ class DocumentsController < ApplicationController
   
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
+  
+  private
+  
+  def check_edit_permission
   end
   
   
