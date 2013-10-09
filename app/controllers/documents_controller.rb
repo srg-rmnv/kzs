@@ -264,7 +264,7 @@ class DocumentsController < ApplicationController
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all
     
-    if current_user.organization_id != @original_document.sender_organization_id
+    if current_user.organization_id != @original_document.sender_organization_id && @original_document.opened?
       render :new
     else
       redirect_to :back, :alert => t('only_mails_from_other_organizations_could_be_answered')
