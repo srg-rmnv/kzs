@@ -103,6 +103,8 @@ class DocumentsController < ApplicationController
     
     if @document.user_id != current_user.id && @document.approver_id != current_user.id
       redirect_to :back, :alert => t('access_denied')
+    elsif @document.approved
+      redirect_to :back, :alert => t('approved_document_couldnt_be_edited')
     end
     
       

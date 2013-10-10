@@ -40,6 +40,7 @@ ru:
   permit_rejected: "Пропуск отклонен"
   documents_updated: "Документы изменены"
   only_mails_from_other_organizations_could_be_answered: "Отвечать можно только на письма из сторонних организаций"
+  approved_document_couldnt_be_edited: "Подписанные документы нельзя редактировать"
   activerecord:
     models: 
       permission:
