@@ -50,7 +50,9 @@
 			<%= user(current_user.id).first_name_with_last_name %>
 			<% end %>
 			</span>
+			<% if current_user.id != @document.user_id %>
 			<br><span style="color:red;">Внимание, при сохранении внесенных изменений Вы станете составителем данного документа</span>
+			<% end %>
 			</div>
 
 			
