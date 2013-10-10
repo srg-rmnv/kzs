@@ -40,9 +40,9 @@
 		<% end %>
 		
 		<br><br>
-		<% unless @conversation.nil? %>
+		<% unless @conversation.nil? || @conversation_documents.count < 1 %>
 		<p>История переписки</p>
-		<%= render 'table', :@documents => @conversation.documents %>
+		<%= render 'table', :@documents => @conversation_documents %>
 		<% end %>
 	
 		<% if @document.document_type == 'writ' %>

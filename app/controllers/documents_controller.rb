@@ -64,6 +64,7 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     if DocumentConversation.exists?(@document.document_conversation_id)
       @conversation = DocumentConversation.find(@document.document_conversation_id)
+      @conversation_documents = @conversation.documents.where('id != ?', @document.id)
     end
     
     if current_user.permissions.exists?('1') && @document.organization_id == current_user.organization_id && @document.opened != true
