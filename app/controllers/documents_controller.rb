@@ -101,7 +101,7 @@ class DocumentsController < ApplicationController
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.where('id != ?', @document.id)
     
-    if @document.user_id != current_user.id
+    if @document.user_id != current_user.id && @document.approver_id != current_user.id
       redirect_to :back, :alert => t('access_denied')
     end
     

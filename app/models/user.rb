@@ -60,8 +60,8 @@ class User < ActiveRecord::Base
         superuser.where(:organization_id => organization_id)
   end
   
-  def has_permission?(role)
-    permissions.exists?(role)
+  def has_permission?(permission_id)
+    permissions.exists?(permission_id)
   end
 
   
