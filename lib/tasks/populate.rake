@@ -31,7 +31,7 @@ namespace :users do
     
     
     
-    User.create!(:username => 'babrovka', :first_name => 'babrovka', :phone => '7777777', :position => 'babrovka', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :organization_id => '3', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => '111', :password_confirmation => '111')
+    User.create!(:last_name => 'demo', :username => 'demon', :first_name => 'demon', :middle_name => 'demo', :phone => '7777777', :position => 'babrovka', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :organization_id => '3', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => '111', :password_confirmation => '111')
     
     puts "Users create!"
     

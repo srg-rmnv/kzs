@@ -1,6 +1,6 @@
-<div class="span2" style="width: 120px">
+<div class="left_menu">
 	
-	<ul class="nav doc-left">
+	<ul class="doc-left">
 	  <li class="nav-header">Документы</li>
 	  <li><%= link_to documents_path, :class => ('active' if params[:type] == 'inbox' || controller?("documents") && action?("index") && params[:type] == nil ) do %>
 		  Все <% unless indox(current_user) < 1  %> (<%= indox(current_user) %>) <% end %>
