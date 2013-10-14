@@ -237,6 +237,7 @@ DEPENDENCIES
   chosen-rails
   ckeditor
   coffee-rails (~> 3.2.1)
+  compass-rails
   devise
   execjs
   factory_girl_rails

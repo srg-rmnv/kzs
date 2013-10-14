@@ -22,6 +22,7 @@ end
 
 namespace :users do
   task :create => :environment do
+<<<<<<< HEAD
     User.destroy_all
     User.populate 15 do |user|
       user.username = Faker::Internet.user_name
@@ -41,6 +42,13 @@ namespace :users do
     end
     User.create!(:username => 'tester', :first_name => 'tester', :last_name => 'tester', :middle_name => 'tester', :phone => '7777777', :position => 'tester', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :organization_id => '3', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => 'tester', :password_confirmation => 'tester')
     User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'avatars', '*')).sample); user.save! }
+=======
+    
+    
+    
+    User.create!(:last_name => 'demo', :username => 'demon', :first_name => 'demon', :middle_name => 'demo', :phone => '7777777', :position => 'babrovka', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :organization_id => '3', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => '111', :password_confirmation => '111')
+    
+>>>>>>> c5eb8369473d0ebcfa92de2f58694f34c16383d9
     puts "Users create!"
   end
 end

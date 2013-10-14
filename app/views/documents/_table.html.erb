@@ -1,4 +1,4 @@
-<table class="table table-striped" style="font-size: 12px; width: 900px;">
+<table class="table" style="font-size: 12px; width: 900px;">
   	 <tr>
 		<% unless action?('show') %>
 	    <th><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %></th>
@@ -6,11 +6,11 @@
 	    <th><%= sortable "id", "№" %></th>
 	    <th><%= sortable "sender_organization_id", "Отправитель" %></th>
 		<th><%= sortable "organization_id", "Получатель" %></th> 
-		<th><%= sortable_status %></th>
-		<th></th>
 	    <th><%= sortable "document_type", "Тип" %></th>
 	    <th><%= sortable "title", "Тема письма" %></th>
 	    <th style="width: 110px"><%= sortable "created_at", "Дата/Время" %></th>
+	    <th style="width: 30px"></th>
+	    <th><%= sortable_status %></th>
 	  </tr>
 
 	<% @documents.each do |document| %>
@@ -21,21 +21,43 @@
 		<td><%= document.id %></td>
 	    <td><%= organization(document.sender_organization_id) %></td>
 		<td><%= organization(document.organization_id) %></td>
-		<td><%= document_status(document) %></td>
-		<td>
+	    <td>
+		  <% if document.document_type == 'mail' %>
+		    Письмо
+		  <% elsif document.document_type == 'writ' %>
+			Распоряжение
+		  <% end %>
+		</td>
+	    <td><%= document.title %></td>
+	    <td><%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %></td>
+	    		<td>
 			<% unless document.document_attachments.blank? %>
 			<%= image_tag('attachement_ico.png') %>
 			<% end %>
 		</td>
-	    <td>
-		  <% if document.document_type == 'mail' %>
-		    <span class="label label-info">Письмо</span>
-		  <% elsif document.document_type == 'writ' %>
-			<span class="label">Распоряжение</span>
-		  <% end %>
-		</td>
-	    <td><%= link_to document.title, document %></td>
-	    <td><%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %></td>
+	    <td><%= document_status(document) %></td>
+	  </tr>
+	  <tr class="inform">
+	  <td colspan="9">
+	  	<%= link_to document.title, document %>
+	  	<%= organization(document.sender_organization_id) %> -> <%= organization(document.organization_id) %>
+	  	<%= link_to doc_user(document.user_id), user_path(document.user_id) %>
+	  	<% unless document.document_attachments.blank? %>
+		<p>Прикрепленные файлы</p>
+		<% document.document_attachments.each do |a| %>
+		<%= link_to a.attachment_file_name, a.attachment.url(:original, false) %>
+		<% end %>
+		<% end %>
+		
+		<% unless document.documents.blank? %>
+		<p>Прикрепленные документы</p>
+		<ol>
+		<% document.documents.each do |d| %>
+		<li><%= d.created_at.strftime('%d %m %Y') %> <%= link_to d.title, d %></li>
+		<% end %>
+		</ul>
+		<% end %>
+	  </td>
 	  </tr>
 	<% end %>
 </table>

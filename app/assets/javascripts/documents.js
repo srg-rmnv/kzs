@@ -26,7 +26,18 @@ $(document).ready(function(){
 		    type: "GET",
 		    data: 'user=' + $('#document_executor_id option:selected').val(),
 		  })		
-	});
+});
+
+	  $(".inform").hide();
+	  $(".inform td").css({"border-top":"none"});  
+
+
+	  $("tr").click(function() {
+	  	$(".inform").not(this).fadeOut();
+   		$(this).next(".inform").fadeToggle("slow");
+
+	  });
+
 	
 	
 	$('#document_organization_ids').chosen();

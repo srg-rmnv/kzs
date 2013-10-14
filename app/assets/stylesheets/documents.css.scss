@@ -103,3 +103,17 @@
   background-image: url('down_arrow.gif');
 }
 
+.left_menu {
+	position: fixed;
+	display: block;
+	left: 0;
+	top: 0;
+	width: 70px;
+	overflow: hidden;
+	height: 100%;
+	background-color: #f6f6f6;
+}
+.span8 {
+	margin-left: 30px;
+}
+
