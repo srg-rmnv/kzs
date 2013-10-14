@@ -1,18 +1,11 @@
 <div class="left_menu">
 	
-	<ul class="doc-left">
-	  <li class="nav-header">Документы</li>
-	  <li><%= link_to documents_path, :class => ('active' if params[:type] == 'inbox' || controller?("documents") && action?("index") && params[:type] == nil ) do %>
-		  Все <% unless indox(current_user) < 1  %> (<%= indox(current_user) %>) <% end %>
-		  <% end %>
-	  </li>
-	  <li><%= link_to "Письма", documents_path(:type => "mails"), :class => ('active' if params[:type] == "mails") %></li>
-	  <li><%= link_to "Распоряжения", documents_path(:type => "writs"), :class => ('active' if params[:type] == "writs") %></li>
-	  <li><%= link_to statements_path, :class => ('active' if controller?('statements') && action?("index")) do %>
-		   Акты
-		  <% end %>
-	  </li>
-	  <li class="nav-header">Ярлыки</li>
-	  <li><%= link_to "Черновики", drafts_documents_path, :class => ('active' if action?("drafts")) %></li>	  
-	</ul>
+	<div class="doc-left">
+		<a href="#" class="main"></a>
+	  <a href="#" class="doc active"><span class="badge badge-important">7</span></a>
+	  <a href="#" class="az"></a>
+	  <a href="#" class="chat"><span class="badge badge-warning big">88</span></a>
+	  <a href="#" class="security"></a>
+	  <a href="#" class="objects"></a>
+	</div>
 </div>

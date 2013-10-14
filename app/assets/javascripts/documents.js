@@ -33,9 +33,12 @@ $(document).ready(function(){
 
 
 	  $("tr").click(function() {
-	  	$(".inform").not(this).fadeOut();
-   		$(this).next(".inform").fadeToggle("slow");
-
+			if ($(".inform").not(this).is(":visible")){
+				$(".inform").not(this).hide();
+			}
+			else{
+				$(this).next(".inform").show();
+			}
 	  });
 
 	

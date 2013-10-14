@@ -2,16 +2,137 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.doc-left {
-	margin-top: 50px;
-	font-family: Helvetica;
-	font-size: 13px;
-	
-	li.nav-header {
-		padding: 0px;
-	}
-	
+* {
+	outline: 0;
+  outline: none;
 }
+.doc-left {
+	position: fixed;
+	display: block;
+	left: 0;
+	top: 0;
+	width: 70px;
+	overflow: hidden;
+	height: 100%;
+	background-color: #f6f6f6;
+	border: 1px solid #fff;
+	z-index: 999999;
+	font-size: 15px;
+	list-style: none;
+	a {
+		padding: 0px;
+		margin:10px auto;
+		width:55px;
+		height:46px;
+		display: block;
+		position: relative;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		&:first-child{
+			-webkit-border-radius: 0;
+			-moz-border-radius: 0;
+			border-radius: 0;
+		}
+	}
+	.badge-warning,
+	.badge-important {
+  border-radius: 50%;
+  background-color: #e68c5c;
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 19px;
+  height: 19px;
+  padding: 0;
+  color: #fff;
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 19px;
+  font-size: 12px;
+  letter-spacing: -1px;
+  z-index: 18;
+  &.big {
+  	border-radius: 25%;
+  }
+}
+	.badge-important {
+		background-color: #e63d4d;
+	}
+
+	.main {
+	margin: 0;
+	width: 70px;
+	height: 70px;
+	z-index: 30;
+	background: url('main-menu/main-2.png') no-repeat center;
+	&:hover {
+		background: #1ba0e1 url('main-menu/main.png') no-repeat center; 
+		}
+	}
+	.chat {
+	background: #fff  url('left-icon/chat-1.png') no-repeat center;
+	&:hover {
+		background: #76d4ce url('left-icon/chat-2.png') no-repeat center;
+		}
+	&.active {
+		background: #fff url('left-icon/chat-3.png') no-repeat center;
+	}
+	}
+	.doc {
+	background: #fff url('left-icon/doc-1.png') no-repeat center;
+	&:hover {
+		background: #76d4ce url('left-icon/doc-2.png') no-repeat center;
+		}
+	&.active {
+		background: #fff url('left-icon/doc-3.png') no-repeat center;
+	}
+	}
+	.az {
+	background: #fff url('left-icon/az-1.png') no-repeat center;
+	&:hover {
+		background: #76d4ce url('left-icon/az-2.png') no-repeat center;
+		}
+	&.active {
+		background: #fff url('left-icon/az-3.png') no-repeat center;
+	}
+	}
+	.security {
+	background: #fff url('left-icon/security-1.png') no-repeat center;
+	&:hover {
+		background: #76d4ce url('left-icon/security-2.png') no-repeat center;
+		}
+	&.active {
+		background: #fff url('left-icon/security-3.png') no-repeat center;
+	}
+	}	
+	.objects {
+	background: #fff url('left-icon/objects-1.png') no-repeat center;
+	&:hover {
+		background: #76d4ce url('left-icon/objects-2.png') no-repeat center;
+		}
+	&.active {
+		background: #fff url('left-icon/objects-3.png') no-repeat center;
+	}
+	}
+}
+
+	.active:after{
+		content:"";
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 150%;
+		right:-10px;
+		top:-11px;
+		background: url('active.png') no-repeat center right;
+		
+	}
+
+
+
+
 
 .new-wrap {
 	width: 100%;
@@ -104,16 +225,18 @@
 }
 
 .left_menu {
-	position: fixed;
+	position: absolute;
 	display: block;
 	left: 0;
 	top: 0;
 	width: 70px;
-	overflow: hidden;
 	height: 100%;
 	background-color: #f6f6f6;
+	border: 1px solid #fff;
+	z-index: 1;
 }
 .span8 {
 	margin-left: 30px;
 }
+
 
