@@ -27,18 +27,18 @@
 
 <% if action?('drafts') %>
 <div class="btn-group">				
-  <%= submit_tag "подготовить", :class => "btn disabled", :name => "prepare" %>
+  <%= submit_tag "подготовить", :class => "btn disabled", :name => "prepare", data: { confirm: "Вы уверены?" } %>
 </div>
 <% end %>
 
 <% if can? :approve, Document %>
 <div class="btn-group">				
-  <%= submit_tag "подписать", :class => "btn disabled", :name => "approve", :id => 'approve_link' %>
+  <%= submit_tag "подписать", :class => "btn disabled", :name => "approve", :id => 'approve_link', data: { confirm: "Вы уверены?" } %>
 </div>
 <% end %>
 
 <div class="btn-group">				
-  <%= submit_tag "отправить", :class => "btn disabled", :name => "send", :id => 'send_link' %>
+  <%= submit_tag "отправить", :class => "btn disabled", :name => "send", :id => 'send_link', data: { confirm: "Вы уверены?" } %>
 </div>
 
 <div class="btn-group">	

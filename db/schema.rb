@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131002131414) do
+ActiveRecord::Schema.define(:version => 20131014122252) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -135,6 +135,12 @@ ActiveRecord::Schema.define(:version => 20131002131414) do
     t.datetime "date"
     t.integer  "version",                  :default => 1
     t.integer  "document_conversation_id"
+    t.datetime "approved_date"
+    t.datetime "sent_date"
+    t.datetime "opened_date"
+    t.datetime "deteled_date"
+    t.datetime "prepared_date"
+    t.datetime "executed_date"
   end
 
   create_table "groups", :force => true do |t|
@@ -213,6 +219,12 @@ ActiveRecord::Schema.define(:version => 20131002131414) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "rights", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "statement_approvers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "statement_id"
@@ -255,6 +267,13 @@ ActiveRecord::Schema.define(:version => 20131002131414) do
     t.integer  "permission_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "user_rights", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "right_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

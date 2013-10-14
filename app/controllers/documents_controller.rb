@@ -32,14 +32,6 @@ class DocumentsController < ApplicationController
     else
       @documents = documents
     end  
-      
-    # elsif params[:type] == "prepared"
-    #   @documents = documents.prepared.not_sent.where(:sender_organization_id => organization).all
-    # elsif params[:type] == "approved"
-    #  @documents = documents.approved.where(:sender_organization_id => organization).all
-    # elsif params[:type] == "archived"
-    #  @documents = Document.order("created_at DESC").not_deleted.archived.where(:user_id => current_user.id).all
-    
   end
   
   def drafts    
@@ -51,7 +43,14 @@ class DocumentsController < ApplicationController
     if params[:prepare]
       Document.update_all({prepared: true, draft: false}, {id: documents_ids})
     elsif params[:approve]
-      Document.update_all({approved: true, draft: false}, {id: documents_ids})
+      Document.where(:id => documents_ids).each do |d|
+        d.draft = false
+        d.approved = true
+        d.approved_date = Time.now
+        d.date = Time.now
+        d.sn = "D" + d.id.to_s
+        d.save!
+      end
     elsif params[:send]
       Document.update_all({sent: true}, {id: documents_ids})
     end
@@ -159,32 +158,25 @@ class DocumentsController < ApplicationController
     @document.prepared = true
     @document.draft = false
     @document.save
-
-    respond_to do |format|
-      format.html { redirect_to documents_url, notice: t('document_prepared') }
-    end
+    redirect_to documents_url, notice: t('document_prepared')
   end
   
   def approve
     @document = Document.find(params[:id])
     @document.draft = false
     @document.approved = true
+    @document.approved_date = Time.now
+    @document.date = Time.now
+    @document.sn = "D" + @document.id.to_s
     @document.save
-
-    respond_to do |format|
-      format.html { redirect_to document_path(@document), notice: t('document_approved') }
-    end
+    redirect_to documents_path, notice: t('document_approved')
   end
   
   def send_document
     @document = Document.find(params[:id])
     @document.sent = true
     @document.save
-  
-    respond_to do |format|
-      format.html { redirect_to documents_url, notice: t('document_successfully_sent') }
-      format.json { head :no_content }
-    end
+    redirect_to documents_url, notice: t('document_successfully_sent')
   end
   
   def callback
@@ -192,11 +184,7 @@ class DocumentsController < ApplicationController
     @document.sent = false
     @document.callback = true
     @document.save
-
-    respond_to do |format|
-      format.html { redirect_to documents_url, notice: t('document_called_back') }
-      format.json { head :no_content }
-    end
+    redirect_to documents_url, notice: t('document_called_back')
   end
   
   def execute
@@ -215,11 +203,7 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     @document.archived = true
     @document.save
-
-    respond_to do |format|
-      format.html { redirect_to :back, notice: t('document_archived') }
-      format.json { head :no_content }
-    end
+    redirect_to :back, notice: t('document_archived')
   end
   
   def delete
@@ -230,11 +214,8 @@ class DocumentsController < ApplicationController
       @document.deleted = true
       @document.save
     end
-
-    respond_to do |format|
-      format.html { redirect_to documents_path, notice: t('document_deleted') }
-      format.json { head :no_content }
-    end
+    
+    redirect_to documents_path, notice: t('document_deleted')
   end
   
   def copy
@@ -281,11 +262,7 @@ class DocumentsController < ApplicationController
     @document.draft = true
     @document.user_id = current_user.id
     @document.save
-
-    respond_to do |format|
-      format.html { redirect_to documents_url, notice: t('document_prepared') }
-      format.json { head :no_content }
-    end
+    redirect_to documents_url, notice: t('document_prepared')
   end
   
   # misc
@@ -306,8 +283,6 @@ class DocumentsController < ApplicationController
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
-  
-  private
   
   def check_edit_permission
   end
