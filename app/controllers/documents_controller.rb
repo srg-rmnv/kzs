@@ -52,7 +52,11 @@ class DocumentsController < ApplicationController
         d.save!
       end
     elsif params[:send]
-      Document.update_all({sent: true}, {id: documents_ids})
+      if @document.approved == true && @docuemnt.sent == false && current_user.id == @document.user_id || @document.approver_id
+        Document.update_all({sent: true, sent_date: Time.now}, {id: documents_ids})
+      else
+        redirect_to documents_path, notice: t('permission_denied')
+      end
     end
     redirect_to documents_path, notice: t('documents_updated')
   end
@@ -163,13 +167,18 @@ class DocumentsController < ApplicationController
   
   def approve
     @document = Document.find(params[:id])
-    @document.draft = false
-    @document.approved = true
-    @document.approved_date = Time.now
-    @document.date = Time.now
-    @document.sn = "D" + @document.id.to_s
-    @document.save
-    redirect_to documents_path, notice: t('document_approved')
+    
+    if current_user.id == @document.approver_id    
+      @document.draft = false
+      @document.approved = true
+      @document.approved_date = Time.now
+      @document.date = Time.now
+      @document.sn = "D" + @document.id.to_s
+      @document.save
+      redirect_to documents_path, notice: t('document_approved')
+    else
+      redirect_to :back, notice: t('permission_denied')
+    end
   end
   
   def send_document
