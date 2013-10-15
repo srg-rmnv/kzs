@@ -2,10 +2,12 @@
 	
 	<div class="doc-left">
 		<a href="#" class="main"></a>
-	  <a href="#" class="doc active"><span class="badge badge-important">7</span></a>
+		<%= link_to documents_path, :class => (controller?("documents") ? 'doc active' : 'doc') do %>
+	    <span class="badge badge-important">7</span>
+	  <% end %>
 	  <a href="#" class="az"></a>
 	  <a href="#" class="chat"><span class="badge badge-warning big">88</span></a>
 	  <a href="#" class="security"></a>
-	  <a href="#" class="objects"></a>
+	  <%= link_to "", destroy_user_session_path, method: :delete, :class => 'objects' %>
 	</div>
 </div>
