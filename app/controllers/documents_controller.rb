@@ -78,9 +78,31 @@ class DocumentsController < ApplicationController
         OpenNotice.create!(:user_id => user.id, :document_id => @document.id)
       end
     end
+    
+    @sender_organization = Organization.find(@document.sender_organization_id).title
+    @organization = Organization.find(@document.organization_id).title
+    @sender = User.find(@document.user_id).first_name_with_last_name
+    @executor = User.find(@document.executor_id).first_name_with_last_name
 
     respond_to do |format|
       format.html # show.html.erb
+      format.json {render :json => {:sender_organization => @sender_organization, 
+                                    :organization => @organization,
+                                    :title => @document.title,
+                                    :sn => @document.sn,
+                                    :type => t(@document.document_type),
+                                    :executor => @executor,
+                                    :sender => @sender,
+                                    :prepared => @document.prepared,
+                                    :prepared_date => @document.prepared_date,
+                                    :approved => @document.approved,
+                                    :approved_date => @document.approved_date,
+                                    :sent => @document.sent,
+                                    :sent_date => @document.sent_date,
+                                    :opened => @document.opened,
+                                    :opened_date => @document.opened_date,
+                                    :attachments => @document.document_attachments,
+                                    :conversation => @conversation }}
       format.pdf do
         pdf = DocumentPdf.new(@document, view_context)
         send_data pdf.render, filename: "document_#{@document.id}.pdf",

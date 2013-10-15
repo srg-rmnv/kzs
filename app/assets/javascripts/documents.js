@@ -28,6 +28,7 @@ $(document).ready(function(){
 		  })		
 });
 
+/*
 	  $(".inform").hide();
 	  $(".inform td").css({"border-top":"none"});  
 
@@ -40,6 +41,21 @@ $(document).ready(function(){
 				$(this).next(".inform").show();
 			}
 	  });
+*/
+
+
+
+	  $("tr").click(function() {
+		// $(this).hide();
+		document_id = $(this).find('.document_id').html()
+		$.ajax({
+		    url: "/documents/" + document_id,
+		    dataType: 'json',
+		  })	
+	  });
+
+
+
 
 	
 	
