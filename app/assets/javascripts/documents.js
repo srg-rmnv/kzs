@@ -69,6 +69,8 @@ $(document).ready(function(){
 	})
   });
 
+  
+
 
 
 	
@@ -116,5 +118,10 @@ function myFunction(elem) {
   }
 };
 
-
+$(function() {
+  $("#text-search input").keyup(function() {
+    $.get($("#text-search").attr("action"), $("#text-search").serialize(), null, "script");
+    return false;
+  });
+});
 

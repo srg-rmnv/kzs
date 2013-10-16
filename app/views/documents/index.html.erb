@@ -3,7 +3,7 @@
   <%= render 'left' %>
   <div class="span12">
   <h1>Все документы<span class="caret"></span></h1>
-	<%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
+	<%= form_tag documents_path, method: :get, :id => "text-search" do %>
 	  <p>
 	    <%= text_field_tag :query, params[:query] %>
 			<%= hidden_field_tag :direction, params[:direction] %>
