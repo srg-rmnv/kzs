@@ -45,15 +45,29 @@ $(document).ready(function(){
 
 
 
+/*
 	  $("tr").click(function() {
 		// $(this).hide();
 		document_id = $(this).find('.document_id').html()
 		$.ajax({
 		    url: "/documents/" + document_id,
 		    dataType: 'json',
-		  })	
-	  });
+		    success : function(text)
+            {
+             response = text;
+            }
+		  }).done(function( approved ) {
+			    alert(response);
+			  });	
+	  });*/
 
+
+  $("tr").click(function() {
+	document_id = $(this).find('.document_id').html()
+	$.getJSON( "/documents/" + document_id + ".json", function(data) {
+	  alert(data.organization);
+	})
+  });
 
 
 
