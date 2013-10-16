@@ -10,18 +10,23 @@
 			</div>
 
 			<div class="btn-group">	
-				<%= link_to "создать по образу и подобию", copy_document_path(@document), :class => "btn" %>
+				<%= link_to image_tag('create_copy.png'), copy_document_path(@document), :class => "btn btn-success", :title => "Создать по образу и подобию" %>
 			</div>
 
 			<div class="btn-group">	
-				<%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn" %>
+				<%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn btn-success" %>
 			</div>
 		</div>
 
 		<div class="new-wrap">
 			<iframe style="width: 800px; height: 1030px;" src="/documents/<%= @document.id %>.pdf"/></iframe>
 			<%= render 'actions_show' %>
-	    </div>	
+	    </div>
+	
+		<% unless @conversation.nil? %>
+		<p>История переписки</p>
+		<%= render 'table', :@documents => @conversation.documents %>
+		<% end %>
 	
 		<% if @document.document_type == 'writ' %>
 		<div class="new-wrap">

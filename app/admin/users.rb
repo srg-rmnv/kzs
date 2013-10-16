@@ -21,7 +21,7 @@ ActiveAdmin.register User do
        f.input :first_name
        f.input :last_name
        f.input :middle_name
-       f.input :phone
+       f.input :phone, :as => :string
        f.input :position
        f.input :division
        f.input :dob

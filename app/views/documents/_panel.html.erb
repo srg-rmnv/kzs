@@ -6,23 +6,49 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu">
-    <li><%= link_to "Письмо", new_document_path(:type => 'mail') %></li>	
-	<li><%= link_to "Распоряжение", new_document_path(:type => 'writ') %></li>	
-	<li><%= link_to "Акт", new_statement_path %></li>	
+     <li><%= link_to "Письмо", new_document_path(:type => 'mail') %></li>	
+	   <li><%= link_to "Распоряжение", new_document_path(:type => 'writ') %></li>	
+	   <li><%= link_to "Акт", new_statement_path %></li>	
   </ul>
 </div>
+
 
 <div class="btn-group">				
   <a class="btn btn-success" href="javascript:location.reload(true);"><%= image_tag('refresh.png') %></a>
 </div>
 
-<div class="btn-group">				
-  <a class="btn btn-success" href="javascript:location.reload(true);"><%= image_tag('create_copy.png') %></a>
+<div class="btn-group">	
+	<%= link_to image_tag('create_copy.png'), "#", :class => "btn disabled", :title => "Создать по образу и подобию", :id => 'create_copy_link' %>
 </div>
 
-<div class="btn-group">				
-  <%= submit_tag "подготовить", :class => "btn btn-success", :name => "prepare" %>
+<div class="btn-group">	
+	<%= link_to "редактировать", "#", :class => "btn disabled", :id => 'edit_link' %>
 </div>
+
+<% if action?('drafts') %>
+<div class="btn-group">				
+  <%= submit_tag "подготовить", :class => "btn disabled", :name => "prepare" %>
+</div>
+<% end %>
+
+<% if can? :approve, Document %>
+<div class="btn-group">				
+  <%= submit_tag "подписать", :class => "btn disabled", :name => "approve", :id => 'approve_link' %>
+</div>
+<% end %>
+
+<div class="btn-group">				
+  <%= submit_tag "отправить", :class => "btn disabled", :name => "send", :id => 'send_link' %>
+</div>
+
+<div class="btn-group">	
+	<%= link_to "ответить", "#", :class => "btn disabled", :id => 'reply_link' %>
+</div>
+
+
+
+
+
 
 
 

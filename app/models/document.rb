@@ -3,11 +3,12 @@ class Document < ActiveRecord::Base
                   :title, :user_id, :approver_id, :opened, :for_approve, 
                   :deleted, :archived, :callback, :prepared, :document_type,
                   :attachment, :executor_id, :confidential, :document_attachments_attributes,
-                  :document_ids, :organization_ids, :document_attachments
+                  :document_ids, :organization_ids, :document_attachments, :document_conversation_id
                   
   attr_accessor :organization_ids
                   
   belongs_to :project
+  belongs_to :document_conversation
   has_many :statements
   has_many :document_attachments
   accepts_nested_attributes_for :document_attachments, allow_destroy: true

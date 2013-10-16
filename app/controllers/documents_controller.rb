@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  
+  helper_method :sort_column, :sort_direction
   # collection
   
   def index
@@ -12,7 +12,13 @@ class DocumentsController < ApplicationController
     organization = current_user.organization_id
     
     #default scope
-    documents = Document.not_deleted.not_archived.order("created_at DESC").where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
+    if params[:status_sort] == true
+      sort_type = "opened DESC", "sent DESC", "approved DESC", "prepared DESC"
+    else
+      sort_type = sort_column + " " + sort_direction
+    end
+    
+    documents = Document.not_deleted.not_archived.order(sort_type).where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
     
     # mails
     if params[:type] == "mails"
@@ -44,6 +50,10 @@ class DocumentsController < ApplicationController
     documents_ids = params[:document_ids]
     if params[:prepare]
       Document.update_all({prepared: true, draft: false}, {id: documents_ids})
+    elsif params[:approve]
+      Document.update_all({approved: true, draft: false}, {id: documents_ids})
+    elsif params[:send]
+      Document.update_all({sent: true}, {id: documents_ids})
     end
     redirect_to documents_path, notice: t('documents_updated')
   end
@@ -52,6 +62,9 @@ class DocumentsController < ApplicationController
   
   def show
     @document = Document.find(params[:id])
+    if DocumentConversation.exists?(@document.document_conversation_id)
+      @conversation = DocumentConversation.find(@document.document_conversation_id)
+    end
     
     if current_user.permissions.exists?('1') && @document.organization_id == current_user.organization_id && @document.opened != true
       @document.opened = true
@@ -75,15 +88,10 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
-    @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
+    @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @document }
-    end
   end
 
   def edit
@@ -92,6 +100,12 @@ class DocumentsController < ApplicationController
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.where('id != ?', @document.id)
+    
+    if @document.user_id != current_user.id
+      redirect_to :back, :alert => t('access_denied')
+    end
+    
+      
   end
 
   def create
@@ -237,6 +251,27 @@ class DocumentsController < ApplicationController
     render :new # render same view as "new", but with @prescription attributes already filled in
   end
   
+  def reply
+    @original_document = Document.find(params[:id])
+    @document_conversation_id = DocumentConversation.where(:id => @original_document.document_conversation_id).first_or_create!
+    @document_conversation_id = @document_conversation_id.id
+    @original_document.document_conversation_id = @document_conversation_id
+    @original_document.save!
+    @document = Document.new
+    @document_conversation_id
+    @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
+    @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @documents = Document.all
+    
+    if current_user.organization_id != @original_document.sender_organization_id
+      render :new
+    else
+      redirect_to :back, :alert => t('only_mails_from_other_organizations_could_be_answered')
+    end
+      
+  end
+  
   def to_drafts
     @document = Document.find(params[:id])
     @document.prepared = false
@@ -257,6 +292,21 @@ class DocumentsController < ApplicationController
       respond_to do |format|
          format.js {  }
       end
+  end
+  
+  private
+  
+  def sort_column
+    Document.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
+  
+  private
+  
+  def check_edit_permission
   end
   
   

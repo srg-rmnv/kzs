@@ -1,6 +1,6 @@
 <div class="row">
 	
-	<%= render 'left' %>
+	<!-- <%= render 'left' %> -->
 	
 	<div class="span8">
 		
@@ -12,6 +12,12 @@
 			<div class="btn-group">	
 				<a class="btn btn-success" href="javascript:if(window.print)window.print()" style="margin-left: 20px"><%= image_tag('print.png') %></a>
 			</div>
+			
+			<% unless action?('new') || action?('copy') || action?('reply') %>
+			<div class="btn-group">	
+				<%= link_to image_tag('preview.png'), document_path(@document, format: "pdf"), :class => "btn btn-success" %>
+			</div>
+			<% end %>
 		</div>
 		
 		<div class="new-wrap">
@@ -23,15 +29,17 @@
 					Новое письмо | 
 				  <% elsif params[:type == 'writ'] %>
 					Новое распоряжение | 
+				  <% else%>
+				    Новое письмо | 
 				  <% end %>
 				<% else %>
 				  №<%= @document.id %> | 
 				<% end %>
 				<%= Russian::strftime(Time.new, "%d %B %Y %H:%M") %></span>
-			<% if params[:type] == 'mail' || @document.document_type == 'mail' %>
-			  <span class="label label-info" style="float: right; margin-top: 7px">Письмо</span>
-			<% else %>
+			<% if params[:type] == 'writ' || @document.document_type == 'writ' %>
 			  <span class="label" style="float: right; margin-top: 7px">Распоряжение</span>
+			<% else %>
+			  <span class="label label-info" style="float: right; margin-top: 7px">Письмо</span>
 			<% end %>
 			</div>
 			
@@ -51,9 +59,13 @@
 				
 				<% if action?('new') %>
 				<%= f.hidden_field :document_type, :value => params[:type] %>
+				<% elsif action?('reply') %>
+				<%= f.hidden_field :document_type, :value => @original_document.document_type %>
 				<% elsif %>
 				<%= f.hidden_field :document_type, :value => @document.document_type %>
 				<% end %>
+				
+				<%= f.hidden_field :document_conversation_id, :value => @document_conversation_id %>
 			
 			<div class="new-title"><span style="margin-right: 20px;">Организация-получатель</span> <%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:400px', :'data-placeholder' => "Выберите организацию"}) %> <%= link_to "Отправить всем", "#", :id => :select_all_organizations %></div>
 			

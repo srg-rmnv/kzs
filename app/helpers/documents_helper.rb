@@ -71,9 +71,9 @@ module DocumentsHelper
     elsif document.for_confirmation?
       '<span class="label label-success">Проверка исполнения</span>'.html_safe    
     elsif document.opened?
-      '<span class="label label-success">Прочитан</span>'.html_safe
+      '<span class="label label-success">Получен</span>'.html_safe
     elsif document.sent?
-       '<span class="label label-info">Не прочитан</span>'.html_safe
+       '<span class="label label-info">Отправлен</span>'.html_safe
      elsif document.approved?
        '<span class="label label-warning">Подписан</span>'.html_safe    
      elsif document.prepared?

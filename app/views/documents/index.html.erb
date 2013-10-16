@@ -1,7 +1,11 @@
 <div class="row">
+	
   <%= render 'left' %>
-  <div class="span8">
+  <div class="span12">
+  <h1>Все документы<span class="caret"></span></h1>
+	<%= form_tag documents_batch_path, method: :put do %>
 	<%= render 'panel' %>
 	<%= render 'table'%>
+	<% end %>
   </div>
 </div>

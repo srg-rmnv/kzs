@@ -4,4 +4,5 @@ CKEDITOR.editorConfig = (config) ->
     { name: 'paragraph',   items: [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-' ] },
   ]
   config.toolbar = 'Pure'
+  config.removePlugins = 'elementspath';
   true

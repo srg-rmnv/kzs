@@ -8,12 +8,6 @@
 		<%= f.submit "в черновики", :class => "btn btn-primary", :name => "to_draft" %>
 	</div>
 	
-	<% unless @document.sent? || @document.prepared? || action?('new') || action?('copy')  %>
-	<div class="btn-group"   style="margin-left: 10px">	
-		<%= link_to 'Удалить', delete_document_path(@document), :class => "btn btn-danger" %>
-	</div>
-	<% end %>
-	
 	<div class="btn-group"   style="margin-left: 10px">	
 		<%= link_to 'Отмена', :back, :class => "btn btn-danger" %>
 	</div>

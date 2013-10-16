@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
-	$('#select_all_documents').on("click", function() {	
-		$(document).find(':checkbox').prop('checked', this.checked);
-	});
+
+	
+
 	
 	$('#select_all_documents').on("click", function() {	
 		checked = $("#document_confidential").is(':checked')
@@ -26,7 +26,21 @@ $(document).ready(function(){
 		    type: "GET",
 		    data: 'user=' + $('#document_executor_id option:selected').val(),
 		  })		
-	});
+});
+
+	  $(".inform").hide();
+	  $(".inform td").css({"border-top":"none"});  
+
+
+	  $("tr").click(function() {
+			if ($(".inform").not(this).is(":visible")){
+				$(".inform").not(this).hide();
+			}
+			else{
+				$(this).next(".inform").show();
+			}
+	  });
+
 	
 	
 	$('#document_organization_ids').chosen();
@@ -35,12 +49,40 @@ $(document).ready(function(){
 		$("#document_organization_ids").trigger("chosen:updated");
 	});
 	
+	$('#select_all_documents').on("click", function() {	
+		$(document).find(':checkbox').prop('checked', this.checked);
+		myFunction();
+	});
+	
+	$('.document_operation').on("change", function() {
+		elem = $(this)
+		myFunction(elem);
+	});
+	
+	
+	
 	
 });
+
+
 
 $(function() {
     $( "#datepicker" ).datepicker();
 });
+
+function myFunction(elem) {
+  	if ($('.document_operation:checked').length == 1) {
+	$( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link" ).removeClass('disabled').addClass('btn-success');
+	$("#edit_link").attr("href", "/documents/" + elem.val() + "/edit");
+	$("#create_copy_link").attr("href", "/documents/" + elem.val() + "/copy");
+	$("#reply_link").attr("href", "/documents/" + elem.val() + "/reply");
+  } else if ($('.document_operation:checked').length > 1)  {
+	$( "input[name$='prepare'], #approve_link, #send_link, #reply_link" ).removeClass('disabled').addClass('btn-success');
+	$( "#create_copy_link, #edit_link, #reply_link" ).removeClass('btn-success').addClass('disabled');
+  } else {
+    $( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link" ).removeClass('btn-success').addClass('disabled');
+  }
+};
 
 
 
