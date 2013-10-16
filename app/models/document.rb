@@ -46,7 +46,7 @@ class Document < ActiveRecord::Base
   
   def self.text_search(query)
     if query.present?
-      where("title ilike :q or text ilike :q", q: "%#{query}")
+      where("title @@ :q or text @@ :q", q: query)
     else
       scoped
     end
