@@ -3,9 +3,17 @@
   <%= render 'left' %>
   <div class="span12">
   <h1>Все документы<span class="caret"></span></h1>
+	<%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
+	  <p>
+	    <%= text_field_tag :query, params[:query] %>
+			<%= hidden_field_tag :direction, params[:direction] %>
+			<%= hidden_field_tag :sort, params[:sort] %>
+			<%= link_to "Искать", "#", :class => "btn", :id => "text-search_button" %>
+	  </p>
+	<% end %>
 	<%= form_tag documents_batch_path, method: :put do %>
 	<%= render 'panel' %>
-	<%= render 'table'%>
+	<div id="document_table"><%= render 'table'%></div>
 	<% end %>
   </div>
 </div>

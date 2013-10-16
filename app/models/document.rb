@@ -44,5 +44,13 @@ class Document < ActiveRecord::Base
   
   DOCUMENT_TYPES = ["mail", "writ"]
   
+  def self.text_search(query)
+    if query.present?
+      where("title ilike :q or text ilike :q", q: "%#{query}")
+    else
+      scoped
+    end
+  end
+  
 
 end

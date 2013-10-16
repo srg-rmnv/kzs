@@ -75,7 +75,9 @@ $(document).ready(function(){
 		myFunction(elem);
 	});
 	
-	
+	$('#text-search_button').on("click", function() {	
+		$('#text-search').submit();
+	});
 	
 	
 });

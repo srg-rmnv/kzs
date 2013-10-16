@@ -1,0 +1,1 @@
+$('#document_table').html("<%=j render :partial => 'table', :@documents => @documents %>");

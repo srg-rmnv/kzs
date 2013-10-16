@@ -19,7 +19,7 @@ class DocumentsController < ApplicationController
       sort_type = sort_column + " " + sort_direction
     end
     
-    documents = Document.not_deleted.not_archived.order(sort_type).where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
+    documents = Document.text_search(params[:query]).not_deleted.not_archived.order(sort_type).where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
     
     # mails
     if params[:type] == "mails"
@@ -33,6 +33,14 @@ class DocumentsController < ApplicationController
     else
       @documents = documents
     end  
+    
+    @documents = @documents.paginate(:per_page => 20, :page => params[:page])
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    
   end
   
   def drafts    
@@ -53,11 +61,7 @@ class DocumentsController < ApplicationController
         d.save!
       end
     elsif params[:send]
-      if @document.approved == true && @docuemnt.sent == false && current_user.id == @document.user_id || @document.approver_id
         Document.update_all({sent: true, sent_date: Time.now}, {id: documents_ids})
-      else
-        redirect_to documents_path, notice: t('permission_denied')
-      end
     end
     redirect_to documents_path, notice: t('documents_updated')
   end
