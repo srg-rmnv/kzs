@@ -27,9 +27,9 @@ module ApplicationHelper
    
    
    def sortable_status 
-     css_class = params[:status_sort] == true ? "current #{sort_direction}" : nil
-     direction = params[:status_sort] == true && direction == "asc" ? "desc" : "asc"
-     link_to "Статус", {:status_sort => 'true', :direction => direction}, {:class => css_class}
+     css_class = params[:status_sort] ? "current #{sort_direction}" : nil
+     direction = params[:status_sort] && params[:direction] == "desc" ? "asc" : "desc"
+     link_to "Статус", {:status_sort => true, :direction => direction}, {:class => css_class}
    end
    
   

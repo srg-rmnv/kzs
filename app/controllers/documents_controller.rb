@@ -3,7 +3,7 @@ class DocumentsController < ApplicationController
   # collection
   
   def index
-    #check if user can view confindetnial documents
+    # check if user can view confindetnial documents
     if current_user.has_permission?(5)
       documents = Document.all
     else
@@ -12,8 +12,9 @@ class DocumentsController < ApplicationController
     organization = current_user.organization_id
     
     #default scope
-    if params[:status_sort] == true
-      sort_type = "opened DESC", "sent DESC", "approved DESC", "prepared DESC"
+    if params[:status_sort]
+      direction = params[:direction]
+      sort_type = "opened #{direction}", "sent #{direction}", "approved #{direction}", "prepared #{direction}"
     else
       sort_type = sort_column + " " + sort_direction
     end
