@@ -1,3 +1,26 @@
+	function jsonTr() {
+		var  current_row = $(this).closest('tr');
+		$.getJSON( "/documents/" + document_id + ".json", function(data) {
+			$("<tr class='inform'><td colspan='9'><ul class='expanded'><li><span class='exp_type'>Тип:</span>" + data.type + "</li><li><span class='exp_date'>Номер и дата:</span>" + data.sn + " / " + data.date + "</li><li><span class='exp_title'>Тема:</span>" + data.title + "</li><li class='exp_fromto'>"  + data.sender_organization + " &rarr; " + data.organization + "</li><li><span class='exp_exec'>Исполнитель:</span>" + data.executor + "</li><li><span class='exp_exec'>Отправитель:</span>" + data.sender + "</li><li><span class='exp_exec'>Отправитель:</span>" + data.attachments + "</li></ul></td></tr>").insertAfter(current_row);
+	})};
+
+	function appendTr() {
+	var  current_row = $(this).closest('tr');
+	document_id = $(this).find('.document_id').html();
+	if (!!$(current_row).next(".inform").length){
+			$(".inform").remove();
+			}
+	else if (!!$(".inform").not(current_row).length){
+		$(".inform").not(current_row).remove();
+	  	$(jsonTr);
+			}
+	else {
+			$(jsonTr);
+	}
+
+};
+
+
 $(document).ready(function(){
 	
 
@@ -28,51 +51,8 @@ $(document).ready(function(){
 		  })		
 });
 
-/*
-	  $(".inform").hide();
-	  $(".inform td").css({"border-top":"none"});  
 
-
-	  $("tr").click(function() {
-			if ($(".inform").not(this).is(":visible")){
-				$(".inform").not(this).hide();
-			}
-			else{
-				$(this).next(".inform").show();
-			}
-	  });
-*/
-
-
-
-/*
-	  $("tr").click(function() {
-		// $(this).hide();
-		document_id = $(this).find('.document_id').html()
-		$.ajax({
-		    url: "/documents/" + document_id,
-		    dataType: 'json',
-		    success : function(text)
-            {
-             response = text;
-            }
-		  }).done(function( approved ) {
-			    alert(response);
-			  });	
-	  });*/
-
-
-  $("tr").click(function() {
-	document_id = $(this).find('.document_id').html()
-	$.getJSON( "/documents/" + document_id + ".json", function(data) {
-	  alert(data.organization);
-	})
-  });
-
-  
-
-
-
+$("tr").click(appendTr);
 	
 	
 	$('#document_organization_ids').chosen();
