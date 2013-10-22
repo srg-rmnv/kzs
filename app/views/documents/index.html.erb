@@ -1,14 +1,9 @@
 <div class="row">
 	
   <%= render 'left' %>
-  <div class="span9">
+  <div class="span8">
   <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
-  	  <p class="doc_search">
-	    <%= text_field_tag :query, params[:query], :placeholder => "Поиск по документам" %>
-			<%= hidden_field_tag :direction, params[:direction] %>
-			<%= hidden_field_tag :sort, params[:sort] %>
-			<%= content_tag(:span, current_user.first_name_with_last_name, :class => "user_name") %>
-	  </p>
+  <%= render 'user' %>
   <h1 class="doc_header">Все документы<span class="caret"></span></h1>
 	
 

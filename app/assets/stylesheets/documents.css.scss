@@ -249,10 +249,14 @@ td span{
 }
 .doc_header{
 	width: 50%;
+	position: relative;
 }
 .doc_search{
-	position: relative;
+	position: absolute;
 	float: right;
+	right: 0;
+	top: 30px;
+	width: 50%;
 }
 .user_name{
 	margin-left: 40px;
@@ -295,7 +299,7 @@ td span{
 }
 .exp_fromto{
 	color:#666;
-	margin-top: -15px;
+	margin-top: -10px;
 	a{
 		color: #666;
 		text-decoration: underline;
@@ -312,6 +316,7 @@ td span{
 	position: absolute;
 	right: 8px;
 	top: 20px;
+	min-width: 80px;
 	}
 }
  .doc_sample{
@@ -329,4 +334,33 @@ td span{
 .attach p{
 	line-height: 20px;
 	margin-bottom: 1px;
+}
+.tab_right{
+	float: right;
+	text-align: right;
+}
+tr {
+	border-bottom: 1px solid #ccc;
+}
+td {
+	border-bottom: none;
+	min-height: 40px;
+}
+.lupe{
+	background: url(lupe.png) no-repeat right 10px center;
+}
+.control.checkbox{
+	margin-left: -20px;
+	margin-top: 3px;
+}
+.letter_input{
+  width: 778px;
+  height: 299px;
+  display: block;
+}
+.logout{
+	font-family: "FontAwesome";
+	min-width: 0;
+	font-size: 18px;
+	margin-bottom: 20px;
 }

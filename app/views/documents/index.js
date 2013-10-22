@@ -5,4 +5,7 @@ $(function() {
 		$('#document_table').html("<tr class='inform'><td colspan='9'>По запросу &laquo;"+ searchString +"&raquo; - ничего не найдено.</td></tr>");
 	}
 });
-$("tr").click(appendTr);
+$("tbody tr").click(appendTr);
+$("tbody td.not_this").click(function(e){
+    e.stopPropagation()
+})
