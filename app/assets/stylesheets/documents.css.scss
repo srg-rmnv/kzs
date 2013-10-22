@@ -6,6 +6,34 @@
 	outline: 0;
   outline: none;
 }
+.inform td{
+	border-top: none;
+}
+.badge-warning,
+	.badge-important {
+  border-radius: 50%;
+  background-color: #e68c5c;
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 19px;
+  height: 19px;
+  padding: 0;
+  color: #fff;
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 19px;
+  font-size: 12px;
+  letter-spacing: -1px;
+  z-index: 18;
+  &.big {
+  	border-radius: 25%;
+  }
+}
+	.badge-important {
+		background-color: #e63d4d;
+	}
 .doc-left {
 	position: fixed;
 	display: block;
@@ -35,31 +63,7 @@
 			border-radius: 0;
 		}
 	}
-	.badge-warning,
-	.badge-important {
-  border-radius: 50%;
-  background-color: #e68c5c;
-  position: absolute;
-  right: -5px;
-  top: -5px;
-  width: 19px;
-  height: 19px;
-  padding: 0;
-  color: #fff;
-  display: block;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 19px;
-  font-size: 12px;
-  letter-spacing: -1px;
-  z-index: 18;
-  &.big {
-  	border-radius: 25%;
-  }
-}
-	.badge-important {
-		background-color: #e63d4d;
-	}
+	
 
 	.main {
 	margin: 0;
@@ -238,5 +242,34 @@
 .span8 {
 	margin-left: 30px;
 }
-
-
+td span{
+	position: relative;
+}
+.doc_header{
+	width: 50%;
+}
+.doc_search{
+	position: relative;
+	float: right;
+}
+.user_name{
+	margin-left: 40px;
+	color: #ccc;
+	font-size: 13px;
+	line-height: 10px;
+}
+.expanded li{
+	list-style: none;
+	position: relative;
+	margin-left: 90px;
+	span{
+		color: #666;
+		font-size: 12px;	
+		display: block;
+		white-space:nowrap;
+		position: absolute;
+		top: 0px;
+		right:30px;
+		margin-right: 100%;
+	}
+}
