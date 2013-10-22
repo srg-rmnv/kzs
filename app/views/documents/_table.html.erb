@@ -1,4 +1,5 @@
 <table class="table" style="font-size: 12px; width: 900px;">
+  	<thead>
   	 <tr>
 		<% unless action?('show') %>
 	    <th><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %></th>
@@ -12,8 +13,9 @@
 	    <th style="width: 30px"></th>
 	    <th><%= sortable_status %></th>
 	  </tr>
-
+	  </thead>
 	<% @documents.each do |document| %>
+	<tbody>
 	  <tr>
 		<% unless action?('show') %>
 		<td><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %></td>
@@ -39,5 +41,6 @@
 	  </tr>
 		<%#= render 'full_element', :document => document %>
 	<% end %>
+	</tbody>
 </table>
 <%= will_paginate @elements, :remote => true %>

@@ -1685,7 +1685,7 @@ table {
   border-top: 0;
 }
 .table tbody + tbody {
-  border-top: 2px solid #dddddd;
+  border-top: 1px solid #dddddd;
 }
 .table .table {
   background-color: #ffffff;
