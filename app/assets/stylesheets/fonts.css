@@ -116,4 +116,7 @@
     font-style: normal;
 
 }
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('FontAwesome.otf') format('truetype');}
 

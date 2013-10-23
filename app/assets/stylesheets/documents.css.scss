@@ -6,8 +6,10 @@
 	outline: 0;
   outline: none;
 }
+
 .inform td{
-	border-top: none;
+	position: relative;
+	background-color: #f7fffd;
 }
 .badge-warning,
 	.badge-important {
@@ -239,18 +241,27 @@
 	border: 1px solid #fff;
 	z-index: 1;
 }
-.span8 {
-	margin-left: 30px;
-}
+
 td span{
 	position: relative;
 }
 .doc_header{
 	width: 50%;
+	position: relative;
+}
+.btn-toolbar{
+	margin-top:50px;
+}
+.span12{
+	position: relative;
+	width: 940px;
 }
 .doc_search{
-	position: relative;
-	float: right;
+float: right;
+position: absolute;
+right: 30px;
+top: 15px;
+display: inline-block;
 }
 .user_name{
 	margin-left: 40px;
@@ -272,4 +283,115 @@ td span{
 		right:30px;
 		margin-right: 100%;
 	}
+}
+.exp_type{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-family: 'open_sanssemibold';
+	letter-spacing: -1px;
+}
+.exp_date{
+	color: #666;
+	a {
+		color: #0e84cf;
+	}
+}
+.exp_title{
+	font-size: 26px;
+	line-height: 26px;
+	font-family: 'open_sanslight';
+	width: 430px;	
+}
+.exp_fromto{
+	color:#666;
+	margin-top: -10px;
+	a{
+		color: #666;
+		text-decoration: underline;
+	}
+}
+.inform td{
+	.btn {
+		position: relative;
+		bottom: 0;
+		float: right;
+		margin: 10px;
+	}
+ .label{
+	position: absolute;
+	right: 8px;
+	top: 20px;
+	min-width: 80px;
+	}
+}
+ .doc_sample{
+ 	position: absolute;
+ 	right: 173px;
+ 	top: 50px;
+ }
+ .inform td ul{
+ 	min-height: 350px;
+ }
+ .expanded li {
+	line-height: 20px;
+	margin-top: 15px;
+}
+.attach p{
+	line-height: 20px;
+	margin-bottom: 1px;
+}
+.tab_right{
+	float: right;
+	text-align: right;
+}
+tr {
+	border-bottom: 1px solid #ccc;
+}
+td {
+	border-bottom: none;
+	min-height: 40px;
+}
+.lupe{
+	background: url(lupe.png) no-repeat right 10px center;
+}
+.control.checkbox{
+	margin-left: -20px;
+	margin-top: 3px;
+}
+.letter_input{
+  width: 778px;
+  height: 299px;
+  display: block;
+}
+.logout{
+	font-family: "FontAwesome";
+	min-width: 0;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+.inform td .control.checkbox{
+	position: absolute;
+}
+.login {
+	margin: -14px 0 0 10px;
+	font-size: 16px;
+	font-family: 'open_sanslight';
+	padding-right: 10px;
+	padding-left: 10px;
+	&:hover{
+		background-color: #666666;
+		color: #fff;
+	}
+}
+.login_header{
+	margin-top: 50px;
+	margin-bottom: 70px;
+	color: #00bc80;
+}
+.logos{
+	position: absolute;
+	bottom: 30px;
+}
+.sign_in{
+	margin-left: -40px;
 }

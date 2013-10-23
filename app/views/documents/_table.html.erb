@@ -1,43 +1,45 @@
 <table class="table" style="font-size: 12px; width: 900px;">
+  	<thead>
   	 <tr>
 		<% unless action?('show') %>
-	    <th><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %></th>
+	    <th><label class="control checkbox"><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %>
+   <span class="checkbox-label"></span>
+</label></th>
 		<% end %>
-	    <th><%= sortable "id", "№" %></th>
+	    <th><%= sortable "id", "Номер / Дата" %></th>
 	    <th><%= sortable "sender_organization_id", "Отправитель" %></th>
 		<th><%= sortable "organization_id", "Получатель" %></th> 
 	    <th><%= sortable "document_type", "Тип" %></th>
-	    <th><%= sortable "title", "Тема письма" %></th>
-	    <th style="width: 110px"><%= sortable "created_at", "Дата/Время" %></th>
 	    <th style="width: 30px"></th>
-	    <th><%= sortable_status %></th>
+	    <th class="tab_right"><%= sortable_status %></th>
 	  </tr>
-
+	  </thead>
+	  <tbody>
 	<% @documents.each do |document| %>
+	
 	  <tr>
 		<% unless action?('show') %>
-		<td><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %></td>
+		<td class="not_this"><label class="control checkbox"><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %><span class="checkbox-label"></span>
+</label></td>
 		<% end %>
-		<td class="document_id"><%= document.id %></td>
+		<td><a class="document_id"><%= document.id %></a> / <%= Russian::strftime(document.created_at, "%d.%m.%y") %></td>
 	    <td><%= organization(document.sender_organization_id) %></td>
 		<td><%= organization(document.organization_id) %></td>
-	    <td>
+	    <td class="exp_type">
 		  <% if document.document_type == 'mail' %>
 		    Письмо
 		  <% elsif document.document_type == 'writ' %>
 			Распоряжение
 		  <% end %>
-		</td>
-	    <td><%= document.title %></td>
-	    <td><%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %></td>
 	    		<td>
 			<% unless document.document_attachments.blank? %>
 			<%= image_tag('attachement_ico.png') %>
 			<% end %>
 		</td>
-	    <td><%= document_status(document) %></td>
+	    <td class="tab_right"><%= document_status(document) %></td>
 	  </tr>
 		<%#= render 'full_element', :document => document %>
 	<% end %>
+	</tbody>
 </table>
 <%= will_paginate @elements, :remote => true %>
