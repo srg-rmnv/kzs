@@ -5,20 +5,50 @@
 	<div class="span8">
 
   <%= render 'user' %>
-		<h1 class="doc_header">Новое письмо
+  
+		<h1 class="doc_header">
+		  <% if action?('new') %>
+			  <% if params[:type == 'mail'] %>
+				Новое письмо
+			  <% elsif params[:type == 'writ'] %>
+				Новое распоряжение
+			  <% else%>
+			    Новое письмо
+			  <% end %>
+			<% end %>
 		<span class="caret"></span></h1>
 
 
 	<div class="btn-toolbar">
 			<%= link_to "Назад", :back, :class => "btn" %>
 			<%= link_to "Шаблоны", "#", :class => "btn" %>
-			<%= link_to "Черновики", "#", :class => "btn" %>
+			<%= link_to "Черновики", drafts_documents_path, :class => "btn" %>
 	</div>
+	
 	<%= form_for(@document) do |f| %>
+	
+	<!-- hidden_fields -->
+	<% if action?('new') %>
+	<%= f.hidden_field :document_type, :value => params[:type] %>
+	<% elsif action?('reply') %>
+	<%= f.hidden_field :document_type, :value => @original_document.document_type %>
+	<% elsif %>
+	<%= f.hidden_field :document_type, :value => @document.document_type %>
+	<% end %>
+	
+	<%= f.hidden_field :document_conversation_id, :value => @document_conversation_id %>
+  <!-- end -->
+	
 	<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Тема письма' %>
-	<%= f.text_field :title, :class => 'input-xxlarge lupe', :placeholder => 'Организация-получатель' %>
-	<%= f.text_field :title, :class => 'input-xxlarge lupe', :placeholder => 'Контрольное-лицо' %>
-	<%= f.text_field :title, :class => 'input-xxlarge lupe', :placeholder => 'Исполнитель' %>
+	
+	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:400px', :'data-placeholder' => "Организация-получатель"}) %>
+	<%= f.collection_select(:approver_id, @approvers, :id, :first_name_with_last_name) %>
+	<%= f.collection_select(:executor_id, @executors.all, :id, :first_name_with_last_name, :prompt => t('choose_executor')) %>
+	
+	
+	<!-- <%= f.text_field :title, :class => 'input-xxlarge lupe', :placeholder => 'Организация-получатель' %> -->
+	<!-- <%= f.text_field :title, :class => 'input-xxlarge lupe', :placeholder => 'Контрольное-лицо' %> -->
+	<!-- <%= f.text_field :title, :class => 'input-xxlarge lupe', :placeholder => 'Исполнитель' %> -->
 	<%= f.text_area :title, :class => 'input-xxlarge letter_input', :placeholder => 'Текст письма', :rows => "20" %>
 
 	<% end %>

@@ -45,6 +45,7 @@ class DocumentsController < ApplicationController
   
   def drafts    
     @documents = Document.not_deleted.not_archived.order("created_at DESC").draft.where(:user_id => current_user.id)
+    @documents = @documents.paginate(:per_page => 20, :page => params[:page])
   end
   
   def batch
