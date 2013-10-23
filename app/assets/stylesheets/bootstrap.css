@@ -6355,7 +6355,6 @@ pre {
   -webkit-border-radius: 12px;
   -moz-border-radius: 12px;
   border-radius: 12px;
-  min-width: 80px;
   text-align: center;
   letter-spacing: -1px;
 }
@@ -6554,6 +6553,9 @@ textarea:focus {
   top: 0;
   left: 0;
 }
+.control.checkbox input[type="checkbox"]:checked ~ .checkbox-label:before {
+  border-color: #76d4ce;
+}
 .control.checkbox input[type="checkbox"]:checked ~ .checkbox-label:after {
   position: absolute;
   display: block;
@@ -6569,7 +6571,7 @@ textarea:focus {
   margin-left: 4px;
   color:red;
   font-family: 'FontAwesome';
-  border-color: #76d4ce;
+
 }
 .control.radio {
   display: inline-block;
@@ -6620,4 +6622,9 @@ h1 .caret {
   margin-top:20px;
   margin-left: 10px;
   border-top-color: inherit;
+}
+.offset h2{
+  margin:0 auto;
+  width: 40%;
+  text-align: center;
 }

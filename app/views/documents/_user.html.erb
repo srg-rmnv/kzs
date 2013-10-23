@@ -3,5 +3,5 @@
 			<%= hidden_field_tag :direction, params[:direction] %>
 			<%= hidden_field_tag :sort, params[:sort] %>
 			<%= content_tag(:span, current_user.first_name_with_last_name, :class => "user_name") %>
-			<a href="/users/sign_out" class="label logout">&#xf011;</a>
-	  </p>
+			<%= link_to ("&#xf011;").html_safe, destroy_user_session_path, method: :delete, :class => 'label logout' %>
+			</p>
